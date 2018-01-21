@@ -35,54 +35,59 @@ def hide(list_x, hidden):
         if i != hidden:
             return i
 
+ROOMS = {
+    1 : {"name" : "White Room", "north" : 2, "item" : "pack"},
+    2 : {"name" : "Blue Room", "south" : 1, "east" : 3},
+    3 : {"name" : "Black Room", "west": 2, "north" : 4},
+    4 : {"name" : "Amber Room", "south" : 3, "item" : "twizzlers"}
+}
 
-def main():
-    """Core gameplay and varriables"""
-    def stats():
+class Player:
+    """Establish Player and core gameplay"""
+    curr_room = 1
+    bag = []
+
+    @classmethod
+    def stats(cls):
         """Current Status"""
         line_br2 = "-" * 30
 
         print("\n" + line_br2)
-        print("You are in : " + rooms[current_room]["name"])
-        if "pack" in bag:
-            print("Inventory: " + str(hide(bag, "pack")))
-        if "item" in rooms[current_room]:
-            print("You catch sight of a %s" % (rooms[current_room].get("item")))
+        print("You are in : " + ROOMS[Player.curr_room]["name"])
+        if "pack" in Player.bag:
+            print("Inventory: " + str(hide(Player.bag, "pack")))
+        if "item" in ROOMS[Player.curr_room]:
+            print("You catch sight of a %s" % (ROOMS[Player.curr_room].get("item")))
         print(line_br2 + "\n")
 
-    current_room = 1
-    bag = []
-    rooms = {
-        1 : {"name" : "White Room", "north" : 2, "item" : "pack"},
-        2 : {"name" : "Blue Room", "south" : 1, "east" : 3},
-        3 : {"name" : "Black Room", "west": 2, "north" : 4},
-        4 : {"name" : "Amber Room", "south" : 3, "item" : "twizzlers"}
-    }
-    while True:
-        stats()
-
-        move = input(">").lower().split()
-        if move[0] == "go":
-            if move[1] in rooms[current_room]:
-                current_room = rooms[current_room][move[1]]
+    @classmethod
+    def move(cls):
+        """Move Player"""
+        choice = input(">").lower().split()
+        if choice[0] == "go":
+            if choice[1] in ROOMS[Player.curr_room]:
+                Player.curr_room = ROOMS[Player.curr_room][choice[1]]
             else:
                 print("You cannot go that way!\n")
-        elif move[0] == "get":
-            if "item" in rooms[current_room] and move[1] in rooms[current_room]["item"]:
-                bag += [move[1]]
-                print("Picked up " + move[1] + "!")
-                del rooms[current_room]["item"]
+        elif choice[0] == "get":
+            if "item" in ROOMS[Player.curr_room] and choice[1] in ROOMS[Player.curr_room]["item"]:
+                Player.bag += [choice[1]]
+                print("Picked up " + choice[1] + "!")
+                del ROOMS[Player.curr_room]["item"]
             else:
                 print("It must have been a mirage...")
-        elif move[0] != "go" or "get":
+        elif choice[0] != "go" or "get":
             print("That's not a valid command!")
 
-        if "twizzlers" in bag:
+def main():
+    """Run game"""
+    while True:
+        Player.stats()
+        Player.move()
+        if "twizzlers" in Player.bag:
             print("You sigh, blissfully, as you unwrap the pack of twizzlers.")
             print("Game Over!")
             break
-
-
 #Start!!
 title()
 menu()
