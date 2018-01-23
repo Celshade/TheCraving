@@ -43,7 +43,7 @@ ROOMS = {
 }
 
 class Player:
-    """Establish Player and core gameplay"""
+    """Establish Player gameplay"""
     curr_room = 1
     bag = []
 
