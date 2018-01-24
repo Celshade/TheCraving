@@ -37,9 +37,13 @@ def hide(list_x, hidden):
 
 ROOMS = {
     1 : {"name" : "White Room", "north" : 2, "item" : "pack"},
-    2 : {"name" : "Blue Room", "south" : 1, "east" : 3},
-    3 : {"name" : "Black Room", "west": 2, "north" : 4},
-    4 : {"name" : "Amber Room", "south" : 3, "item" : "twizzlers"}
+    2 : {"name" : "Blue Room", "south" : 1, "east" : 3, "west" : 4, "item" : "green orb"},
+    3 : {"name" : "Green Room", "west": 2, "north" : 6, "item" : "purple orb"},
+    4 : {"name" : "Purple Room", "east" : 2, "north" : 5, "item" : "red orb"},
+    5 : {"name" : "Red Room", "south" : 4, "east" : 7, "item" : "yellow orb"},
+    6 : {"name" : "Yellow Room", "south" : 3, "west" : 7, "item" : "orange orb"},
+    7 : {"name" : "Orange Room", "east" : 6, "west" : 5, "north" : 8, "item" : "white orb"},
+    8 : {"name" : "Black Room", "south" : 7, "item" : "twizzlers"}
 }
 
 class Player:
