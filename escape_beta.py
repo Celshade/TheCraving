@@ -46,6 +46,20 @@ ROOMS = {
     8 : {"name" : "Black Room", "south" : 7, "item" : "twizzlers"}
 }
 
+class Orb(object):
+    """Provide Orb functionality"""
+    def __init__(self, color):
+        self.color = color
+
+    def desc(self):
+        """Get description of orb"""
+        print("A glowing %s orb" % self.color)
+
+    def resonate(self):
+        """Resonate Orb with door"""
+        pass
+
+
 class Player:
     """Establish Player gameplay"""
     curr_room = 1
