@@ -36,29 +36,15 @@ def hide(list_x, hidden):
             return i
 
 ROOMS = {
-    1 : {"name" : "White Room", "north" : 2, "item" : "pack"},
-    2 : {"name" : "Blue Room", "south" : 1, "east" : 3, "west" : 4, "item" : "green orb"},
-    3 : {"name" : "Green Room", "west": 2, "north" : 6, "item" : "purple orb"},
-    4 : {"name" : "Purple Room", "east" : 2, "north" : 5, "item" : "red orb"},
-    5 : {"name" : "Red Room", "south" : 4, "east" : 7, "item" : "yellow orb"},
-    6 : {"name" : "Yellow Room", "south" : 3, "west" : 7, "item" : "orange orb"},
-    7 : {"name" : "Orange Room", "east" : 6, "west" : 5, "north" : 8, "item" : "white orb"},
-    8 : {"name" : "Black Room", "south" : 7, "item" : "twizzlers"}
+    1 : {"name" : "White Room", "north" : 2, "item" : Pack},
+    2 : {"name" : "Blue Room", "south" : 1, "east" : 3, "west" : 4, "item" : green_orb},
+    3 : {"name" : "Green Room", "west": 2, "north" : 6, "item" : purple_orb},
+    4 : {"name" : "Purple Room", "east" : 2, "north" : 5, "item" : red_orb},
+    5 : {"name" : "Red Room", "south" : 4, "east" : 7, "item" : yellow_orb},
+    6 : {"name" : "Yellow Room", "south" : 3, "west" : 7, "item" : orange_orb},
+    7 : {"name" : "Orange Room", "east" : 6, "west" : 5, "north" : 8, "item" : white_orb},
+    8 : {"name" : "Black Room", "south" : 7, "item" : twizzlers}
 }
-
-class Orb(object):
-    """Provide Orb functionality"""
-    def __init__(self, color):
-        self.color = color
-
-    def desc(self):
-        """Get description of orb"""
-        print("A glowing %s orb" % self.color)
-
-    def resonate(self):
-        """Resonate Orb with door"""
-        pass
-
 
 class Player:
     """Establish Player gameplay"""
@@ -106,6 +92,7 @@ def main():
             print("You sigh, blissfully, as you unwrap the pack of twizzlers.")
             print("Game Over!")
             break
+
 #Start!!
 title()
 menu()
