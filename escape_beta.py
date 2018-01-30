@@ -1,4 +1,5 @@
 """Cheers! A simple text-based, escape-the-room-type, game. Have fun!"""
+import items
 
 def title():
     """Intro"""
@@ -36,14 +37,14 @@ def hide(list_x, hidden):
             return i
 
 ROOMS = {
-    1 : {"name" : "White Room", "north" : 2, "item" : Pack},
-    2 : {"name" : "Blue Room", "south" : 1, "east" : 3, "west" : 4, "item" : green_orb},
-    3 : {"name" : "Green Room", "west": 2, "north" : 6, "item" : purple_orb},
-    4 : {"name" : "Purple Room", "east" : 2, "north" : 5, "item" : red_orb},
-    5 : {"name" : "Red Room", "south" : 4, "east" : 7, "item" : yellow_orb},
-    6 : {"name" : "Yellow Room", "south" : 3, "west" : 7, "item" : orange_orb},
-    7 : {"name" : "Orange Room", "east" : 6, "west" : 5, "north" : 8, "item" : white_orb},
-    8 : {"name" : "Black Room", "south" : 7, "item" : twizzlers}
+    1 : {"name" : "White Room", "north" : 2, "item" : PACK},
+    2 : {"name" : "Blue Room", "south" : 1, "east" : 3, "west" : 4, "item" : GREEN_ORB},
+    3 : {"name" : "Green Room", "west": 2, "north" : 6, "item" : PURPLE_ORB},
+    4 : {"name" : "Purple Room", "east" : 2, "north" : 5, "item" : RED_ORB},
+    5 : {"name" : "Red Room", "south" : 4, "east" : 7, "item" : YELLOW_ORB},
+    6 : {"name" : "Yellow Room", "south" : 3, "west" : 7, "item" : ORANGE_ORB},
+    7 : {"name" : "Orange Room", "east" : 6, "west" : 5, "north" : 8, "item" : WHITE_ORB},
+    8 : {"name" : "Black Room", "south" : 7, "item" : TWIZZLERS}
 }
 
 class Player:
