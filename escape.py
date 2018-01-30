@@ -1,5 +1,5 @@
 """Cheers! A simple text-based, escape-the-room-type, game. Have fun!"""
-import items
+from . import items as it
 
 def title():
     """Intro"""
@@ -37,14 +37,14 @@ def hide(list_x, hidden):
             return i
 
 ROOMS = {
-    1 : {"name" : "White Room", "north" : 2, "item" : PACK},
-    2 : {"name" : "Blue Room", "south" : 1, "east" : 3, "west" : 4, "item" : GREEN_ORB},
-    3 : {"name" : "Green Room", "west": 2, "north" : 6, "item" : PURPLE_ORB},
-    4 : {"name" : "Purple Room", "east" : 2, "north" : 5, "item" : RED_ORB},
-    5 : {"name" : "Red Room", "south" : 4, "east" : 7, "item" : YELLOW_ORB},
-    6 : {"name" : "Yellow Room", "south" : 3, "west" : 7, "item" : ORANGE_ORB},
-    7 : {"name" : "Orange Room", "east" : 6, "west" : 5, "north" : 8, "item" : WHITE_ORB},
-    8 : {"name" : "Black Room", "south" : 7, "item" : TWIZZLERS}
+    1 : {"name" : "White Room", "north" : 2, "item" : it.PACK},
+    2 : {"name" : "Blue Room", "south" : 1, "east" : 3, "west" : 4, "item" : it.GREEN_ORB},
+    3 : {"name" : "Green Room", "west": 2, "north" : 6, "item" : it.PURPLE_ORB},
+    4 : {"name" : "Purple Room", "east" : 2, "north" : 5, "item" : it.RED_ORB},
+    5 : {"name" : "Red Room", "south" : 4, "east" : 7, "item" : it.YELLOW_ORB},
+    6 : {"name" : "Yellow Room", "south" : 3, "west" : 7, "item" : it.ORANGE_ORB},
+    7 : {"name" : "Orange Room", "east" : 6, "west" : 5, "north" : 8, "item" : it.WHITE_ORB},
+    8 : {"name" : "Black Room", "south" : 7, "item" : it.TWIZZLERS}
 }
 
 class Player:
@@ -59,8 +59,8 @@ class Player:
 
         print("\n" + line_br2)
         print("You are in : " + ROOMS[Player.curr_room]["name"])
-        if "pack" in Player.bag:
-            print("Inventory: " + str(hide(Player.bag, "pack")))
+        if it.PACK in Player.bag:
+            print("Inventory: " + str(hide(Player.bag, it.PACK)))
         if "item" in ROOMS[Player.curr_room]:
             print("You catch sight of a %s" % (ROOMS[Player.curr_room].get("item")))
         print(line_br2 + "\n")
