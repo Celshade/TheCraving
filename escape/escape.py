@@ -28,7 +28,7 @@ def menu():
     """Main Menu"""
     print("Valid Commands:")
     print("'go [direction]' (north, south, east, or west)")
-    print("'get [item]'\n\n")
+    print("'get [item]'")
     print("'get [orb] (picks up nearby orb)\n\n")
 
 ROOMS = {
@@ -90,7 +90,7 @@ def main():
     while True:
         Player.stats()
         Player.move()
-        if "twizzlers" in it.PACK:
+        if "twizzlers" in it.PACK.inventory:
             print("You sigh, blissfully, as you unwrap the pack of twizzlers.")
             print("Game Over!")
             break
