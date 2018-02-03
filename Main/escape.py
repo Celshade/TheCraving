@@ -1,5 +1,5 @@
 """Cheers! A simple text-based, escape-the-room-type, game. Have fun!"""
-import escape.items as it
+import items as it
 
 def title():
     """Intro"""
