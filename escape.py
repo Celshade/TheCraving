@@ -33,12 +33,12 @@ def menu():
 
 ROOMS = {
     1 : {"name" : "White Room", "north" : 2, "item" : it.PACK},
-    2 : {"name" : "Blue Room", "south" : 1, "east" : 3, "west" : 4, "item" : it.GREEN_ORB},
-    3 : {"name" : "Green Room", "west": 2, "north" : 6, "item" : it.PURPLE_ORB},
-    4 : {"name" : "Purple Room", "east" : 2, "north" : 5, "item" : it.RED_ORB},
-    5 : {"name" : "Red Room", "south" : 4, "east" : 7, "item" : it.YELLOW_ORB},
-    6 : {"name" : "Yellow Room", "south" : 3, "west" : 7, "item" : it.ORANGE_ORB},
-    7 : {"name" : "Orange Room", "east" : 6, "west" : 5, "north" : 8, "item" : it.WHITE_ORB},
+    2 : {"name" : "Blue Room", "south" : 1, "east" : 3, "west" : 4, "orb" : it.GREEN_ORB},
+    3 : {"name" : "Green Room", "west": 2, "north" : 6, "orb" : it.PURPLE_ORB},
+    4 : {"name" : "Purple Room", "east" : 2, "north" : 5, "orb" : it.RED_ORB},
+    5 : {"name" : "Red Room", "south" : 4, "east" : 7, "orb" : it.YELLOW_ORB},
+    6 : {"name" : "Yellow Room", "south" : 3, "west" : 7, "orb" : it.ORANGE_ORB},
+    7 : {"name" : "Orange Room", "east" : 6, "west" : 5, "north" : 8, "orb" : it.WHITE_ORB},
     8 : {"name" : "Black Room", "south" : 7, "item" : it.TWIZZLERS}
 }
 
