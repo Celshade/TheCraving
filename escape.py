@@ -1,5 +1,5 @@
 """Cheers! A simple text-based, escape-the-room-type, game. Have fun!"""
-from . import items as it
+import escape.items as it
 
 def title():
     """Intro"""
@@ -29,12 +29,7 @@ def menu():
     print("Valid Commands:")
     print("'go [direction]' (north, south, east, or west)")
     print("'get [item]'\n\n")
-
-def hide(list_x, hidden):
-    """Hides an item in a list"""
-    for i in list_x:
-        if i != hidden:
-            return i
+    print("'get [orb] (picks up nearby orb)\n\n")
 
 ROOMS = {
     1 : {"name" : "White Room", "north" : 2, "item" : it.PACK},
