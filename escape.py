@@ -55,9 +55,11 @@ class Player:
         print("\n" + line_br2)
         print("You are in : " + ROOMS[Player.curr_room]["name"])
         if it.PACK in Player.bag:
-            print("Inventory: " + str(hide(Player.bag, it.PACK)))
+            print("Inventory: " + it.PACK)
         if "item" in ROOMS[Player.curr_room]:
             print("You catch sight of a %s" % (ROOMS[Player.curr_room].get("item")))
+        elif "orb" in ROOMS[Player.curr_room]:
+            print("You catch sight of a %s" % (ROOMS[Player.curr_room].get("orb")))
         print(line_br2 + "\n")
 
     @classmethod
@@ -71,9 +73,13 @@ class Player:
                 print("You cannot go that way!\n")
         elif choice[0] == "get":
             if "item" in ROOMS[Player.curr_room] and choice[1] in ROOMS[Player.curr_room]["item"]:
-                Player.bag += [choice[1]]
+                it.PACK += [choice[1]]
                 print("Picked up " + choice[1] + "!")
                 del ROOMS[Player.curr_room]["item"]
+            elif choice[1] == "orb" and "orb" in ROOMS[Player.curr_room]:
+                it.PACK.inventory += [ROOMS[Player.curr_room]["orb"]]
+                print("Picked up " + ROOMS[Player.curr_room]["orb"] + "!")
+                del ROOMS[Player.curr_room]["orb"]
             else:
                 print("It must have been a mirage...")
         elif choice[0] != "go" or "get":
@@ -84,7 +90,7 @@ def main():
     while True:
         Player.stats()
         Player.move()
-        if "twizzlers" in Player.bag:
+        if "twizzlers" in it.PACK:
             print("You sigh, blissfully, as you unwrap the pack of twizzlers.")
             print("Game Over!")
             break
