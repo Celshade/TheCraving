@@ -26,13 +26,13 @@ def title():
 
 def menu():
     """Main Menu"""
-    print("Valid Commands:")
+    print("\nValid Commands:")
     print("'go [direction]' (north, south, east, or west)")
-    print("'get [item]'")
-    print("'get [orb] (picks up nearby orb)\n\n")
+    print("'get item' (picks up nearby non-orb item")
+    print("'get orb (picks up nearby orb)\n")
 
 ROOMS = {
-    1 : {"name" : "White Room", "north" : 2, "item" : it.PACK},
+    1 : {"name" : "White Room", "north" : 2, "item" : it.PACK, "orb" : it.BLUE_ORB},
     2 : {"name" : "Blue Room", "south" : 1, "east" : 3, "west" : 4, "orb" : it.GREEN_ORB},
     3 : {"name" : "Green Room", "west": 2, "north" : 6, "orb" : it.PURPLE_ORB},
     4 : {"name" : "Purple Room", "east" : 2, "north" : 5, "orb" : it.RED_ORB},
@@ -45,7 +45,7 @@ ROOMS = {
 class Player:
     """Establish Player gameplay"""
     curr_room = 1
-    bag = []
+    inventory = []
 
     @classmethod
     def stats(cls):
@@ -54,12 +54,12 @@ class Player:
 
         print("\n" + line_br2)
         print("You are in : " + ROOMS[Player.curr_room]["name"])
-        if it.PACK in Player.bag:
-            print("Inventory: " + it.PACK)
+        if it.PACK in Player.inventory:
+            print(it.PACK.contents())
         if "item" in ROOMS[Player.curr_room]:
-            print("You catch sight of a %s" % (ROOMS[Player.curr_room].get("item")))
+            print("You catch sight of %s" % (ROOMS[Player.curr_room]["item"].description))
         elif "orb" in ROOMS[Player.curr_room]:
-            print("You catch sight of a %s" % (ROOMS[Player.curr_room].get("orb")))
+            print("You catch sight of %s" % (ROOMS[Player.curr_room]["orb"].description))
         print(line_br2 + "\n")
 
     @classmethod
@@ -72,13 +72,13 @@ class Player:
             else:
                 print("You cannot go that way!\n")
         elif choice[0] == "get":
-            if "item" in ROOMS[Player.curr_room] and choice[1] in ROOMS[Player.curr_room]["item"]:
-                it.PACK += [choice[1]]
-                print("Picked up " + choice[1] + "!")
+            if choice[1] == "item" and "item" in ROOMS[Player.curr_room]:
+                it.PACK.pocket += [ROOMS[Player.curr_room]["item"]]
+                print("Picked up " + (ROOMS[Player.curr_room]["item"].name) + "!")
                 del ROOMS[Player.curr_room]["item"]
             elif choice[1] == "orb" and "orb" in ROOMS[Player.curr_room]:
-                it.PACK.inventory += [ROOMS[Player.curr_room]["orb"]]
-                print("Picked up " + ROOMS[Player.curr_room]["orb"] + "!")
+                it.PACK.pocket += [ROOMS[Player.curr_room]["orb"]]
+                print("Picked up " + (ROOMS[Player.curr_room]["orb"].name) + "!")
                 del ROOMS[Player.curr_room]["orb"]
             else:
                 print("It must have been a mirage...")
@@ -90,7 +90,7 @@ def main():
     while True:
         Player.stats()
         Player.move()
-        if "twizzlers" in it.PACK.inventory:
+        if it.TWIZZLERS in it.PACK.pocket:
             print("You sigh, blissfully, as you unwrap the pack of twizzlers.")
             print("Game Over!")
             break
