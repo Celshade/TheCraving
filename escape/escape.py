@@ -72,16 +72,19 @@ class Player:
             else:
                 print("You cannot go that way!\n")
         elif choice[0] == "get":
-            if choice[1] == "item" and "item" in ROOMS[Player.curr_room]:
-                it.PACK.pocket += [ROOMS[Player.curr_room]["item"]]
-                print("Picked up " + (ROOMS[Player.curr_room]["item"].name) + "!")
-                del ROOMS[Player.curr_room]["item"]
-            elif choice[1] == "orb" and "orb" in ROOMS[Player.curr_room]:
-                it.PACK.pocket += [ROOMS[Player.curr_room]["orb"]]
-                print("Picked up " + (ROOMS[Player.curr_room]["orb"].name) + "!")
-                del ROOMS[Player.curr_room]["orb"]
+            if it.PACK in Player.inventory:
+                if choice[1] == "item" and "item" in ROOMS[Player.curr_room]:
+                    it.PACK.pocket += [ROOMS[Player.curr_room]["item"]]
+                    print("Picked up " + (ROOMS[Player.curr_room]["item"].name) + "!")
+                    del ROOMS[Player.curr_room]["item"]
+                elif choice[1] == "orb" and "orb" in ROOMS[Player.curr_room]:
+                    it.PACK.pocket += [ROOMS[Player.curr_room]["orb"]]
+                    print("Picked up " + (ROOMS[Player.curr_room]["orb"].name) + "!")
+                    del ROOMS[Player.curr_room]["orb"]
+                else:
+                    print("It must have been a mirage...")
             else:
-                print("It must have been a mirage...")
+                print("You should have worn pants with pockets...")
         elif choice[0] != "go" or "get":
             print("That's not a valid command!")
 

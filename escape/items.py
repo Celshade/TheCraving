@@ -29,7 +29,7 @@ class Pack(Item):
         """Print iventory"""
         if self.pocket == []:
             return "Your pack is empty!"
-        return "Inventory: {}".format(self.pocket)
+        return "Inventory: {}".format(str(self.pocket))
 
 class Orb(Item):
     """Define Orbs"""
