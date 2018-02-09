@@ -7,7 +7,7 @@ class Item(object):
         self.description = description
         self.origin = origin
 
-    def __str__(self):
+    def __repr__(self):
         """Return Item name"""
         return self.name
 
@@ -16,20 +16,18 @@ class Item(object):
         return "**{}**\n{}".format(self.name, self.description)
 
     def origin_id(self):
-        """Returns ROOM origin"""
+        """Return ROOM origin"""
         return self.origin
 
 class Pack(Item):
     """Define Pack"""
     def __init__(self):
-        super().__init__(name="Pack", description="a spacious leather bag", origin=1)
+        super().__init__(name="Bottomless Pack", description="even the pockets have pockets!", origin=1)
         self.pocket = []
 
     def contents(self):
         """Print iventory"""
-        if self.pocket == []:
-            return "Your pack is empty!"
-        return "Inventory: {}".format(str(self.pocket))
+        return "Inventory: {}".format(self.pocket)
 
 class Orb(Item):
     """Define Orbs"""
