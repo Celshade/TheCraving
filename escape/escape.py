@@ -32,14 +32,28 @@ def menu():
     print("'get orb (picks up nearby orb)\n")
 
 ROOMS = {
-    1 : {"name" : "White Room", "north" : 2,"item" : it.PACK, "orb" : it.BLUE_ORB},
-    2 : {"name" : "Blue Room", "south" : 1, "east" : 3, "west" : 4, "orb" : it.GREEN_ORB},
-    3 : {"name" : "Green Room", "west": 2, "north" : 6, "orb" : it.PURPLE_ORB},
-    4 : {"name" : "Purple Room", "east" : 2, "north" : 5, "orb" : it.RED_ORB},
-    5 : {"name" : "Red Room", "south" : 4, "east" : 7, "orb" : it.YELLOW_ORB},
-    6 : {"name" : "Yellow Room", "south" : 3, "west" : 7, "orb" : it.ORANGE_ORB},
-    7 : {"name" : "Orange Room", "east" : 6, "west" : 5, "north" : 8, "orb" : it.WHITE_ORB},
-    8 : {"name" : "Black Room", "south" : 7, "item" : it.TWIZZLERS}
+    1 : {"name" : "White Room", "north" : 2,
+         "item" : it.PACK, "orb" : it.BLUE_ORB,
+         "door" : {"north" : it.BLUE_DOOR}},
+    2 : {"name" : "Blue Room", "south" : 1, "east" : 3, "west" : 4,
+         "orb" : it.GREEN_ORB,
+         "door" : {"east" : it.GREEN_DOOR, "west" : it.PURPLE_DOOR}},
+    3 : {"name" : "Green Room", "west": 2, "north" : 6,
+         "orb" : it.PURPLE_ORB,
+         "door" : {"north" : it.YELLOW_DOOR}},
+    4 : {"name" : "Purple Room", "east" : 2, "north" : 5,
+         "orb" : it.RED_ORB,
+         "door" : {"north" : it.RED_DOOR}},
+    5 : {"name" : "Red Room", "south" : 4,
+         "orb" : it.YELLOW_ORB},
+    6 : {"name" : "Yellow Room", "south" : 3, "west" : 7,
+         "orb" : it.ORANGE_ORB,
+         "door" : {"west" : it.ORANGE_DOOR}},
+    7 : {"name" : "Orange Room", "east" : 6, "west" : 5, "north" : 8,
+         "orb" : it.WHITE_ORB,
+         "door" : {"north" : it.BLACK_DOOR}},
+    8 : {"name" : "Black Room", "south" : 7,
+         "item" : it.TWIZZLERS}
 }
 
 class Player:
