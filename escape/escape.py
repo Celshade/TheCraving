@@ -76,8 +76,8 @@ class Player:
         choice = input(">").lower().split()
         if choice[0] == "go":
             if choice[1] in ROOMS[Player.curr_room]:
-            #door functionality here!
-                Player.curr_room = ROOMS[Player.curr_room][choice[1]]
+                ROOMS[Player.curr_room][choice[1]].unlock()
+                    Player.curr_room = ROOMS[Player.curr_room][choice[1]].room_tag
             else:
                 print("You cannot go that way!\n")
         elif choice[0] == "get":

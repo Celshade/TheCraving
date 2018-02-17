@@ -31,8 +31,8 @@ class Pack(Item):
 
 class Orb(Item):
     """Define Orbs"""
-    def __init__(self, name, description, color):
-        super().__init__(name, description)
+    def __init__(self, name, description, room_tag, color):
+        super().__init__(name, description, room_tag)
         self.color = color
 
     def rezonate(self):
@@ -43,19 +43,18 @@ class Door(Orb):
     """Define Doors"""
     def __init__(self, name, description, room_tag, color):
         super().__init__(name, description, room_tag, color)
-        self._lock = True
-    
+        self.unlock = False
+
     @property
-    def lock(self):
-        """Return Door status"""
-        return self._lock
-    
-    @lock.setter
-    def lock(self, false):
+    def unlock(self):
+        return self.unlock
+
+    @unlock.setter
+    def unlock(self):
         """Unlock Door"""
         for item in Pack().pocket:
             if item.color == self.color:
-                self._lock = False
+                self.unlock = True
             else:
                 print("The door doesn't budge.")
 
@@ -64,14 +63,14 @@ class Door(Orb):
 PACK = Pack()
 TWIZZLERS = Item("Twizzlers", "The tastiest of tasty snacks!", 8)
 #Orbs
-BLUE_ORB = Orb("Blue Orb", "A glowing blue orb", "blue")
-GREEN_ORB = Orb("Green Orb", "A glowing green orb", "green")
-PURPLE_ORB = Orb("Purple Orb", "A glowing purple orb", "purple")
-RED_ORB = Orb("Red Orb", "A glowing red orb", "red")
-YELLOW_ORB = Orb("Yellow Orb", "A glowing yellow orb", "yellow")
-ORANGE_ORB = Orb("Orange Orb", "A glowing orange orb", "orange")
-WHITE_ORB = Orb("White Orb", "A glowing white orb", "white")
-BLACK_ORB = Orb("Black Orb", "A glowing black orb", "black")
+BLUE_ORB = Orb("Blue Orb", "A glowing blue orb", 1, "blue")
+GREEN_ORB = Orb("Green Orb", "A glowing green orb", 2, "green")
+PURPLE_ORB = Orb("Purple Orb", "A glowing purple orb", 3, "purple")
+RED_ORB = Orb("Red Orb", "A glowing red orb", 4, "red")
+YELLOW_ORB = Orb("Yellow Orb", "A glowing yellow orb", 5, "yellow")
+ORANGE_ORB = Orb("Orange Orb", "A glowing orange orb", 6, "orange")
+WHITE_ORB = Orb("White Orb", "A glowing white orb", 7, "white")
+BLACK_ORB = Orb("Black Orb", "A glowing black orb", 1, "black")
 #Doors
 BLUE_DOOR = Door("Blue Door", "An impossing door with a feint blue glow.", 2, "blue")
 GREEN_DOOR = Door("Green Door", "An impossing door with a feint green glow.", 3, "green")
