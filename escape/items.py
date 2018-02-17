@@ -31,13 +31,13 @@ class Pack(Item):
 
 class Orb(Item):
     """Define Orbs"""
-    def __init__(self, name, description, room_tag, color):
-        super().__init__(name, description, room_tag)
+    def __init__(self, name, description, color):
+        super().__init__(name, description)
         self.color = color
 
     def rezonate(self):
         """Rezonate Orb with Door"""
-        return "a pulsating {} light shines from within the orb.".format(self.color)
+        return "A pulsating {} light shines from within the orb.".format(self.color)
 
 class Door(Orb):
     """Define Doors"""
@@ -56,7 +56,6 @@ class Door(Orb):
         for item in Pack().pocket:
             if item.color == self.color:
                 self._lock = False
-                print("The door slowly swings open.")
             else:
                 print("The door doesn't budge.")
 
@@ -65,20 +64,20 @@ class Door(Orb):
 PACK = Pack()
 TWIZZLERS = Item("Twizzlers", "The tastiest of tasty snacks!", 8)
 #Orbs
-BLUE_ORB = Orb("Blue Orb", "A glowing blue orb", 1, "blue")
-GREEN_ORB = Orb("Green Orb", "A glowing green orb", 2, "green")
-PURPLE_ORB = Orb("Purple Orb", "A glowing purple orb", 3, "purple")
-RED_ORB = Orb("Red Orb", "A glowing red orb", 4, "red")
-YELLOW_ORB = Orb("Yellow Orb", "A glowing yellow orb", 5, "yellow")
-ORANGE_ORB = Orb("Orange Orb", "A glowing orange orb", 6, "orange")
-WHITE_ORB = Orb("White Orb", "A glowing white orb", 7, "white")
-BLACK_ORB = Orb("Black Orb", "A glowing black orb", 0, "black")
+BLUE_ORB = Orb("Blue Orb", "A glowing blue orb", "blue")
+GREEN_ORB = Orb("Green Orb", "A glowing green orb", "green")
+PURPLE_ORB = Orb("Purple Orb", "A glowing purple orb", "purple")
+RED_ORB = Orb("Red Orb", "A glowing red orb", "red")
+YELLOW_ORB = Orb("Yellow Orb", "A glowing yellow orb", "yellow")
+ORANGE_ORB = Orb("Orange Orb", "A glowing orange orb", "orange")
+WHITE_ORB = Orb("White Orb", "A glowing white orb", "white")
+BLACK_ORB = Orb("Black Orb", "A glowing black orb", "black")
 #Doors
-BLUE_DOOR = Door("Blue Door", "An impossing door with a feint blue glow.", 1, "blue")
-GREEN_DOOR = Door("Green Door", "An impossing door with a feint green glow.", 2, "green")
-PURPLE_DOOR = Door("Purple Door", "An impossing door with a feint purple glow.", 2, "purple")
-RED_DOOR = Door("Red Door", "An impossing door with a feint red glow.", 4, "red")
-YELLOW_DOOR = Door("Yellow Door", "An impossing door with a feint yellow glow.", 3, "yellow")
-ORANGE_DOOR = Door("Orange Door", "An impossing door with a feint orange glow.", 6, "orange")
-WHITE_DOOR = Door("White Door", "An impossing door with a feint white glow.", 2, "white")
-BLACK_DOOR = Door("Black Door", "An impossing door with a feint black glow.", 7, "black")
+BLUE_DOOR = Door("Blue Door", "An impossing door with a feint blue glow.", 2, "blue")
+GREEN_DOOR = Door("Green Door", "An impossing door with a feint green glow.", 3, "green")
+PURPLE_DOOR = Door("Purple Door", "An impossing door with a feint purple glow.", 4, "purple")
+RED_DOOR = Door("Red Door", "An impossing door with a feint red glow.", 5, "red")
+YELLOW_DOOR = Door("Yellow Door", "An impossing door with a feint yellow glow.", 6, "yellow")
+ORANGE_DOOR = Door("Orange Door", "An impossing door with a feint orange glow.", 7, "orange")
+WHITE_DOOR = Door("White Door", "An impossing door with a feint white glow.", 1, "white")
+BLACK_DOOR = Door("Black Door", "An impossing door with a feint black glow.", 8, "black")
