@@ -32,27 +32,21 @@ def menu():
     print("'get orb (picks up nearby orb)\n")
 
 ROOMS = {
-    1 : {"name" : "White Room", "north" : 2,
-         "item" : it.PACK, "orb" : it.BLUE_ORB,
-         "door" : {"north" : it.BLUE_DOOR}},
-    2 : {"name" : "Blue Room", "south" : 1, "east" : 3, "west" : 4,
-         "orb" : it.GREEN_ORB,
-         "door" : {"east" : it.GREEN_DOOR, "west" : it.PURPLE_DOOR}},
-    3 : {"name" : "Green Room", "west": 2, "north" : 6,
-         "orb" : it.PURPLE_ORB,
-         "door" : {"north" : it.YELLOW_DOOR}},
-    4 : {"name" : "Purple Room", "east" : 2, "north" : 5,
-         "orb" : it.RED_ORB,
-         "door" : {"north" : it.RED_DOOR}},
-    5 : {"name" : "Red Room", "south" : 4,
+    1 : {"name" : "White Room", "north" : it.BLUE_DOOR,
+         "item" : it.PACK, "orb" : it.BLUE_ORB},
+    2 : {"name" : "Blue Room", "south" : it.WHITE_DOOR, "east" : it.GREEN_DOOR,
+         "west" : it.PURPLE_DOOR, "orb" : it.GREEN_ORB},
+    3 : {"name" : "Green Room", "west": it.BLUE_DOOR, "north" : it.YELLOW_DOOR,
+         "orb" : it.PURPLE_ORB},
+    4 : {"name" : "Purple Room", "east" : it.BLUE_DOOR, "north" : it.RED_DOOR,
+         "orb" : it.RED_ORB},
+    5 : {"name" : "Red Room", "south" : it.PURPLE_DOOR, "east" : it.RED_DOOR,
          "orb" : it.YELLOW_ORB},
-    6 : {"name" : "Yellow Room", "south" : 3, "west" : 7,
-         "orb" : it.ORANGE_ORB,
-         "door" : {"west" : it.ORANGE_DOOR}},
-    7 : {"name" : "Orange Room", "east" : 6, "west" : 5, "north" : 8,
-         "orb" : it.WHITE_ORB,
-         "door" : {"north" : it.BLACK_DOOR}},
-    8 : {"name" : "Black Room", "south" : 7,
+    6 : {"name" : "Yellow Room", "south" : it.GREEN_DOOR,
+         "west" : it.ORANGE_DOOR, "orb" : it.ORANGE_ORB},
+    7 : {"name" : "Orange Room", "east" : it.YELLOW_DOOR,
+         "west" : it.RED_DOOR, "north" : it.BLACK_DOOR, "orb" : it.WHITE_ORB},
+    8 : {"name" : "Black Room", "south" : it.ORANGE_DOOR,
          "item" : it.TWIZZLERS}
 }
 
@@ -82,6 +76,7 @@ class Player:
         choice = input(">").lower().split()
         if choice[0] == "go":
             if choice[1] in ROOMS[Player.curr_room]:
+            #door functionality here!
                 Player.curr_room = ROOMS[Player.curr_room][choice[1]]
             else:
                 print("You cannot go that way!\n")
