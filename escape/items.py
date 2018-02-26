@@ -2,10 +2,10 @@
 
 class Item(object):
     """Define basic Item"""
-    def __init__(self, name, description, room_tag):
+    def __init__(self, name, description, tag):
         self.name = name
         self.description = description
-        self.room_tag = room_tag
+        self.tag = tag
 
     def __repr__(self):
         """Return Item name"""
@@ -13,16 +13,18 @@ class Item(object):
 
     def info(self):
         """Return full Item description"""
-        return "{}\n^->{}".format(self.name, self.description)
+        return "{}\n-->{}".format(self.name, self.description)
 
-    def tag(self):
-        """Return a ROOM ID"""
-        return self.room_tag
+    def room_tag(self):
+        """Return a ROOM tag"""
+        return self.tag
 
 class Pack(Item):
     """Define Pack"""
     def __init__(self):
-        super().__init__(name="Bottomless Pack", description="Even the pockets have pockets!", room_tag=1)
+        super().__init__(name="Bottomless Pack",
+                         description="Even the pockets have pockets!",
+                         tag=1)
         self.pocket = []
 
     def contents(self):
@@ -31,34 +33,33 @@ class Pack(Item):
 
 class Orb(Item):
     """Define Orbs"""
-    def __init__(self, name, description, room_tag, color):
-        super().__init__(name, description, room_tag)
+    def __init__(self, name, description, tag, color):
+        super().__init__(name, description, tag)
         self.color = color
 
-    def rezonate(self):
-        """Rezonate Orb with Door"""
-        return "A pulsating {} light shines from within the orb.".format(self.color)
+    def icolor(self):
+        return self.color
 
 class Door(Orb):
     """Define Doors"""
-    def __init__(self, name, description, room_tag, color):
-        super().__init__(name, description, room_tag, color)
-        self.unlock = False
+    def __init__(self, name, description, tag, color, lock=True):
+        super().__init__(name, description, tag, color)
+        self.lock = lock
 
-    @property
-    def unlock(self):
-        return self.unlock
+    def rezonate(self):
+        """Rezonate with Orb"""
+        return """A pulsing {} light shines bright from within the orb!\n
+        The door pulses in sync with the orb and begins to open!
+        """.format(self.color)
 
-    @unlock.setter
+    def lock_status(self):
+        return self.lock
+
     def unlock(self):
         """Unlock Door"""
-        for item in Pack().pocket:
-            if item.color == self.color:
-                self.unlock = True
-            else:
-                print("The door doesn't budge.")
+        setattr(self, "lock", False)
+        self.rezonate()
 
-        
 #Items
 PACK = Pack()
 TWIZZLERS = Item("Twizzlers", "The tastiest of tasty snacks!", 8)
