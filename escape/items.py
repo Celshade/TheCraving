@@ -1,5 +1,6 @@
 """Module: Define Items"""
 
+
 class Item(object):
     """Define basic Item"""
     def __init__(self, name, description, tag):
@@ -19,6 +20,7 @@ class Item(object):
         """Return a ROOM tag"""
         return self.tag
 
+
 class Pack(Item):
     """Define Pack"""
     def __init__(self):
@@ -31,6 +33,7 @@ class Pack(Item):
         """Print iventory"""
         return "Inventory: {}".format(self.pocket)
 
+
 class Orb(Item):
     """Define Orbs"""
     def __init__(self, name, description, tag, color):
@@ -38,7 +41,9 @@ class Orb(Item):
         self.color = color
 
     def icolor(self):
+        """Return color"""
         return self.color
+
 
 class Door(Orb):
     """Define Doors"""
@@ -48,11 +53,12 @@ class Door(Orb):
 
     def rezonate(self):
         """Rezonate with Orb"""
-        return """A pulsing {} light shines bright from within the orb!\n
+        print("""A pulsing {} light shines bright from within the orb!
         The door pulses in sync with the orb and begins to open!
-        """.format(self.color)
+        """.format(self.color))
 
     def lock_status(self):
+        """Return status of lock"""
         return self.lock
 
     def unlock(self):
@@ -64,7 +70,7 @@ class Door(Orb):
 PACK = Pack()
 TWIZZLERS = Item("Twizzlers", "The tastiest of tasty snacks!", 8)
 #Orbs
-BLUE_ORB = Orb("Blue Orb", "A glowing blue orb", 1, "blue")
+BLUE_ORB = Orb("Blue Orb", "A glowing blue orb", 2, "blue")
 GREEN_ORB = Orb("Green Orb", "A glowing green orb", 2, "green")
 PURPLE_ORB = Orb("Purple Orb", "A glowing purple orb", 3, "purple")
 RED_ORB = Orb("Red Orb", "A glowing red orb", 4, "red")

@@ -2,6 +2,7 @@
 import items as it
 import player as p
 
+
 def title():
     """Intro"""
     line_br = "=" * 25
@@ -25,6 +26,7 @@ def title():
     print(line_br)
     print("Search your surroundings for a way to escape!")
 
+
 def menu():
     """Main Menu"""
     print("\nValid Commands:")
@@ -32,12 +34,15 @@ def menu():
     print("'get item' (picks up nearby non-orb item")
     print("'get orb (picks up nearby orb)\n")
 
+
 def main():
     """Run game"""
     player = p.Player()
     while True:
         player.stats()
         player.action()
+        if it.WHITE_ORB in it.PACK.pocket:
+            p.ROOMS[1]["orb"] = it.BLACK_ORB
         if it.TWIZZLERS in it.PACK.pocket:
             print("You sigh, blissfully, as you unwrap the pack of twizzlers.")
             print("Game Over!")

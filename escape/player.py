@@ -1,6 +1,7 @@
 """Module: Define Player"""
 import items as it
 
+
 ROOMS = {
     1 : {"name" : "White Room", "north" : it.BLUE_DOOR, "item" : it.PACK,
          "orb" : it.BLUE_ORB},
@@ -19,6 +20,7 @@ ROOMS = {
     8 : {"name" : "Black Room", "south" : it.ORANGE_DOOR,
          "item" : it.TWIZZLERS}
 }
+
 
 class Player():
     """Establish Player gameplay"""
@@ -41,25 +43,25 @@ class Player():
         print(line_br2 + "\n")
 
     @classmethod
-    def check_pack(cls, direction):
-        """Check Orb color against Door color"""
-        if it.Orb in it.Pack().pocket:
-            if it.Orb.icolor == ROOMS[Player.room][str(direction)].icolor():
+    def match(cls, door):
+        """Check for Orb match"""
+        for x in it.PACK.pocket:
+            if x.icolor() == door.icolor():
                 return True
             else:
-                return False
+                continue
 
     @classmethod
     def move(cls, direction):
         """Move in desired direction"""
-        direction = str(direction)
+        door = ROOMS[Player.room][str(direction)]
 
-        if ROOMS[Player.room][direction].lock_status() == False:
-            Player.room = ROOMS[Player.room][direction].room_tag()
-        elif ROOMS[Player.room][direction].lock_status() == True:
-            if Player.check_pack(direction):
-                ROOMS[Player.room][direction].unlock()
-                Player.room = ROOMS[Player.room][direction].room_tag()
+        if door.lock_status() == False:
+            Player.room = door.room_tag()
+        elif door.lock_status() == True:
+            if it.PACK in Player.inventory and Player.match(door):
+                door.unlock()
+                Player.room = door.room_tag()
             else:
                 print("The door doesn't budge!")
 
@@ -67,32 +69,34 @@ class Player():
     def action(cls):
         """Control Player"""
         choice = input(">").lower().split()
+        location = ROOMS[Player.room]
+
         if choice[0] == "go":
-            if choice[1] == "north" and choice[1] in ROOMS[Player.room]:
+            if choice[1] == "north" and choice[1] in location:
                 Player.move("north")
-            elif choice[1] == "east" and choice[1] in ROOMS[Player.room]:
+            elif choice[1] == "east" and choice[1] in location:
                 Player.move("east")
-            elif choice[1] == "south" and choice[1] in ROOMS[Player.room]:
+            elif choice[1] == "south" and choice[1] in location:
                 Player.move("south")
-            elif choice[1] == "west" and choice[1] in ROOMS[Player.room]:
+            elif choice[1] == "west" and choice[1] in location:
                 Player.move("west")
             else:
                 print("You cannot go that way!\n")
         elif choice[0] == "get":
-            if choice[1] == "item" and "item" in ROOMS[Player.room]:
-                if ROOMS[Player.room]["item"] == it.PACK:
+            if choice[1] == "item" and "item" in location:
+                if location["item"] == it.PACK:
                     Player.inventory.append(it.PACK)
                 else:
-                    it.PACK.pocket += [ROOMS[Player.room]["item"]]
-                print("Picked up " + ROOMS[Player.room]["item"].name + "!")
-                print(ROOMS[Player.room]["item"].info())
-                del ROOMS[Player.room]["item"]
-            elif choice[1] == "orb" and "orb" in ROOMS[Player.room]:
+                    it.PACK.pocket += [location["item"]]
+                print("Picked up " + location["item"].name + "!")
+                print(location["item"].info())
+                del location["item"]
+            elif choice[1] == "orb" and "orb" in location:
                 if it.PACK in Player.inventory:
-                    it.PACK.pocket += [ROOMS[Player.room]["orb"]]
-                    print("Picked up " + ROOMS[Player.room]["orb"].name + "!")
-                    print(ROOMS[Player.room]["orb"].info())
-                    del ROOMS[Player.room]["orb"]
+                    it.PACK.pocket += [location["orb"]]
+                    print("Picked up " + location["orb"].name + "!")
+                    print(location["orb"].info())
+                    del location["orb"]
                 else:
                     print("You should have worn the pants with pockets!")
             else:
