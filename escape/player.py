@@ -3,22 +3,40 @@ import items as it
 
 
 ROOMS = {
-    1 : {"name" : "White Room", "north" : it.BLUE_DOOR, "item" : it.PACK,
-         "orb" : it.BLUE_ORB},
-    2 : {"name" : "Blue Room", "south" : it.WHITE_DOOR, "east" : it.GREEN_DOOR,
-         "west" : it.PURPLE_DOOR, "orb" : it.GREEN_ORB},
-    3 : {"name" : "Green Room", "west": it.BLUE_DOOR, "north" : it.YELLOW_DOOR,
-         "orb" : it.PURPLE_ORB},
-    4 : {"name" : "Purple Room", "east" : it.BLUE_DOOR, "north" : it.RED_DOOR,
-         "orb" : it.RED_ORB},
-    5 : {"name" : "Red Room", "south" : it.PURPLE_DOOR,
-         "east" : it.ORANGE_DOOR, "orb" : it.YELLOW_ORB},
-    6 : {"name" : "Yellow Room", "south" : it.GREEN_DOOR,
-         "west" : it.ORANGE_DOOR, "orb" : it.ORANGE_ORB},
-    7 : {"name" : "Orange Room", "east" : it.YELLOW_DOOR, "west" : it.RED_DOOR,
-         "north" : it.BLACK_DOOR, "orb" : it.WHITE_ORB},
-    8 : {"name" : "Black Room", "south" : it.ORANGE_DOOR,
-         "item" : it.TWIZZLERS}
+    1 : {"name" : "White Room",
+         "north" : it.BLUE_DOOR,
+         "item" : it.PACK, "orb" : it.BLUE_ORB
+        },
+    2 : {"name" : "Blue Room",
+         "south" : it.WHITE_DOOR, "east" : it.GREEN_DOOR,
+         "west" : it.PURPLE_DOOR, 
+         "orb" : it.GREEN_ORB
+        },
+    3 : {"name" : "Green Room",
+         "west": it.BLUE_DOOR, "north" : it.YELLOW_DOOR,
+         "orb" : it.PURPLE_ORB
+        },
+    4 : {"name" : "Purple Room",
+         "east" : it.BLUE_DOOR, "north" : it.RED_DOOR,
+         "orb" : it.RED_ORB
+        },
+    5 : {"name" : "Red Room",
+         "south" : it.PURPLE_DOOR, "east" : it.ORANGE_DOOR,
+         "orb" : it.YELLOW_ORB
+        },
+    6 : {"name" : "Yellow Room",
+         "south" : it.GREEN_DOOR, "west" : it.ORANGE_DOOR,
+         "orb" : it.ORANGE_ORB
+        },
+    7 : {"name" : "Orange Room",
+         "east" : it.YELLOW_DOOR, "west" : it.RED_DOOR,
+         "north" : it.BLACK_DOOR,
+         "orb" : it.WHITE_ORB
+        },
+    8 : {"name" : "Black Room",
+         "south" : it.ORANGE_DOOR,
+         "item" : it.TWIZZLERS
+        }
 }
 
 

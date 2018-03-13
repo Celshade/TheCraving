@@ -66,6 +66,7 @@ class Door(Orb):
         setattr(self, "lock", False)
         self.rezonate()
 
+
 #Items
 PACK = Pack()
 TWIZZLERS = Item("Twizzlers", "The tastiest of tasty snacks!", 8)
