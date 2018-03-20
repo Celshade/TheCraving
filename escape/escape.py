@@ -3,28 +3,45 @@ import items as it
 import player as p
 
 
+def word_wrap(target, numb=1):
+    """Wrap text headings"""
+    wrap = "=" * (len(target) * numb)
+
+    print(wrap)
+    print(target)
+    print(wrap)
+
+
 def title():
     """Intro"""
-    line_br = "=" * 25
-    grumble = "\n**grrRRrRrrRUmmMmMMble**\n"
+    intro = "\t**ThE CrAvInG**"
+    grumble = "\n\t**grrRRrRrrRUmmMmMMble**\n"
 
-    print("\n" + line_br)
-    print("**The Craving**")
-    print(line_br + "\n")
-    print("==The Story Thus Far==\n")
-    print("**A bell sounds**")
-    print("You awaken unto an empty white room, with no idea where you are or how you arrived.")
-    print("You look around, searching for any clue of what's going on, but to no avail.")
-    print("You look down, thankful that you're still, at least, in posession of your pants.")
+    word_wrap(intro, 2)
+    print("\n==The Story Thus Far==\n")
+    print("\t**A bell sounds**")
+    print(
+        """
+        You awaken unto an empty white room
+        \twith no idea where you are or how you arrived.
+        You look around, searching for any clue of what's going on,
+        \tbut to no avail.
+        You look down
+        \tthankful that you're still, at least, in posession of your pants.
+        """
+    )
     print(grumble)
     print("Startled by the sudden noise, you scramble guardedly to your feet.")
     print(grumble)
-    print("That sound...that feeling...you recognize it.")
-    print("A cold realization sets in.")
-    print("... .. .. ... .. .. ... .. ..")
-    print("You've developed a serious craving for twizzlers.")
-    print(line_br)
-    print("Search your surroundings for a way to escape!")
+    print(
+        """
+    That sound...that feeling...you recognize it.
+    A cold realization sets in.
+    ... .. .. ... .. .. ... .. ..
+    You've developed a serious craving for twizzlers.
+        """
+    )
+    word_wrap("Search your surroundings for a way to escape!")
 
 
 def menu():
@@ -48,7 +65,8 @@ def main():
             print("Game Over!")
             break
 
-#Start!!
+
+# Start!!
 title()
 menu()
 main()
