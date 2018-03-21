@@ -1,4 +1,5 @@
 """Cheers! A simple text-based, escape-the-room-type, game. Have fun!"""
+
 import items as it
 import player as p
 
@@ -18,29 +19,21 @@ def title():
     grumble = "\n\t**grrRRrRrrRUmmMmMMble**\n"
 
     word_wrap(intro, 2)
-    print("\n==The Story Thus Far==\n")
+    print("\t  ==Thus Far==\n\n")
     print("\t**A bell sounds**")
-    print(
-        """
-        You awaken unto an empty white room
-        \twith no idea where you are or how you arrived.
-        You look around, searching for any clue of what's going on,
-        \tbut to no avail.
-        You look down
-        \tthankful that you're still, at least, in posession of your pants.
-        """
-    )
+    print("""You awaken unto an empty white room..
+        ..with no idea where you are or how you arrived.""")
+    print("""You look around, searching for any clue of what's going on,
+        but to no avail.""")
+    print("""You look down,
+        thankful that you're still, at least, in posession of your pants.""")
     print(grumble)
     print("Startled by the sudden noise, you scramble guardedly to your feet.")
     print(grumble)
-    print(
-        """
-    That sound...that feeling...you recognize it.
-    A cold realization sets in.
-    ... .. .. ... .. .. ... .. ..
-    You've developed a serious craving for twizzlers.
-        """
-    )
+    print("""That sound...that feeling...you recognize it..
+        ..A cold realization sets in.
+        ... .. .. ... .. .. ... .. ..""")
+    print("You've developed a serious craving for twizzlers.\n")
     word_wrap("Search your surroundings for a way to escape!")
 
 

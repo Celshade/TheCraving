@@ -1,42 +1,35 @@
 """Module: Define Player"""
+
 import items as it
 
 
 ROOMS = {
-    1 : {"name" : "White Room",
-         "north" : it.BLUE_DOOR,
-         "item" : it.PACK, "orb" : it.BLUE_ORB
-        },
-    2 : {"name" : "Blue Room",
-         "south" : it.WHITE_DOOR, "east" : it.GREEN_DOOR,
-         "west" : it.PURPLE_DOOR, 
-         "orb" : it.GREEN_ORB
-        },
-    3 : {"name" : "Green Room",
-         "west": it.BLUE_DOOR, "north" : it.YELLOW_DOOR,
-         "orb" : it.PURPLE_ORB
-        },
-    4 : {"name" : "Purple Room",
-         "east" : it.BLUE_DOOR, "north" : it.RED_DOOR,
-         "orb" : it.RED_ORB
-        },
-    5 : {"name" : "Red Room",
-         "south" : it.PURPLE_DOOR, "east" : it.ORANGE_DOOR,
-         "orb" : it.YELLOW_ORB
-        },
-    6 : {"name" : "Yellow Room",
-         "south" : it.GREEN_DOOR, "west" : it.ORANGE_DOOR,
-         "orb" : it.ORANGE_ORB
-        },
-    7 : {"name" : "Orange Room",
-         "east" : it.YELLOW_DOOR, "west" : it.RED_DOOR,
-         "north" : it.BLACK_DOOR,
-         "orb" : it.WHITE_ORB
-        },
-    8 : {"name" : "Black Room",
-         "south" : it.ORANGE_DOOR,
-         "item" : it.TWIZZLERS
-        }
+    1: {"name": "White Room",
+        "north": it.BLUE_DOOR,
+        "item": it.PACK, "orb": it.BLUE_ORB},
+    2: {"name": "Blue Room",
+        "south": it.WHITE_DOOR, "east": it.GREEN_DOOR,
+        "west": it.PURPLE_DOOR,
+        "orb": it.GREEN_ORB},
+    3: {"name": "Green Room",
+        "west": it.BLUE_DOOR, "north": it.YELLOW_DOOR,
+        "orb": it.PURPLE_ORB},
+    4: {"name": "Purple Room",
+        "east": it.BLUE_DOOR, "north": it.RED_DOOR,
+        "orb": it.RED_ORB},
+    5: {"name": "Red Room",
+        "south": it.PURPLE_DOOR, "east": it.ORANGE_DOOR,
+        "orb": it.YELLOW_ORB},
+    6: {"name": "Yellow Room",
+        "south": it.GREEN_DOOR, "west": it.ORANGE_DOOR,
+        "orb": it.ORANGE_ORB},
+    7: {"name": "Orange Room",
+        "east": it.YELLOW_DOOR, "west": it.RED_DOOR,
+        "north": it.BLACK_DOOR,
+        "orb": it.WHITE_ORB},
+    8: {"name": "Black Room",
+        "south": it.ORANGE_DOOR,
+        "item": it.TWIZZLERS}
 }
 
 
@@ -66,17 +59,16 @@ class Player():
         for x in it.PACK.pocket:
             if x.icolor() == door.icolor():
                 return True
-            else:
-                continue
 
     @classmethod
     def move(cls, direction):
         """Move in desired direction"""
         door = ROOMS[Player.room][str(direction)]
 
-        if door.lock_status() == False:
+        if door.lock_status(False):
             Player.room = door.room_tag()
-        elif door.lock_status() == True:
+        elif door.lock_status(True):
+            print("You encounter " + door.description)
             if it.PACK in Player.inventory and Player.match(door):
                 door.unlock()
                 Player.room = door.room_tag()
@@ -89,6 +81,16 @@ class Player():
         choice = input(">").lower().split()
         location = ROOMS[Player.room]
 
+        if choice[0] == "gg":
+            exit_choice = input(
+                "Are you sure you wish to quit? Choose [Y] or [N]: ").lower()
+            if exit_choice == "y":
+                quit()
+            elif exit_choice == "n":
+                return
+            else:
+                print("That's not a valid command!")
+                exit_choice
         if choice[0] == "go":
             if choice[1] == "north" and choice[1] in location:
                 Player.move("north")
@@ -119,5 +121,5 @@ class Player():
                     print("You should have worn the pants with pockets!")
             else:
                 print("It must have been a mirage...")
-        elif choice[0] != "go" or "get":
+        elif choice[0] not in ("go", "get", "gg"):
             print("That's not a valid command!")

@@ -13,8 +13,8 @@ class Item(object):
         return self.name
 
     def info(self):
-        """Return full Item description"""
-        return "{}\n-->{}".format(self.name, self.description)
+        """Return Item description"""
+        return "**{}**".format(self.description)
 
     def room_tag(self):
         """Return a ROOM tag"""
@@ -57,9 +57,12 @@ class Door(Orb):
         The door pulses in sync with the orb and begins to open!
         """.format(self.color))
 
-    def lock_status(self):
+    def lock_status(self, condition):
         """Return status of lock"""
-        return self.lock
+        if self.lock == condition:
+            return True
+        else:
+            return False
 
     def unlock(self):
         """Unlock Door"""
@@ -67,10 +70,14 @@ class Door(Orb):
         self.rezonate()
 
 
-#Items
+def door_desc(color):
+    return "an impossing stone door with a feint {} glow.".format(color)
+
+
+# Items
 PACK = Pack()
 TWIZZLERS = Item("Twizzlers", "The tastiest of tasty snacks!", 8)
-#Orbs
+# Orbs
 BLUE_ORB = Orb("Blue Orb", "A glowing blue orb", 2, "blue")
 GREEN_ORB = Orb("Green Orb", "A glowing green orb", 2, "green")
 PURPLE_ORB = Orb("Purple Orb", "A glowing purple orb", 3, "purple")
@@ -79,12 +86,12 @@ YELLOW_ORB = Orb("Yellow Orb", "A glowing yellow orb", 5, "yellow")
 ORANGE_ORB = Orb("Orange Orb", "A glowing orange orb", 6, "orange")
 WHITE_ORB = Orb("White Orb", "A glowing white orb", 7, "white")
 BLACK_ORB = Orb("Black Orb", "A glowing black orb", 1, "black")
-#Doors
-BLUE_DOOR = Door("Blue Door", "An impossing door with a feint blue glow.", 2, "blue")
-GREEN_DOOR = Door("Green Door", "An impossing door with a feint green glow.", 3, "green")
-PURPLE_DOOR = Door("Purple Door", "An impossing door with a feint purple glow.", 4, "purple")
-RED_DOOR = Door("Red Door", "An impossing door with a feint red glow.", 5, "red")
-YELLOW_DOOR = Door("Yellow Door", "An impossing door with a feint yellow glow.", 6, "yellow")
-ORANGE_DOOR = Door("Orange Door", "An impossing door with a feint orange glow.", 7, "orange")
-WHITE_DOOR = Door("White Door", "An impossing door with a feint white glow.", 1, "white")
-BLACK_DOOR = Door("Black Door", "An impossing door with a feint black glow.", 8, "black")
+# Doors
+BLUE_DOOR = Door("Blue Door", door_desc("blue"), 2, "blue")
+GREEN_DOOR = Door("Green Door", door_desc("green"), 3, "green")
+PURPLE_DOOR = Door("Purple Door", door_desc("purple"), 4, "purple")
+RED_DOOR = Door("Red Door", door_desc("red"), 5, "red")
+YELLOW_DOOR = Door("Yellow Door", door_desc("yellow"), 6, "yellow")
+ORANGE_DOOR = Door("Orange Door", door_desc("orange"), 7, "orange")
+WHITE_DOOR = Door("White Door", door_desc("white"), 1, "white")
+BLACK_DOOR = Door("Black Door", door_desc("black"), 8, "black")
