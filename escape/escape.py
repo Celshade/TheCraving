@@ -14,7 +14,7 @@ def word_wrap(target, numb=1):
 
 
 def title():
-    """Intro"""
+    """Introduce storyline"""
     intro = "\t**ThE CrAvInG**"
     grumble = "\n\t**grrRRrRrrRUmmMmMMble**\n"
 
@@ -23,26 +23,30 @@ def title():
     print("\t**A bell sounds**")
     print("""You awaken unto an empty white room..
         ..with no idea where you are or how you arrived.""")
-    print("""You look around, searching for any clue of what's going on,
-        but to no avail.""")
-    print("""You look down,
-        thankful that you're still, at least, in posession of your pants.""")
+    print("""You look around, searching for any clue of what's going on..
+        ..but to no avail.""")
+    print("""You look down..
+        ..thankful that you're still, at least, in posession of your pants.""")
     print(grumble)
     print("Startled by the sudden noise, you scramble guardedly to your feet.")
     print(grumble)
     print("""That sound...that feeling...you recognize it..
         ..A cold realization sets in.
-        ... .. .. ... .. .. ... .. ..""")
+        .. ... ... ... ... ... ... ..""")
     print("You've developed a serious craving for twizzlers.\n")
     word_wrap("Search your surroundings for a way to escape!")
 
 
 def menu():
-    """Main Menu"""
-    print("\nValid Commands:")
-    print("'go [direction]' (north, south, east, or west)")
-    print("'get item' (picks up nearby non-orb item")
-    print("'get orb (picks up nearby orb)\n")
+    """List main menu"""
+    print("\n\t==Valid Commands==")
+    print("> 'options' (lists valid command options)")
+    print("> 'check [object]' (look closer at an object)")
+    print("> 'go [direction]' (north, south, east, or west)")
+    print("> 'get item' (picks up nearby non-orb item)")
+    print("> 'get orb' (picks up nearby orb)")
+    print("> 'gg' (quit game)")
+    print(("_" * 48) + "\n")
 
 
 def main():

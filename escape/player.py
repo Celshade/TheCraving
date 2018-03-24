@@ -78,7 +78,7 @@ class Player():
     @classmethod
     def action(cls):
         """Control Player"""
-        choice = input(">").lower().split()
+        choice = input("> ").lower().split()
         location = ROOMS[Player.room]
 
         if choice[0] == "gg":
