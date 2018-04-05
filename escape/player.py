@@ -140,6 +140,3 @@ class Player():
                 continue
         if choice[0] not in choices:
             print("That's not a valid command!")
-
-
-P1 = Player()
