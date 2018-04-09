@@ -14,7 +14,7 @@ class Item(object):
 
     def info(self):
         """Return detailed description"""
-        return "**{}**".format(self.description)
+        return ">{}<".format(self.description) + "\n"
 
     def room_tag(self):
         """Return original location of Item"""
@@ -27,14 +27,17 @@ class Pack(Item):
         super().__init__(name="Bottomless Pack",
                          description="Even the pockets have pockets!",
                          tag=1)
-        self.pocket = []
+        self.pocket = set()
 
     def add_pack(self, obj):
-        self.pocket.append(obj)
+        self.pocket.add(obj)
 
     def contents(self):
         """Return current iventory"""
-        return "Inventory: {}".format(self.pocket)
+        if self.pocket == set():
+            return "Inventory:"
+        else:
+            return "Inventory: {}".format(self.pocket)
 
 
 class Orb(Item):
@@ -56,9 +59,8 @@ class Door(Orb):
 
     def rezonate(self):
         """Rezonate with Orb"""
-        print("""A pulsing {} light shines bright from within the orb!
-        The door pulses in sync with the orb and begins to open!
-        """.format(self.color))
+        print("You raise the {} orb up in front of you".format(self.color))
+        print("The door vibrates in sync with the orb and begins to open!")
 
     def lock_status(self, condition):
         """Return status of lock"""
@@ -69,7 +71,7 @@ class Door(Orb):
 
     def unlock(self):
         """Unlock Door"""
-        setattr(self, "lock", False)
+        self.lock = False
         self.rezonate()
 
 
@@ -80,16 +82,16 @@ def door_desc(color):
 
 # Items
 PACK = Pack()
-TWIZZLERS = Item("[Pack of Twizzlers]", "The tastiest of tasty snacks!", 8)
+TWIZZLERS = Item("Pack of Twizzlers", "The tastiest of tasty snacks!", 8)
 # Orbs
-BLUE_ORB = Orb("[Blue Orb]", "A glowing blue orb", 2, "blue")
-GREEN_ORB = Orb("[Green Orb]", "A glowing green orb", 2, "green")
-PURPLE_ORB = Orb("[Purple Orb]", "A glowing purple orb", 3, "purple")
-RED_ORB = Orb("[Red Orb]", "A glowing red orb", 4, "red")
-YELLOW_ORB = Orb("[Yellow Orb]", "A glowing yellow orb", 5, "yellow")
-ORANGE_ORB = Orb("[Orange Orb]", "A glowing orange orb", 6, "orange")
-WHITE_ORB = Orb("[White Orb]", "A glowing white orb", 7, "white")
-BLACK_ORB = Orb("[Black Orb]", "A glowing black orb", 1, "black")
+BLUE_ORB = Orb("Blue Orb", "A glowing blue orb", 2, "blue")
+GREEN_ORB = Orb("Green Orb", "A glowing green orb", 2, "green")
+PURPLE_ORB = Orb("Purple Orb", "A glowing purple orb", 3, "purple")
+RED_ORB = Orb("Red Orb", "A glowing red orb", 4, "red")
+YELLOW_ORB = Orb("Yellow Orb", "A glowing yellow orb", 5, "yellow")
+ORANGE_ORB = Orb("Orange Orb", "A glowing orange orb", 6, "orange")
+WHITE_ORB = Orb("White Orb", "A glowing white orb", 7, "white")
+BLACK_ORB = Orb("Black Orb", "A glowing black orb", 1, "black")
 # Doors
 BLUE_DOOR = Door("Blue Door", door_desc("blue"), 2, "blue")
 GREEN_DOOR = Door("Green Door", door_desc("green"), 3, "green")

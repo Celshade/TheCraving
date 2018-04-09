@@ -1,4 +1,4 @@
-"""Module: Define self"""
+"""Module: Define Player and Rooms"""
 
 import items as it
 
@@ -35,10 +35,9 @@ ROOMS = {
 
 class Player():
     """Establish Player gameplay"""
-    def __init__(self):
-        self.room = 1
-        self.inventory = []
-        self.location = ROOMS[self.room]
+    def __init__(self, room=1, inventory=set()):
+        self.room = room
+        self.inventory = inventory
 
     def menu(self):
         """List main menu"""
@@ -48,7 +47,7 @@ class Player():
         print("\n" + line_1)
         print(space + "Valid Commands")
         print("> 'options'       (Lists valid commands)")
-        print("> 'check [object]'(Look closer at an object)")
+        print("> 'check [object]'(Look closer at an object)")  # not yet added
         print("> 'go [direction]'(north, south, east, or west)")
         print("> 'get item'      (Picks up nearby non-orb item)")
         print("> 'get orb'       (Picks up nearby orb)")
@@ -56,33 +55,34 @@ class Player():
         print(line_1 + "\n")
 
     def stats(self):
-        """Current Status"""
+        """Broadcast current status"""
         line_2 = "-" * 30
+        location = ROOMS[self.room]
 
         print("\n" + line_2)
-        print("You are in : " + self.location["name"])
+        print("You are in : " + location["name"])
         if it.PACK in self.inventory:
             print(it.PACK.contents())
-        if "item" in self.location:
-            print("You catch sight of %s" % (self.location["item"]))
-        if "orb" in self.location:
-            print("You catch sight of %s" % (self.location["orb"]))
+        if "item" in location:
+            print("You catch sight of %s" % (location["item"]))
+        if "orb" in location:
+            print("You catch sight of %s" % (location["orb"]))
         print(line_2 + "\n")
 
     def match(self, door):
-        """Check for Orb match"""
+        """Check PACK for Orb match"""
         for x in it.PACK.pocket:
             if x.icolor() == door.icolor():
                 return True
 
     def move(self, direction):
         """Move in desired direction"""
-        door = self.location[str(direction)]
+        door = ROOMS[self.room][str(direction)]
 
         if door.lock_status(False):
             self.room = door.room_tag()
         elif door.lock_status(True):
-            print("You encounter " + door.description)
+            print("\nYou encounter " + door.description)
             if it.PACK in self.inventory and self.match(door):
                 door.unlock()
                 self.room = door.room_tag()
@@ -90,47 +90,55 @@ class Player():
                 print("The door doesn't budge!")
 
     def action(self):
-        """Control Player"""
+        """Establish Player action"""
         choice = input("> ").lower().split()
         choices = ("options", "check", "go", "get", "gg")
+        checkables = set()
+        location = ROOMS[self.room]
 
+        if choice[0] == "ending":
+            self.inventory.add(it.PACK)
+            it.PACK.pocket.add(it.TWIZZLERS)
         if choice[0] == "options":
             self.menu()
         elif choice[0] == "check":
-            pass
+            if choice[1] in checkables:
+                print("\nFeature not yet implemented")
+            else:
+                print("\nIt must have been your imagination")
         elif choice[0] == "go":
-            if choice[1] == "north" and choice[1] in self.location:
+            if choice[1] == "north" and choice[1] in location:
                 self.move("north")
-            elif choice[1] == "east" and choice[1] in self.location:
+            elif choice[1] == "east" and choice[1] in location:
                 self.move("east")
-            elif choice[1] == "south" and choice[1] in self.location:
+            elif choice[1] == "south" and choice[1] in location:
                 self.move("south")
-            elif choice[1] == "west" and choice[1] in self.location:
+            elif choice[1] == "west" and choice[1] in location:
                 self.move("west")
             else:
                 print("You cannot go that way!\n")
         elif choice[0] == "get":
-            if choice[1] == "item" and "item" in self.location:
-                if self.location["item"] == it.PACK:
-                    self.inventory.append(it.PACK)
+            if choice[1] == "item" and "item" in location:
+                if location["item"] == it.PACK:
+                    self.inventory.add(it.PACK)
                 else:
-                    it.PACK.pocket += [self.location["item"]]
-                print("Picked up " + self.location["item"].name + "!")
-                print(self.location["item"].info())
-                del self.location["item"]
-            elif choice[1] == "orb" and "orb" in self.location:
+                    it.PACK.add_pack(location["item"])
+                print("\nPicked up %s!" % (location["item"]))
+                print(location["item"].info())
+                del location["item"]
+            elif choice[1] == "orb" and "orb" in location:
                 if it.PACK in self.inventory:
-                    it.PACK.pocket += [self.location["orb"]]
-                    print("Picked up " + self.location["orb"].name + "!")
-                    print(self.location["orb"].info())
-                    del self.location["orb"]
+                    it.PACK.add_pack(location["orb"])
+                    print("\nPicked up %s!" % (location["orb"]))
+                    print(location["orb"].info())
+                    del location["orb"]
                 else:
-                    print("You should have worn the pants with pockets!")
+                    print("\nYou should have worn the pants with pockets!")
             else:
-                print("It must have been a mirage...")
+                print("\nIt must have been a mirage...")
         while choice[0] == "gg":
             exit_choice = input(
-                "Are you sure you wish to quit? Choose [Y] or [N]: ").lower()
+                "\nAre you sure you wish to quit? Choose [Y] or [N]: ").lower()
             if exit_choice == "y":
                 quit()
             elif exit_choice == "n":
@@ -139,4 +147,4 @@ class Player():
                 print("That's not a valid choice.")
                 continue
         if choice[0] not in choices:
-            print("That's not a valid command!")
+            print("\nThat's not a valid command!")
