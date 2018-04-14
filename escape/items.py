@@ -9,12 +9,18 @@ class Item(object):
         self.tag = tag
 
     def __repr__(self):
-        """Return Item name"""
+        """Return alternate Item name"""
         return self.name
+
+    def __str__(self):
+        """Return true Item name"""
+        return "[{}]".format(self.name)
 
     def info(self):
         """Return detailed description"""
-        return ">{}<".format(self.description) + "\n"
+        return ("\n[{}]\n"
+                + "=" * (len(self.name) + 2)
+                + "\n{}").format(self.name, self.description)
 
     def room_tag(self):
         """Return original location of Item"""
@@ -24,18 +30,21 @@ class Item(object):
 class Pack(Item):
     """Define Pack"""
     def __init__(self):
-        super().__init__(name="Bottomless Pack",
+        super().__init__(name="Leather Pack",
                          description="Even the pockets have pockets!",
                          tag=1)
-        self.pocket = set()
+        self.pocket = []
 
     def add_pack(self, obj):
-        self.pocket.add(obj)
+        self.pocket.append(obj)
 
     def contents(self):
         """Return current iventory"""
-        if self.pocket == set():
-            return "Inventory:"
+        if self.pocket == []:
+            return "Inventory: Empty"
+        elif len(self.pocket) > 4:
+            return ("Inventory: {}\n".format(self.pocket[:4])
+                    + (" " * 11) + "{}.".format(self.pocket[4:]))
         else:
             return "Inventory: {}".format(self.pocket)
 
@@ -59,7 +68,7 @@ class Door(Orb):
 
     def rezonate(self):
         """Rezonate with Orb"""
-        print("You raise the {} orb up in front of you".format(self.color))
+        print("You raise the {} orb in front of you.".format(self.color))
         print("The door vibrates in sync with the orb and begins to open!")
 
     def lock_status(self, condition):

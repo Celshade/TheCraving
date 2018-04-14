@@ -47,7 +47,6 @@ class Player():
         print("\n" + line_1)
         print(space + "Valid Commands")
         print("> 'options'       (Lists valid commands)")
-        print("> 'check [object]'(Look closer at an object)")  # not yet added
         print("> 'go [direction]'(north, south, east, or west)")
         print("> 'get item'      (Picks up nearby non-orb item)")
         print("> 'get orb'       (Picks up nearby orb)")
@@ -64,9 +63,9 @@ class Player():
         if it.PACK in self.inventory:
             print(it.PACK.contents())
         if "item" in location:
-            print("You catch sight of %s" % (location["item"]))
+            print("You catch sight of a {}".format(location["item"]))
         if "orb" in location:
-            print("You catch sight of %s" % (location["orb"]))
+            print("You catch sight of a {}".format(location["orb"]))
         print(line_2 + "\n")
 
     def match(self, door):
@@ -82,7 +81,7 @@ class Player():
         if door.lock_status(False):
             self.room = door.room_tag()
         elif door.lock_status(True):
-            print("\nYou encounter " + door.description)
+            print("\nYou encounter " + it.door_desc(door.icolor()))
             if it.PACK in self.inventory and self.match(door):
                 door.unlock()
                 self.room = door.room_tag()
@@ -98,7 +97,12 @@ class Player():
 
         if choice[0] == "ending":
             self.inventory.add(it.PACK)
-            it.PACK.pocket.add(it.TWIZZLERS)
+            it.PACK.pocket.append(it.TWIZZLERS)
+        if choice[0] == "port":
+            if choice[1] == "one":
+                self.room = 1
+            elif choice[1] == "two":
+                self.room = 7
         if choice[0] == "options":
             self.menu()
         elif choice[0] == "check":
@@ -116,20 +120,20 @@ class Player():
             elif choice[1] == "west" and choice[1] in location:
                 self.move("west")
             else:
-                print("You cannot go that way!\n")
+                print("\nYou cannot go that way!\n")
         elif choice[0] == "get":
             if choice[1] == "item" and "item" in location:
                 if location["item"] == it.PACK:
                     self.inventory.add(it.PACK)
                 else:
                     it.PACK.add_pack(location["item"])
-                print("\nPicked up %s!" % (location["item"]))
+                print("\nPicked up {}!".format(location["item"]))
                 print(location["item"].info())
                 del location["item"]
             elif choice[1] == "orb" and "orb" in location:
                 if it.PACK in self.inventory:
                     it.PACK.add_pack(location["orb"])
-                    print("\nPicked up %s!" % (location["orb"]))
+                    print("\nPicked up {}!".format(location["orb"]))
                     print(location["orb"].info())
                     del location["orb"]
                 else:
@@ -144,7 +148,7 @@ class Player():
             elif exit_choice == "n":
                 break
             else:
-                print("That's not a valid choice.")
+                print("\nThat's not a valid choice.")
                 continue
         if choice[0] not in choices:
             print("\nThat's not a valid command!")
