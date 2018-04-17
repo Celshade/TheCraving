@@ -49,6 +49,18 @@ class Pack(Item):
             return "Inventory: {}".format(self.pocket)
 
 
+class Checkable(Item):
+    """Define Checkable Item"""
+    def __init__(self, name, description, tag, obj):
+        super().__init__(name, description, tag)
+        self.obj = obj
+        self.hidden = [obj]
+
+    def hidden(self):
+        """Return that which lies beneath"""
+        return self.hidden[0]
+
+
 class Orb(Item):
     """Define Orbs"""
     def __init__(self, name, description, tag, color):
@@ -68,8 +80,9 @@ class Door(Orb):
 
     def rezonate(self):
         """Rezonate with Orb"""
-        print("You raise the {} orb in front of you.".format(self.color))
-        print("The door vibrates in sync with the orb and begins to open!")
+        print("""You raise the {} orb in front of you.
+        The door vibrates in sync with the orb and begins to open!
+        """.format(self.color))
 
     def lock_status(self, condition):
         """Return status of lock"""
@@ -89,9 +102,6 @@ def door_desc(color):
     return "an impossing stone door with a feint {} glow.".format(color)
 
 
-# Items
-PACK = Pack()
-TWIZZLERS = Item("Pack of Twizzlers", "The tastiest of tasty snacks!", 8)
 # Orbs
 BLUE_ORB = Orb("Blue Orb", "A glowing blue orb", 2, "blue")
 GREEN_ORB = Orb("Green Orb", "A glowing green orb", 2, "green")
@@ -110,3 +120,15 @@ YELLOW_DOOR = Door("Yellow Door", door_desc("yellow"), 6, "yellow")
 ORANGE_DOOR = Door("Orange Door", door_desc("orange"), 7, "orange")
 WHITE_DOOR = Door("White Door", door_desc("white"), 1, "white")
 BLACK_DOOR = Door("Black Door", door_desc("black"), 8, "black")
+# Items
+PACK = Pack()
+TWIZZLERS = Item("Pack of Twizzlers", "The tastiest of tasty snacks!", 8)
+SHRINE = Checkable("Old Shrine",
+                   "An ornate box sits atop an onyx pedestal",
+                   8,
+                   TWIZZLERS)
+SHELF = Checkable("Bookshelf",
+                  ("A bookshelf housing old leather tomes."
+                   "\nOne of the books seems out of place..."),
+                  2,
+                  GREEN_ORB)

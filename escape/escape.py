@@ -2,34 +2,9 @@
 
 import items as it
 import player as p
+import story as s
 
 player = p.Player()
-
-text_zero = """\n\t  ==Thus Far==\n\n
-\t**A bell sounds**
-You awaken unto an empty white room..
-..with no idea where you are or how you arrived.
-You look around, searching for any clue of what's going on..
-..but to no avail. All you see are stark white walls, a bag, and a strange orb.
-You look down and check yourself..
-..thankful that you're still, at least, in posession of your pants."""
-
-text_one = """As the twizzlers hit your tastebuds, you feel a sudden
-surge of strength well up within you. Your vision brightens and
-your eyes began to adjust to the pitch darkness. An aged wooden door
-materializes just off to your left. The door gives, easily, and you are
-temporarily blinded by sunshine pouring in from the outside. You exit the
-compound unto a dense forest, when suddenly - ..."""
-
-text_two = """You awaken, lying on your bed, with sunlight streaming in from
-the windows to your left. You notice that your backpack is still slung across
-your shoulders. You must have been so tired that you forgot to shrug it off.
-"""
-outro = """That sound...that feeling...you recognize it..
-\t..A cold realization sets in.
-\n\t.. ... ... ... ... ... ... ..\n
-You've developed a serious craving for twizzlers.\n"""
-grumble = "\n\t**grrRRrRrrRUmmMmMMble**\n"
 
 
 def word_wrap(target, numb=1):
@@ -47,11 +22,11 @@ def title():
 
     print("\n" * 50)
     word_wrap(actual_title, 2)
-    print(text_zero)
-    print(grumble)
+    print(s.intro)
+    print(s.grumble)
     print("Startled by the sudden noise, you scramble guardedly to your feet.")
-    print(grumble)
-    print(outro)
+    print(s.grumble)
+    print(s.outro)
     word_wrap("Search your surroundings for a way to escape!")
 
 
@@ -65,17 +40,16 @@ def main():
         if it.TWIZZLERS in it.PACK.pocket:
             print("You sigh, blissfully, as you unwrap the pack of twizzlers.")
             print()
-            print(text_one)
-            print(grumble)
-            print(text_two)
-            print(grumble)
-            print(outro)
+            print(s.text_alpha)
+            print(s.grumble)
+            print(s.text_beta)
+            print(s.grumble)
+            print(s.realization)
             print("Game Over!")
             break
+    quit()
 
 
-# command > "ending" -> obtains twizzlers to trigger ending
-# Start!!
 title()
 player.menu()
 main()

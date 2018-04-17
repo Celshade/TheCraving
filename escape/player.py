@@ -1,7 +1,7 @@
 """Module: Define Player and Rooms"""
 
 import items as it
-
+from story import menu_text
 
 ROOMS = {
     1: {"name": "White Room",
@@ -46,12 +46,10 @@ class Player():
 
         print("\n" + line_1)
         print(space + "Valid Commands")
-        print("> 'options'       (Lists valid commands)")
-        print("> 'go [direction]'(north, south, east, or west)")
-        print("> 'get item'      (Picks up nearby non-orb item)")
-        print("> 'get orb'       (Picks up nearby orb)")
-        print("> 'gg'            (Quit game)")
+        print(menu_text)
         print(line_1 + "\n")
+        # command: > 'ending'  (prompts end-game w/text)
+        # command: > 'port [room_tag] ('one' == ROOMS[1], 'seven' == ROOMS[7])
 
     def stats(self):
         """Broadcast current status"""
@@ -74,6 +72,19 @@ class Player():
             if x.icolor() == door.icolor():
                 return True
 
+    def check(self, obj):
+        """Check Item for details"""
+        location = ROOMS[self.room]
+
+        print("You take a closer look at the {}...".format(obj))
+        print(obj.info())
+        print("You discover a {}".format(obj.hidden())
+              + " hidden inside the {}!".format(obj))
+        if obj == it.SHELF:
+            location["Orb"] = it.SHELF.hidden()
+        else:
+            location["Item"] = it.SHRINE.hidden()
+
     def move(self, direction):
         """Move in desired direction"""
         door = ROOMS[self.room][str(direction)]
@@ -91,23 +102,16 @@ class Player():
     def action(self):
         """Establish Player action"""
         choice = input("> ").lower().split()
-        choices = ("options", "check", "go", "get", "gg")
-        checkables = set()
+        choices = ("options", "check", "go", "get", "gg", "port")
         location = ROOMS[self.room]
 
-        if choice[0] == "ending":
-            self.inventory.add(it.PACK)
-            it.PACK.pocket.append(it.TWIZZLERS)
-        if choice[0] == "port":
-            if choice[1] == "one":
-                self.room = 1
-            elif choice[1] == "two":
-                self.room = 7
         if choice[0] == "options":
             self.menu()
         elif choice[0] == "check":
-            if choice[1] in checkables:
-                print("\nFeature not yet implemented")
+            if choice[1] == "item":
+                self.check(location["item"])
+            elif choice[1] == "orb":
+                self.check(location["orb"])
             else:
                 print("\nIt must have been your imagination")
         elif choice[0] == "go":
@@ -150,5 +154,12 @@ class Player():
             else:
                 print("\nThat's not a valid choice.")
                 continue
+        if choice[0] == "port":  # Teleport for easy ROOM testing
+            if choice[1] == "one":
+                self.room = 1
+            elif choice[1] == "seven":
+                self.room = 7
+            else:
+                return "You can't envision this location in your mind's eye"
         if choice[0] not in choices:
             print("\nThat's not a valid command!")
