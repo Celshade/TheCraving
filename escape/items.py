@@ -142,8 +142,18 @@ BOOKSHELF = Checkable("Bookshelf",
                       2,
                       "One of the books seems out of place...",
                       GREEN_ORB)
-SHRINE = Checkable("Ancient Looking Shrine",
+CAMERA_CRATE = Checkable("Crate of Camera Parts",
+                         "A crate full of used camera parts.",
+                         4,
+                         "An odd glow shines from beneath old fish lenses...",
+                         RED_ORB)
+BUILDING_MATERIALS = Checkable("Discarded Pile of Building Materials",
+                               "Building materials lie strewn about the room.",
+                               6,
+                               "You slip on something amidst the supplies...",
+                               ORANGE_ORB)
+SHRINE = Checkable("Strange Looking Shrine",
                    s.SHRINE_TEXT_ALPHA,
                    8,
-                   "As you open the box and reach inside, you find...",
+                   "As you open the box and reach inside...",
                    TWIZZLERS)

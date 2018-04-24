@@ -16,13 +16,13 @@ ROOMS = {
         "orb": it.PURPLE_ORB},
     4: {"name": "Purple Room",
         "east": it.BLUE_DOOR, "north": it.RED_DOOR,
-        "orb": it.RED_ORB},
+        "object": it.CAMERA_CRATE},
     5: {"name": "Red Room",
         "south": it.PURPLE_DOOR, "east": it.ORANGE_DOOR,
         "orb": it.YELLOW_ORB},
     6: {"name": "Yellow Room",
         "south": it.GREEN_DOOR, "west": it.ORANGE_DOOR,
-        "orb": it.ORANGE_ORB},
+        "object": it.BUILDING_MATERIALS},
     7: {"name": "Orange Room",
         "east": it.YELLOW_DOOR, "west": it.RED_DOOR, "north": it.BLACK_DOOR,
         "orb": it.WHITE_ORB},
@@ -30,7 +30,7 @@ ROOMS = {
         "south": it.ORANGE_DOOR,
         "object": it.SHRINE}
 }
-CHECKABLES = (it.BOOKSHELF, it.SHRINE)
+CHECKABLES = (it.BOOKSHELF, it.CAMERA_CRATE, it.BUILDING_MATERIALS, it.SHRINE)
 ORB_LIST = (it.BLUE_ORB, it.GREEN_ORB, it.PURPLE_ORB, it.RED_ORB,
             it.YELLOW_ORB, it.ORANGE_ORB, it.WHITE_ORB, it.BLACK_ORB)
 
