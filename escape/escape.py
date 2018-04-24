@@ -4,8 +4,6 @@ import items as it
 import player as p
 import story as s
 
-player = p.Player()
-
 
 def word_wrap(target, numb=1):
     """Wrap text headings"""
@@ -20,13 +18,15 @@ def title():
     """Introduce storyline"""
     actual_title = "\t **ThE CrAvInG**"
 
-    print("\n" * 50)
+    print("\n" * 42)
     word_wrap(actual_title, 2)
-    print(s.intro)
-    print(s.grumble)
+    print(s.ALPHA_TEXT)
+    print(s.GRUMBLE)
+    print()
     print("Startled by the sudden noise, you scramble guardedly to your feet.")
-    print(s.grumble)
-    print(s.outro)
+    print()
+    print(s.GRUMBLE)
+    print(s.REALIZATION)
     word_wrap("Search your surroundings for a way to escape!")
 
 
@@ -38,18 +38,16 @@ def main():
         if it.WHITE_ORB in it.PACK.pocket:
             p.ROOMS[1]["orb"] = it.BLACK_ORB
         if it.TWIZZLERS in it.PACK.pocket:
-            print("You sigh, blissfully, as you unwrap the pack of twizzlers.")
-            print()
-            print(s.text_alpha)
-            print(s.grumble)
-            print(s.text_beta)
-            print(s.grumble)
-            print(s.realization)
+            print(s.BETA_TEXT)
+            print(s.OMEGA_TEXT)
+            print(s.GRUMBLE)
+            print(s.REALIZATION)
             print("Game Over!")
             break
     quit()
 
 
+player = p.Player()
 title()
 player.menu()
 main()
