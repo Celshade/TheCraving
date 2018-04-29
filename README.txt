@@ -6,7 +6,7 @@
 Aloha!!
 
 This is the first game that I've ever built, so please pardon the lack of swag.
-I built this mainly as a way to test my [python] programming knowledge,
+I've built this mainly as a way to test my [python] programming knowledge,
 thus far. I haven't been coding all that long, so I wanted to try out various
 techniques and work on my flow. The game took me roughly three months to
 complete. I believe it could have been finished much quicker; however, working
