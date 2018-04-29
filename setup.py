@@ -1,28 +1,30 @@
 """Setup file for distribution"""
 
 from os import path
+from codecs import open
 from setuptools import setup
 from setuptools import find_packages
 
 
 here = path.abspath(path.dirname(__file__))
 
-with open(path.join(here, 'README.txt'), encoding='utf-8') as f:
+with open(path.join(here, 'README.md'), encoding='utf-8') as f:
     long_description = f.read()
 
 setup(
     name='TheCraving',
-    version='3.6.3',
+    version='1.0.0',
     description='A simple text-based adventure game',
     long_description=long_description,
-    long_description_content_type='text/plain',
+    long_description_content_type='text/markdown',
     url='https://github.com/Celshade/The-Craving',
-    author='Danny Collins aka Celshade',
+    license="MIT License",
+    author='D.Collins aka Celshade',
     author_email='ggcelshade@gmail.com',
     classifiers=[
-        'Developement Status :: 3 - Alpha',
+        'Development Status :: 3 - Alpha',
         'Intended Audience :: Developers',
-        'Topic :: Game Developement :: Game Programming',
+        'Topic :: Game Development',
         'License :: OSI approved :: MIT License',
         'Programming Language :: Python :: 3.6'
         ],

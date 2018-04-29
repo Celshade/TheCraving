@@ -1,7 +1,6 @@
-=================
-[**ThE CrAvInG**]
-=================
-# A text-based, escape-the-room, adventure game
+# ThE CrAvInG
+
+_A text-based, escape-the-room, adventure game_
 
 Aloha!!
 
