@@ -1,12 +1,25 @@
-"""Cheers! A simple text-based, escape-the-room, game. Have fun!"""
+"""Primary module of TheCraving: import additional modules and initiate game.
 
+Functions:
+    word_wrap(): Text wrapper.
+    title(): Provides story intro.
+    main(): Primary game-loop.
+"""
+#  Welcome to TheCraving!
+#  This is a simple text-based, escape-the-room, game.
+#  Have fun!
 import items as it
 import player as p
 import story as s
 
 
 def word_wrap(target, numb=1):
-    """Wrap text headings"""
+    """Wrap text headings.
+
+    Args:
+        target (str): The target text to be wrapped.
+        numb (int): The wrap multiplyer (default=1).
+    """
     wrap = "=" * (len(target) * numb)
 
     print(wrap)
@@ -15,7 +28,7 @@ def word_wrap(target, numb=1):
 
 
 def title():
-    """Introduce storyline"""
+    """Introduce storyline."""
     actual_title = "\t **ThE CrAvInG**"
 
     print("\n" * 42)
@@ -31,12 +44,10 @@ def title():
 
 
 def main():
-    """Run game"""
+    """Primary game-loop: run game."""
     while True:
         player.stats()
         player.action()
-        if it.WHITE_ORB in it.PACK.pocket:
-            p.ROOMS[1]["orb"] = it.BLACK_ORB
         if it.TWIZZLERS in it.PACK.pocket:
             print(s.BETA_TEXT)
             print(s.OMEGA_TEXT)
@@ -47,6 +58,7 @@ def main():
     quit()
 
 
+#  Where it all begins.
 player = p.Player()
 title()
 player.menu()

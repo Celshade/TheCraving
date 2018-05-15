@@ -35,5 +35,4 @@ setup(
         'Bug Reports': 'https://github.com/Celshade/The-Craving/issues',
         'Source': 'https://github.com/Celshade/The-Craving'
     }
-
 )

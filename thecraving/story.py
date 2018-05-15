@@ -1,5 +1,15 @@
-"""Module: Storyline and Text Strings"""
+"""Define constants which hold storyline text
 
+Attributes:
+    ALPHA_TEXT (str): Intro text.
+    BETA_TEXT (str): Twizzler discovery text.
+    OMEGA_TEXT (str): Outro text.
+    REALIZATION (str): Craving recognition text.
+    GRUMBLE (str): Grumbling noise text.
+    WHITE_ORB_TEXT (str): White Room special text.
+    SHRINE_TEXT_ALPHA (str): Shrine description text.
+    SHRINE_TEXT_BETA (str): Shrine activation text.
+"""
 ALPHA_TEXT = """
 \n\t  ==Thus Far==\n\n
 \t**A bell sounds**
@@ -34,6 +44,10 @@ You've developed a serious craving for twizzlers.
 """
 
 GRUMBLE = "\t**grrRRrRrrRUmmMmMMble**"
+
+WHITE_ORB_TEXT = """
+You hear a distant rumble and the [White Orb] flares brilliantly...
+"""
 
 SHRINE_TEXT_ALPHA = """
 A sealed ornate box sits atop an onyx pedestal.
