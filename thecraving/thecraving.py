@@ -1,50 +1,48 @@
 """Primary module of TheCraving: import additional modules and initiate game.
 
 Functions:
-    word_wrap(): Text wrapper.
-    title(): Provides story intro.
-    main(): Primary game-loop.
+    word_wrap: Text wrapper.
+    intro: Provides story intro.
+    main: Primary game-loop.
 """
-#  Welcome to TheCraving!
-#  This is a simple text-based, escape-the-room, game.
-#  Have fun!
 import items as it
 import player as p
 import story as s
 
 
-def word_wrap(target, numb=1):
+def word_wrap(target: str, num=1) -> str:
     """Wrap text headings.
 
     Args:
-        target (str): The target text to be wrapped.
-        numb (int): The wrap multiplyer (default=1).
+        target: The target text to be wrapped.
+        num (int): The wrap multiplyer (default=1).
+    Returns:
+        The wrapped target text.
     """
-    wrap = "=" * (len(target) * numb)
-
-    print(wrap)
-    print(target)
-    print(wrap)
+    wrap = "=" * (len(target) * num)
+    return wrap + "\n" + target + "\n" + wrap
 
 
-def title():
+def intro() -> None:
     """Introduce storyline."""
-    actual_title = "\t **ThE CrAvInG**"
+    title = "\t **ThE CrAvInG**"
 
     print("\n" * 42)
-    word_wrap(actual_title, 2)
+    print(word_wrap(title, 2))
     print(s.ALPHA_TEXT)
-    print(s.GRUMBLE)
-    print()
+    print(s.GRUMBLE + "\n")
     print("Startled by the sudden noise, you scramble guardedly to your feet.")
-    print()
-    print(s.GRUMBLE)
+    print("\n" + s.GRUMBLE)
     print(s.REALIZATION)
-    word_wrap("Search your surroundings for a way to escape!")
+    print(word_wrap("Search your surroundings for a way to escape!"))
 
 
-def main():
+def main() -> None:
     """Primary game-loop: run game."""
+    player = p.Player()
+
+    intro()
+    player.menu()
     while True:
         player.stats()
         player.action()
@@ -58,8 +56,4 @@ def main():
     quit()
 
 
-#  Where it all begins.
-player = p.Player()
-title()
-player.menu()
 main()
