@@ -1,9 +1,9 @@
 """Primary module of TheCraving: import additional modules and initiate game.
 
 Functions:
-    word_wrap: Text wrapper.
-    intro: Provides story intro.
-    main: Primary game-loop.
+    word_wrap(): Text wrapper.
+    intro(): Provides story intro.
+    main(): Primary game-loop.
 """
 import items as it
 import player as p
