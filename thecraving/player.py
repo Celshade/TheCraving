@@ -43,12 +43,12 @@ ORB_LIST = (it.BLUE_ORB, it.GREEN_ORB, it.PURPLE_ORB, it.RED_ORB,
             it.YELLOW_ORB, it.ORANGE_ORB, it.WHITE_ORB, it.BLACK_ORB)
 
 
-class Player():
+class Player(object):
     """Define the Player and establish gameplay.
 
     Attributes:
-        room (int): The current location (default=1).
-        inventory (set):  Base level inventory (default=set()).
+        room: The current location (default=1).
+        inventory:  Base level inventory (default=set()).
     Public methods:
         menu()
         stats()
@@ -57,12 +57,11 @@ class Player():
         check()
         action()
     """
-
-    def __init__(self, room=1, inventory=set()):
+    def __init__(self, room: int=1, inventory: set=set()) -> object:
         self.room = room
         self.inventory = inventory
 
-    def menu(self):
+    def menu(self) -> None:
         """Display main menu."""
         line_1 = "_" * 58
         space = " " * 17
@@ -78,7 +77,7 @@ class Player():
               "\n> 'gg'                       (Quit game)")
         print(line_1 + "\n")
 
-    def stats(self):
+    def stats(self) -> None:
         """Broadcast current inventory and surroundings."""
         line_2 = "-" * 30
         location = ROOMS[self.room]
@@ -95,23 +94,23 @@ class Player():
             print("You catch sight of a {}".format(location["orb"]))
         print(line_2 + "\n")
 
-    def match(self, door):
+    def match(self, door: it.Door) -> bool:
         """Check PACK for Orb >> Door match.
 
         Args:
-            door (obj): The Door to be matched with.
+            door: The Door to be matched with.
         Returns:
-            bool: True if a match is found, False otherwise.
+            Return True if a match is found, False otherwise.
         """
         for x in it.PACK.pocket:
             if x.icolor() == door.icolor():
                 return True
 
-    def move(self, direction):
+    def move(self, direction: str) -> None:
         """Move in desired direction.
 
         Args:
-            direction (str): Direction Player wishes to move in.
+            direction: Direction Player wishes to move in.
         """
         door = ROOMS[self.room][str(direction)]
 
@@ -125,7 +124,7 @@ class Player():
             else:
                 print("The door doesn't budge!")
 
-    def check(self, obj):
+    def check(self, obj: [it.Item, it.Checkable]) -> None:
         """Check Object for hidden details.
 
         Args:
@@ -150,10 +149,10 @@ class Player():
         else:
             return None
 
-    def action(self):
+    def action(self) -> None:
         """Establish Player action.
 
-        This is the primary Player function which handles all interaction.
+        This is the primary Player function which handles all interactions.
         The function prompts a series of input 'choices', which dictate
         what action the Player takes. Acceptable inputs are listed in the
         'menu()' function and are otherwise known as valid commands.

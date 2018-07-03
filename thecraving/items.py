@@ -94,7 +94,7 @@ class Pack(Item):
                          tag=1)
         self.pocket = []
 
-    def add_pack(self, obj: object) -> None:
+    def add_pack(self, obj: Item) -> None:
         """Add Item to the Pack.
 
         Args:
@@ -133,13 +133,13 @@ class Checkable(Item):
     Extend parent behavior while implementing new methods which interact
     with the hidden Item.
     """
-    def __init__(self, name, descrip, tag, special: str, obj: object) -> Item:
+    def __init__(self, name, descrip, tag, special: str, obj: Item) -> Item:
         super().__init__(name, descrip, tag)
         self.special = special
         self.obj = obj
         self.check_count = 0
 
-    def hidden(self) -> object:
+    def hidden(self) -> Item:
         """Return the hidden Item."""
         self.check_count += 1
         return self.obj
@@ -191,7 +191,7 @@ class Door(Orb):
     the status of the Door and unlock the door, based on a successful
     'color' match to an Orb in the Pack.
     """
-    def __init__(self, name, descrip, tag, color, lock: bool=True) -> Orb:
+    def __init__(self, name, descrip, tag, color, lock: bool=True) -> Item:
         super().__init__(name, descrip, tag, color)
         self.lock = lock
 
@@ -252,7 +252,7 @@ BLACK_DOOR = Door("Black Door", door_desc("black"), 8, "Black")
 PACK = Pack()
 TWIZZLERS = Item("Pack of Twizzlers", "The tastiest of tasty snacks!", 8)
 BOOKSHELF = Checkable("Bookshelf",
-                      "An bookshelf housing old leather tomes.",
+                      "A bookshelf housing old leather tomes.",
                       2,
                       "One of the books seems out of place...",
                       GREEN_ORB)
