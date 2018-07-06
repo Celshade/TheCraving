@@ -75,23 +75,23 @@ class Player(object):
               "\n> 'get item'                 (Pick up nearby non-orb item)"
               "\n> 'get orb'                  (Pick up nearby orb)"
               "\n> 'gg'                       (Quit game)")
-        print(line_1 + "\n")
+        print(line_1 + ("\n" * 2))
 
     def stats(self) -> None:
         """Broadcast current inventory and surroundings."""
-        line_2 = "-" * 30
+        line_2 = "-" * 58
         location = ROOMS[self.room]
 
         print("\n" + line_2)
-        print("You are in : " + location["name"])
+        print("You find yourself in: The " + location["name"])
         if it.PACK in self.inventory:
             print(it.PACK.contents())
         if "object" in location:
-            print("You catch sight of a {}".format(location["object"]))
+            print(f"You catch sight of a {location['object']}")
         if "item" in location:
-            print("You catch sight of a {}".format(location["item"]))
+            print(f"You catch sight of a {location['item']}")
         if "orb" in location:
-            print("You catch sight of a {}".format(location["orb"]))
+            print(f"You catch sight of a {location['orb']}")
         print(line_2 + "\n")
 
     def match(self, door: it.Door) -> bool:
@@ -132,7 +132,7 @@ class Player(object):
         Returns:
             Returns None if object has no description.
         """
-        print("\nYou take a closer look at the {}...".format(obj))
+        print(f"\nYou take a closer look at the {obj}...")
         print(obj.info())
         if obj in CHECKABLES and obj.not_checked():
             if obj == it.SHRINE:
@@ -140,8 +140,7 @@ class Player(object):
                 del it.PACK.pocket[:]
             new_obj = obj.hidden()
             print(obj.hidden_text())
-            print(("You discover a {} "
-                   "hidden inside the {}!").format(new_obj, obj))
+            print(f"You discover a {new_obj} hidden inside the {obj}!")
             if new_obj in ORB_LIST:
                 ROOMS[self.room]["orb"] = new_obj
             else:
@@ -188,13 +187,13 @@ class Player(object):
                     self.inventory.add(it.PACK)
                 else:
                     it.PACK.add_pack(location["item"])
-                print("\nPicked up {}!".format(location["item"]))
+                print(f"\nPicked up {location['item']}!")
                 print(location["item"].info())
                 del location["item"]
             elif choice[1] == "orb" and "orb" in location:
                 if it.PACK in self.inventory:
                     it.PACK.add_pack(location["orb"])
-                    print("\nPicked up {}!".format(location["orb"]))
+                    print(f"\nPicked up {location['orb']}!")
                     print(location["orb"].info())
                     if location["orb"] == it.WHITE_ORB:
                         print(s.WHITE_ORB_TEXT)

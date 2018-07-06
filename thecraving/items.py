@@ -63,13 +63,14 @@ class Item(object):
 
     def __str__(self) -> str:
         """Return formatted Item name."""
-        return "[{}]".format(self.name)
+        return f"[{self.name}]"
 
     def info(self) -> str:
-        """Return detailed description of Item."""
-        return ("\n[{}]\n"
-                + "=" * (len(self.name) + 2)
-                + "\n{}").format(self.name, self.descrip)
+        """Return a detailed description of Item."""
+        header = f"\n[{self.name}]"
+        wrap = "\n" + "=" * (len(header) - 1)
+
+        return (wrap + header + wrap + f"\n{self.descrip}")
 
     def room_tag(self) -> int:
         """Return original location of Item."""
@@ -112,10 +113,10 @@ class Pack(Item):
         if self.pocket == []:
             return "Inventory: Empty"
         elif len(self.pocket) > 4:
-            return ("Inventory: {}\n".format(self.pocket[:4])
-                    + (" " * 11) + "{}.".format(self.pocket[4:]))
+            return (f"Inventory: {self.pocket[:4]}\n"
+                    + (" " * 11) + f"{self.pocket[4:]}.")
         else:
-            return "Inventory: {}".format(self.pocket)
+            return f"Inventory: {self.pocket}"
 
 
 class Checkable(Item):
@@ -197,8 +198,8 @@ class Door(Orb):
 
     def rezonate(self) -> str:
         """Rezonate with corresponding Orb."""
-        return ("You raise the [{} Orb] in front of you.\nThe door vibrates "
-                "in sync with the orb and begins to open!".format(self.color))
+        return (f"You raise the [{self.color} Orb] in front of you.\n"
+                "The door vibrates in sync with the orb and begins to open!")
 
     def lock_status(self, condition: bool) -> bool:
         """Return the status of a lock.
@@ -227,7 +228,7 @@ def door_desc(color: str) -> str:
     Returns:
         The extended description text for Door(Orb) formatted to color attr.
     """
-    return "an imposing stone door with a dim {} aura.".format(color).lower()
+    return f"an imposing stone door with a dim {color.lower()} aura."
 
 
 # Orbs
