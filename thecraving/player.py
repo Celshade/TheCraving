@@ -1,10 +1,17 @@
-"""Module: Define Player and Rooms"""
+"""Define the Player class and game environment.
 
+Classes:
+    Player(): Establish the Player.
+Attributes:
+    ROOMS (dict): Game environment throughout which Player interacts.
+    CHECKABLES (tuple): Checkable objects.
+    ORB_LIST (tuple): Orb objects.
+"""
 import items as it
 import story as s
 
 
-ROOMS = {
+ROOMS = {  # The actual game environment a Player will navigate.
     1: {"name": "White Room",
         "north": it.BLUE_DOOR,
         "item": it.PACK, "orb": it.BLUE_ORB},
@@ -30,19 +37,32 @@ ROOMS = {
         "south": it.ORANGE_DOOR,
         "object": it.SHRINE}
 }
+#  Useful constants for the checking of objects and orbs.
 CHECKABLES = (it.BOOKSHELF, it.CAMERA_CRATE, it.BUILDING_MATERIALS, it.SHRINE)
 ORB_LIST = (it.BLUE_ORB, it.GREEN_ORB, it.PURPLE_ORB, it.RED_ORB,
             it.YELLOW_ORB, it.ORANGE_ORB, it.WHITE_ORB, it.BLACK_ORB)
 
 
-class Player():
-    """Establish Player gameplay"""
-    def __init__(self, room=1, inventory=set()):
+class Player(object):
+    """Define the Player and establish gameplay.
+
+    Attributes:
+        room: The current location (default=1).
+        inventory:  Base level inventory (default=set()).
+    Public methods:
+        menu()
+        stats()
+        match()
+        move()
+        check()
+        action()
+    """
+    def __init__(self, room: int=1, inventory: set=set()) -> object:
         self.room = room
         self.inventory = inventory
 
-    def menu(self):
-        """List main menu"""
+    def menu(self) -> None:
+        """Display main menu."""
         line_1 = "_" * 58
         space = " " * 17
 
@@ -55,33 +75,43 @@ class Player():
               "\n> 'get item'                 (Pick up nearby non-orb item)"
               "\n> 'get orb'                  (Pick up nearby orb)"
               "\n> 'gg'                       (Quit game)")
-        print(line_1 + "\n")
+        print(line_1 + ("\n" * 2))
 
-    def stats(self):
-        """Broadcast current status"""
-        line_2 = "-" * 30
+    def stats(self) -> None:
+        """Broadcast current inventory and surroundings."""
+        line_2 = "-" * 58
         location = ROOMS[self.room]
 
         print("\n" + line_2)
-        print("You are in : " + location["name"])
+        print("You find yourself in: The " + location["name"])
         if it.PACK in self.inventory:
             print(it.PACK.contents())
         if "object" in location:
-            print("You catch sight of a {}".format(location["object"]))
+            print(f"You catch sight of a {location['object']}")
         if "item" in location:
-            print("You catch sight of a {}".format(location["item"]))
+            print(f"You catch sight of a {location['item']}")
         if "orb" in location:
-            print("You catch sight of a {}".format(location["orb"]))
+            print(f"You catch sight of a {location['orb']}")
         print(line_2 + "\n")
 
-    def match(self, door):
-        """Check PACK for Orb match"""
+    def match(self, door: it.Door) -> bool:
+        """Check PACK for Orb >> Door match.
+
+        Args:
+            door: The Door to be matched with.
+        Returns:
+            Return True if a match is found, False otherwise.
+        """
         for x in it.PACK.pocket:
             if x.icolor() == door.icolor():
                 return True
 
-    def move(self, direction):
-        """Move in desired direction"""
+    def move(self, direction: str) -> None:
+        """Move in desired direction.
+
+        Args:
+            direction: Direction Player wishes to move in.
+        """
         door = ROOMS[self.room][str(direction)]
 
         if door.lock_status(False):
@@ -94,9 +124,15 @@ class Player():
             else:
                 print("The door doesn't budge!")
 
-    def check(self, obj):
-        """Check Object for hidden Items"""
-        print("\nYou take a closer look at the {}...".format(obj))
+    def check(self, obj: [it.Item, it.Checkable]) -> None:
+        """Check Object for hidden details.
+
+        Args:
+            obj (obj): Item to be checked.
+        Returns:
+            Returns None if object has no description.
+        """
+        print(f"\nYou take a closer look at the {obj}...")
         print(obj.info())
         if obj in CHECKABLES and obj.not_checked():
             if obj == it.SHRINE:
@@ -104,8 +140,7 @@ class Player():
                 del it.PACK.pocket[:]
             new_obj = obj.hidden()
             print(obj.hidden_text())
-            print(("You discover a {} "
-                   "hidden inside the {}!").format(new_obj, obj))
+            print(f"You discover a {new_obj} hidden inside the {obj}!")
             if new_obj in ORB_LIST:
                 ROOMS[self.room]["orb"] = new_obj
             else:
@@ -113,8 +148,14 @@ class Player():
         else:
             return None
 
-    def action(self):
-        """Establish Player action"""
+    def action(self) -> None:
+        """Establish Player action.
+
+        This is the primary Player function which handles all interactions.
+        The function prompts a series of input 'choices', which dictate
+        what action the Player takes. Acceptable inputs are listed in the
+        'menu()' function and are otherwise known as valid commands.
+        """
         choice = input("> ").lower().split()
         location = ROOMS[self.room]
 
@@ -146,14 +187,17 @@ class Player():
                     self.inventory.add(it.PACK)
                 else:
                     it.PACK.add_pack(location["item"])
-                print("\nPicked up {}!".format(location["item"]))
+                print(f"\nPicked up {location['item']}!")
                 print(location["item"].info())
                 del location["item"]
             elif choice[1] == "orb" and "orb" in location:
                 if it.PACK in self.inventory:
                     it.PACK.add_pack(location["orb"])
-                    print("\nPicked up {}!".format(location["orb"]))
+                    print(f"\nPicked up {location['orb']}!")
                     print(location["orb"].info())
+                    if location["orb"] == it.WHITE_ORB:
+                        print(s.WHITE_ORB_TEXT)
+                        ROOMS[1]["orb"] = it.BLACK_ORB
                     del location["orb"]
                 else:
                     print("\nYou should have worn the pants with pockets!")
