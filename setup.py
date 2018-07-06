@@ -17,7 +17,7 @@ setup(
     description='A simple text-based adventure game',
     long_description=long_description,
     long_description_content_type='text/markdown',
-    url='https://github.com/Celshade/The-Craving',
+    url='https://github.com/Celshade/TheCraving',
     author='Danny Collins aka Celshade',
     author_email='ggcelshade@gmail.com',
     license="MIT License",
@@ -32,7 +32,8 @@ setup(
     keywords='game textadventure thecraving',
     packages=find_packages(),
     project_urls={
-        'Bug Reports': 'https://github.com/Celshade/The-Craving/issues',
-        'Source': 'https://github.com/Celshade/The-Craving'
+        'Bug Reports': 'https://github.com/Celshade/TheCraving/issues/9',
+        'Comments': 'https://github.com/Celshade/TheCraving/issues/10',
+        'Source': 'https://github.com/Celshade/TheCraving'
     }
 )
