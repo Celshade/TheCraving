@@ -13,7 +13,7 @@ with open(path.join(here, 'README.md'), encoding='utf-8') as f:
 
 setup(
     name='TheCraving',
-    version='0.2.0b1',
+    version='0.2.0b2',
     description='A simple text-based adventure game',
     long_description=long_description,
     long_description_content_type='text/markdown',
