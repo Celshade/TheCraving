@@ -196,7 +196,7 @@ class Player(object):
                     print(f"\nPicked up {location['orb']}!")
                     print(location["orb"].info())
                     if location["orb"] == it.WHITE_ORB:
-                        print(s.WHITE_ORB_TEXT)
+                        print(s.WORB_TEXT)
                         ROOMS[1]["orb"] = it.BLACK_ORB
                     del location["orb"]
                 else:
