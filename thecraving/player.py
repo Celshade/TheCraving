@@ -2,8 +2,10 @@
 
 Classes:
     Player(): Establish the Player.
+Functions:
+    quit_game(): Exit the game.
 Attributes:
-    ROOMS (dict): Game environment throughout which Player interacts.
+    ROOMS (dict): Game environment throughout which the Player interacts.
     CHECKABLES (tuple): Checkable objects.
     ORB_LIST (tuple): Orb objects.
 """
@@ -11,7 +13,8 @@ import items as it
 import story as s
 
 
-ROOMS = {  # The actual game environment a Player will navigate.
+# The actual game environment a Player will navigate.
+ROOMS = {
     1: {"name": "White Room",
         "north": it.BLUE_DOOR,
         "item": it.PACK, "orb": it.BLUE_ORB},
@@ -41,6 +44,20 @@ ROOMS = {  # The actual game environment a Player will navigate.
 CHECKABLES = (it.BOOKSHELF, it.CAMERA_CRATE, it.BUILDING_MATERIALS, it.SHRINE)
 ORB_LIST = (it.BLUE_ORB, it.GREEN_ORB, it.PURPLE_ORB, it.RED_ORB,
             it.YELLOW_ORB, it.ORANGE_ORB, it.WHITE_ORB, it.BLACK_ORB)
+
+
+def quit_game() -> None:
+    """Quit the game."""
+    while True:
+        exit_choice = input("\nAre you sure you wish to quit?"
+                            "Choose [Y] or [N]: ").lower()
+        if exit_choice == "y":
+            quit()
+        elif exit_choice == "n":
+            break
+        else:
+            print("\nThat's not a valid choice.")
+            continue
 
 
 class Player(object):
@@ -124,7 +141,7 @@ class Player(object):
             else:
                 print("The door doesn't budge!")
 
-    def check(self, obj: [it.Item, it.Checkable]) -> None:
+    def check(self, obj: [it.Item]) -> None:
         """Check Object for hidden details.
 
         Args:
@@ -151,71 +168,73 @@ class Player(object):
     def action(self) -> None:
         """Establish Player action.
 
-        This is the primary Player function which handles all interactions.
+        This is the primary function which handles all in-game decisions.
         The function prompts a series of input 'choices', which dictate
-        what action the Player takes. Acceptable inputs are listed in the
+        what action the Player will take. Acceptable inputs are listed in the
         'menu()' function and are otherwise known as valid commands.
         """
-        choice = input("> ").lower().split()
+        initial_input = input("> ").lower()
         location = ROOMS[self.room]
 
-        if choice[0] == "options":
-            self.menu()
-        elif choice[0] == "check" and len(choice) > 1:
-            if choice[1] == "object" and choice[1] in location:
-                self.check(location["object"])
-            elif choice[1] == "item" and choice[1] in location:
-                self.check(location["item"])
-            elif choice[1] == "orb" and choice[1] in location:
-                self.check(location["orb"])
-            else:
-                print("\nIt must have been your imagination")
-        elif choice[0] == "go" and len(choice) > 1:
-            if choice[1] == "north" and choice[1] in location:
-                self.move("north")
-            elif choice[1] == "east" and choice[1] in location:
-                self.move("east")
-            elif choice[1] == "south" and choice[1] in location:
-                self.move("south")
-            elif choice[1] == "west" and choice[1] in location:
-                self.move("west")
-            else:
-                print("\nThere's no going that way!")
-        elif choice[0] == "get" and len(choice) > 1:
-            if choice[1] == "item" and "item" in location:
-                if location["item"] == it.PACK:
-                    self.inventory.add(it.PACK)
+        # Bug fix, where entering a blank line would crash the game.
+        if initial_input != "":
+            choice = initial_input.split()
+            # List valid commands.
+            if choice[0] == "options":
+                self.menu()
+            # Check an object, item, or orb.
+            elif choice[0] == "check" and len(choice) > 1:
+                if choice[1] == "object" and choice[1] in location:
+                    self.check(location["object"])
+                elif choice[1] == "item" and choice[1] in location:
+                    self.check(location["item"])
+                elif choice[1] == "orb" and choice[1] in location:
+                    self.check(location["orb"])
                 else:
-                    it.PACK.add_pack(location["item"])
-                print(f"\nPicked up {location['item']}!")
-                print(location["item"].info())
-                del location["item"]
-            elif choice[1] == "orb" and "orb" in location:
-                if it.PACK in self.inventory:
-                    it.PACK.add_pack(location["orb"])
-                    print(f"\nPicked up {location['orb']}!")
-                    print(location["orb"].info())
-                    if location["orb"] == it.WHITE_ORB:
-                        print(s.WORB_TEXT)
-                        ROOMS[1]["orb"] = it.BLACK_ORB
-                    del location["orb"]
+                    print("\nIt must have been your imagination")
+            # Move the player.
+            elif choice[0] == "go" and len(choice) > 1:
+                if choice[1] == "north" and choice[1] in location:
+                    self.move("north")
+                elif choice[1] == "east" and choice[1] in location:
+                    self.move("east")
+                elif choice[1] == "south" and choice[1] in location:
+                    self.move("south")
+                elif choice[1] == "west" and choice[1] in location:
+                    self.move("west")
                 else:
-                    print("\nYou should have worn the pants with pockets!")
-            elif choice[1] == "object" and "object" in location:
-                    print("\nYou're going to need a bigger Pack!")
-                    return None
+                    print("\nThere's no going that way!")
+            # Pick up items and orbs.
+            elif choice[0] == "get" and len(choice) > 1:
+                if choice[1] == "item" and "item" in location:
+                    if location["item"] == it.PACK:
+                        self.inventory.add(it.PACK)
+                    else:
+                        it.PACK.add_pack(location["item"])
+                    print(f"\nPicked up {location['item']}!")
+                    print(location["item"].info())
+                    del location["item"]
+                elif choice[1] == "orb" and "orb" in location:
+                    if it.PACK in self.inventory:
+                        it.PACK.add_pack(location["orb"])
+                        print(f"\nPicked up {location['orb']}!")
+                        print(location["orb"].info())
+                        # Picking up WHITE_ORB will proc a special event.
+                        if location["orb"] == it.WHITE_ORB:
+                            print(s.WORB_TEXT)
+                            ROOMS[1]["orb"] = it.BLACK_ORB
+                        del location["orb"]
+                    else:
+                        print("\nYou should have worn the pants with pockets!")
+                elif choice[1] == "object" and "object" in location:
+                        print("\nYou're going to need a bigger Pack!")
+                        return None
+                else:
+                    print("\nIt must have been a mirage...")
+            # Exit the game.
+            elif choice[0] == "gg":
+                quit_game()
             else:
-                print("\nIt must have been a mirage...")
-        elif choice[0] == "gg":
-            while choice[0] == "gg":
-                exit_choice = input("\nAre you sure you wish to quit?"
-                                    " Choose [Y] or [N]: ").lower()
-                if exit_choice == "y":
-                    quit()
-                elif exit_choice == "n":
-                    break
-                else:
-                    print("\nThat's not a valid choice.")
-                    continue
-        else:
-            print("\nThat's not a valid command!")
+                print("\nThat's not a valid command!")
+        else:  # When nothing at all is entered.
+            print("\nNary a whisper could be heard...")

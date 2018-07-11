@@ -3,8 +3,13 @@
 Functions:
     word_wrap(): Text wrapper.
     intro(): Provides story intro.
+    signal_handler(): Signal handler for improper exits.
     main(): Primary game-loop.
 """
+import time
+import random
+import signal
+
 import items as it
 import player as p
 import story as s
@@ -37,6 +42,13 @@ def intro() -> None:
     print(word_wrap("Search your surroundings for a way to escape!"))
 
 
+def signal_handler(signum: int, frame: object) -> None:
+    """Provide a clean exit for those who don't use the proper commands."""
+    print(s.EXITS[random.randint(0, 3)])
+    time.sleep(3)
+    quit()
+
+
 def main() -> None:
     """Primary game-loop: run game."""
     player = p.Player()
@@ -45,6 +57,7 @@ def main() -> None:
     player.menu()
     while True:
         player.stats()
+        signal.signal(signal.SIGINT, signal_handler)
         player.action()
         if it.TWIZZLERS in it.PACK.pocket:
             print(s.BETA_TEXT)

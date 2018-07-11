@@ -57,3 +57,12 @@ SHRINE_TEXT_BETA = """
 You place each of the colored orbs in their corresponding niche.
 The orbs pulse rythmically, in sync, and the box unseals with a feint *hiss*.
 """
+
+EXITS = [
+    "You succumb to your craving and pass out...",
+    ("Chuck Norris appears and roundhouse kicks you in the face."
+     "\nAs your vision fades, you notice the scent of lilacs and justice..."),
+    ("The kool-aid man bursts through the walls with an 'OH, YEEEEAH!"
+     "\nHe grins maliciously and swallows you whole..."),
+    "A noxious dart hits you in the buttocks - rendering you unconscious..."
+]
