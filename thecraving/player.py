@@ -1,4 +1,4 @@
-"""Define the Player class and game environment.
+"""Define the game environment and Player functionality.
 
 Classes:
     Player(): Establish the Player.
