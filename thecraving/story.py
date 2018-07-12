@@ -4,11 +4,13 @@ Attributes:
     ALPHA_TEXT (str): Intro text.
     BETA_TEXT (str): Twizzler discovery text.
     OMEGA_TEXT (str): Outro text.
-    REALIZATION (str): Craving recognition text.
+    REALIZATION (str): Recognition text.
+    THE_CRAVING (str): The craving text.
     GRUMBLE (str): Grumbling noise text.
     WHITE_ORB_TEXT (str): White Room special text.
     SHRINE_TEXT_ALPHA (str): Shrine description text.
     SHRINE_TEXT_BETA (str): Shrine activation text.
+    EXITS (list[str]): List of alternate ending text.
 """
 ALPHA_TEXT = """
 \n\t====Thus Far====\n
@@ -37,9 +39,12 @@ You must have been so tired that you fell asleep with it on...
 """
 
 REALIZATION = """
-That sound...that feeling...you begin to recognize it.
+That sound...that feeling...you recognize it.
 \t..A cold realization settles in..\n
-\t... ... ... .. ... .. ... ... ...\n
+\t... ... ... .. ... .. ... ... ...
+"""
+
+THE_CRAVING = """
 You've developed a serious craving for twizzlers.
 """
 

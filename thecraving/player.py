@@ -9,6 +9,9 @@ Attributes:
     CHECKABLES (tuple): Checkable objects.
     ORB_LIST (tuple): Orb objects.
 """
+import sys
+import time
+
 import items as it
 import story as s
 
@@ -17,7 +20,7 @@ import story as s
 ROOMS = {
     1: {"name": "White Room",
         "north": it.BLUE_DOOR,
-        "item": it.PACK, "orb": it.BLUE_ORB},
+        "item": it.TWIZZLERS, "orb": it.BLUE_ORB},
     2: {"name": "Blue Room",
         "south": it.WHITE_DOOR, "east": it.GREEN_DOOR, "west": it.PURPLE_DOOR,
         "object": it.BOOKSHELF},
@@ -46,13 +49,14 @@ ORB_LIST = (it.BLUE_ORB, it.GREEN_ORB, it.PURPLE_ORB, it.RED_ORB,
             it.YELLOW_ORB, it.ORANGE_ORB, it.WHITE_ORB, it.BLACK_ORB)
 
 
-def quit_game() -> None:
+def quit_game(phrase: str) -> None:
     """Quit the game."""
     while True:
-        exit_choice = input("\nAre you sure you wish to quit?"
-                            "Choose [Y] or [N]: ").lower()
+        exit_choice = input(phrase).lower()
         if exit_choice == "y":
-            quit()
+            print("The craving grows too strong and you pass out...")
+            time.sleep(2)
+            sys.exit()
         elif exit_choice == "n":
             break
         else:
@@ -176,7 +180,6 @@ class Player(object):
         initial_input = input("> ").lower()
         location = ROOMS[self.room]
 
-        # Bug fix, where entering a blank line would crash the game.
         if initial_input != "":
             choice = initial_input.split()
             # List valid commands.
@@ -219,7 +222,7 @@ class Player(object):
                         it.PACK.add_pack(location["orb"])
                         print(f"\nPicked up {location['orb']}!")
                         print(location["orb"].info())
-                        # Picking up WHITE_ORB will proc a special event.
+                        # Proc a special event for WHITE_ORB.
                         if location["orb"] == it.WHITE_ORB:
                             print(s.WORB_TEXT)
                             ROOMS[1]["orb"] = it.BLACK_ORB
@@ -233,7 +236,8 @@ class Player(object):
                     print("\nIt must have been a mirage...")
             # Exit the game.
             elif choice[0] == "gg":
-                quit_game()
+                quit_game("Are you sure you wish to quit?"
+                          + " Choose [Y] or [N]: ")
             else:
                 print("\nThat's not a valid command!")
         else:  # When nothing at all is entered.

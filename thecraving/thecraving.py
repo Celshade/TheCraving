@@ -9,6 +9,7 @@ Functions:
 import time
 import random
 import signal
+import sys
 
 import items as it
 import player as p
@@ -45,8 +46,8 @@ def intro() -> None:
 def signal_handler(signum: int, frame: object) -> None:
     """Provide a clean exit for those who don't use the proper commands."""
     print(s.EXITS[random.randint(0, 3)])
-    time.sleep(3)
-    quit()
+    time.sleep(4)
+    sys.exit()
 
 
 def main() -> None:
@@ -61,12 +62,19 @@ def main() -> None:
         player.action()
         if it.TWIZZLERS in it.PACK.pocket:
             print(s.BETA_TEXT)
+            time.sleep(10)
             print(s.OMEGA_TEXT)
+            time.sleep(10)
             print(s.GRUMBLE)
+            time.sleep(1)
             print(s.REALIZATION)
-            print("Game Over!")
+            time.sleep(2)
+            print(s.THE_CRAVING)
             break
-    quit()
+    print("Game Over!")
+    print("Thanks for playing! Peace!")
+    time.sleep(3)
+    sys.exit()
 
 
 main()
