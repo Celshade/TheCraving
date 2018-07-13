@@ -20,7 +20,7 @@ import story as s
 ROOMS = {
     1: {"name": "White Room",
         "north": it.BLUE_DOOR,
-        "item": it.TWIZZLERS, "orb": it.BLUE_ORB},
+        "item": it.PACK, "orb": it.BLUE_ORB},
     2: {"name": "Blue Room",
         "south": it.WHITE_DOOR, "east": it.GREEN_DOOR, "west": it.PURPLE_DOOR,
         "object": it.BOOKSHELF},
@@ -49,12 +49,19 @@ ORB_LIST = (it.BLUE_ORB, it.GREEN_ORB, it.PURPLE_ORB, it.RED_ORB,
             it.YELLOW_ORB, it.ORANGE_ORB, it.WHITE_ORB, it.BLACK_ORB)
 
 
-def quit_game(phrase: str) -> None:
-    """Quit the game."""
+def quit_game(text: str, phase: int=0) -> None:
+    """Handle the game exit."""
     while True:
-        exit_choice = input(phrase).lower()
-        if exit_choice == "y":
-            print("The craving grows too strong and you pass out...")
+        exit_choice = input(text).lower()
+        if phase == 1:
+            # Give the player time to scroll back through their journey.
+            if exit_choice == "r":
+                break
+            else:
+                print("\nPlease enter [R] when you're ready to exit: ")
+                continue
+        elif exit_choice == "y":
+            print("\nThe craving overwhelms you and you pass out...")
             time.sleep(2)
             sys.exit()
         elif exit_choice == "n":
@@ -236,8 +243,7 @@ class Player(object):
                     print("\nIt must have been a mirage...")
             # Exit the game.
             elif choice[0] == "gg":
-                quit_game("Are you sure you wish to quit?"
-                          + " Choose [Y] or [N]: ")
+                quit_game("Are you sure you wish to quit? Choose [Y] or [N]: ")
             else:
                 print("\nThat's not a valid command!")
         else:  # When nothing at all is entered.

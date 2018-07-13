@@ -26,9 +26,9 @@ You look down and check yourself over..
 BETA_TEXT = """
 You sigh, as you eagerly unwrap the [Pack of Twizzlers]...
 As the sweetness hits your tastebuds, you feel a renewed surge of strength.
-The room begins to come into focus, as your eyes adjust to the pitch darkness.
-An aged wooden door materializes just off to your left.
-The door gives way and you are temporarily blinded, by sunlight pouring in.
+The room begins to come into focus, as your eyes adjust to the darkness.
+You take notice of an aged wooden door just off to your left.
+You test the door. It gives, easily, and you're blinded by sunlight pouring in.
 You exit the compound and find yourself in a dense forest, when suddenly...
 """
 
@@ -40,7 +40,7 @@ You must have been so tired that you fell asleep with it on...
 
 REALIZATION = """
 That sound...that feeling...you recognize it.
-\t..A cold realization settles in..\n
+\t..A cold realization settles in..
 \t... ... ... .. ... .. ... ... ...
 """
 
@@ -48,7 +48,7 @@ THE_CRAVING = """
 You've developed a serious craving for twizzlers.
 """
 
-GRUMBLE = "\t**grRRruMMmble**"
+GRUMBLE = "\t\t**grRRruMMmble**"
 
 WORB_TEXT = "You hear a distant rumble and the [White Orb] flares brightly..."
 
@@ -68,6 +68,6 @@ EXITS = [
     ("Chuck Norris appears and roundhouse kicks you in the face."
      "\nAs your vision fades, you notice the scent of lilacs and justice..."),
     ("The kool-aid man bursts through the walls with an 'OH, YEEEEAH!"
-     "\nHe grins maliciously and swallows you whole..."),
+     "\nHe grins maliciously, pounces, and swallows you whole..."),
     "A noxious dart hits you in the buttocks - rendering you unconscious..."
 ]
