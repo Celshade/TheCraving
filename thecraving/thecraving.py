@@ -55,7 +55,7 @@ def main() -> None:
     player = p.Player()
 
     intro()
-    player.menu()
+    player.options()
     while True:
         player.stats()
         signal.signal(signal.SIGINT, signal_handler)
@@ -72,7 +72,7 @@ def main() -> None:
             print(s.THE_CRAVING)
             time.sleep(2)
             print("Game Over!\nThanks for playing!")
-            p.quit_game("Enter [R] when you're ready to exit the game: ", 1)
+            player.gg("Enter [R] when you're ready to exit the game: ", 1)
             break
     print("\nPeace!\n-Cel-")
     time.sleep(3)

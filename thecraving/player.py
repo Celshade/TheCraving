@@ -20,7 +20,7 @@ import story as s
 ROOMS = {
     1: {"name": "White Room",
         "north": it.BLUE_DOOR,
-        "item": it.PACK, "orb": it.BLUE_ORB},
+        "item": it.TWIZZLERS, "orb": it.BLUE_ORB},
     2: {"name": "Blue Room",
         "south": it.WHITE_DOOR, "east": it.GREEN_DOOR, "west": it.PURPLE_DOOR,
         "object": it.BOOKSHELF},
@@ -49,28 +49,6 @@ ORB_LIST = (it.BLUE_ORB, it.GREEN_ORB, it.PURPLE_ORB, it.RED_ORB,
             it.YELLOW_ORB, it.ORANGE_ORB, it.WHITE_ORB, it.BLACK_ORB)
 
 
-def quit_game(text: str, phase: int=0) -> None:
-    """Handle the game exit."""
-    while True:
-        exit_choice = input(text).lower()
-        if phase == 1:
-            # Give the player time to scroll back through their journey.
-            if exit_choice == "r":
-                break
-            else:
-                print("\nPlease enter [R] when you're ready to exit: ")
-                continue
-        elif exit_choice == "y":
-            print("\nThe craving overwhelms you and you pass out...")
-            time.sleep(2)
-            sys.exit()
-        elif exit_choice == "n":
-            break
-        else:
-            print("\nThat's not a valid choice.")
-            continue
-
-
 class Player(object):
     """Define the Player and establish gameplay.
 
@@ -78,32 +56,18 @@ class Player(object):
         room: The current location (default=1).
         inventory:  Base level inventory (default=set()).
     Public methods:
-        menu()
         stats()
         match()
-        move()
+        options()
         check()
+        go()
+        get()
+        gg()
         action()
     """
     def __init__(self, room: int=1, inventory: set=set()) -> object:
         self.room = room
         self.inventory = inventory
-
-    def menu(self) -> None:
-        """Display main menu."""
-        line_1 = "_" * 58
-        space = " " * 17
-
-        print("\n" + line_1)
-        print(space + "Valid Commands")
-        print(space + "--------------"
-              "\n> 'options'                  (List commands)"
-              "\n> 'check [target]'           ('object', 'item', 'orb')"
-              "\n> 'go [direction]'           (north, south, east, or west)"
-              "\n> 'get item'                 (Pick up nearby non-orb item)"
-              "\n> 'get orb'                  (Pick up nearby orb)"
-              "\n> 'gg'                       (Quit game)")
-        print(line_1 + ("\n" * 2))
 
     def stats(self) -> None:
         """Broadcast current inventory and surroundings."""
@@ -126,7 +90,7 @@ class Player(object):
         """Check PACK for Orb >> Door match.
 
         Args:
-            door: The Door to be matched with.
+            door: The Door to be matched.
         Returns:
             Return True if a match is found, False otherwise.
         """
@@ -134,31 +98,27 @@ class Player(object):
             if x.icolor() == door.icolor():
                 return True
 
-    def move(self, direction: str) -> None:
-        """Move in desired direction.
+    def options(self) -> None:
+        """Display main menu."""
+        line_1 = "_" * 58
+        space = " " * 17
 
-        Args:
-            direction: Direction Player wishes to move in.
-        """
-        door = ROOMS[self.room][str(direction)]
-
-        if door.lock_status(False):
-            self.room = door.room_tag()
-        elif door.lock_status(True):
-            print("\nYou encounter " + it.door_desc(door.icolor()))
-            if it.PACK in self.inventory and self.match(door):
-                door.unlock()
-                self.room = door.room_tag()
-            else:
-                print("The door doesn't budge!")
+        print("\n" + line_1)
+        print(space + "Valid Commands")
+        print(space + "--------------"
+              "\n> 'options'                  (List commands)"
+              "\n> 'check [target]'           ('object', 'item', 'orb')"
+              "\n> 'go [direction]'           (north, south, east, or west)"
+              "\n> 'get item'                 (Pick up nearby non-orb item)"
+              "\n> 'get orb'                  (Pick up nearby orb)"
+              "\n> 'gg'                       (Quit game)")
+        print(line_1 + ("\n" * 2))
 
     def check(self, obj: [it.Item]) -> None:
         """Check Object for hidden details.
 
         Args:
-            obj (obj): Item to be checked.
-        Returns:
-            Returns None if object has no description.
+            obj: Item to be checked.
         """
         print(f"\nYou take a closer look at the {obj}...")
         print(obj.info())
@@ -173,8 +133,79 @@ class Player(object):
                 ROOMS[self.room]["orb"] = new_obj
             else:
                 ROOMS[self.room]["item"] = new_obj
-        else:
-            return None
+
+    def go(self, direction: str) -> None:
+        """Move in desired direction.
+
+        Args:
+            direction: Direction the Player wishes to move in.
+        """
+        door = ROOMS[self.room][str(direction)]
+
+        if door.lock_status(False):
+            self.room = door.room_tag()
+        elif door.lock_status(True):
+            print("\nYou encounter " + it.door_desc(door.icolor()))
+            if it.PACK in self.inventory and self.match(door):
+                door.unlock()
+                self.room = door.room_tag()
+            else:
+                print("The door doesn't budge!")
+
+    def get(self, target: str) -> None:
+        """Pick up Items and Orbs.
+
+        Args:
+            target: The Item or Orb to be picked up.
+        """
+        location = ROOMS[self.room]
+
+        if target == "item":
+            if location["item"] == it.PACK:
+                self.inventory.add(it.PACK)
+            else:
+                it.PACK.add_pack(location["item"])
+            print(f"\nPicked up {location['item']}!")
+            print(location["item"].info())
+            del location["item"]
+        elif target == "orb":
+            if it.PACK in self.inventory:
+                it.PACK.add_pack(location["orb"])
+                print(f"\nPicked up {location['orb']}!")
+                print(location["orb"].info())
+                # Proc a special event for WHITE_ORB.
+                if location["orb"] == it.WHITE_ORB:
+                    print(s.WORB_TEXT)
+                    ROOMS[1]["orb"] = it.BLACK_ORB
+                del location["orb"]
+            else:
+                print("\nYou should have worn pants with pockets!")
+
+    def gg(self, text: str, phase: int=0) -> None:
+        """Handle the game exit.
+
+        Args:
+            text: Text to be displayed upon exiting the game.
+            phase: The phase in which the function is called.
+        """
+        while True:
+            exit_choice = input(text).lower()
+            if phase == 1:
+                # Give the player time to scroll back through their journey.
+                if exit_choice == "r":
+                    break
+                else:
+                    print("\nPlease enter [R] when you're ready to exit: ")
+                    continue
+            elif exit_choice == "y":
+                print("\nThe craving overwhelms you and you pass out...")
+                time.sleep(2)
+                sys.exit()
+            elif exit_choice == "n":
+                break
+            else:
+                print("\nThat's not a valid choice.")
+                continue
 
     def action(self) -> None:
         """Establish Player action.
@@ -184,14 +215,14 @@ class Player(object):
         what action the Player will take. Acceptable inputs are listed in the
         'menu()' function and are otherwise known as valid commands.
         """
-        initial_input = input("> ").lower()
+        initial_input = input("> ")
         location = ROOMS[self.room]
 
         if initial_input != "":
-            choice = initial_input.split()
+            choice = initial_input.lower().split()
             # List valid commands.
             if choice[0] == "options":
-                self.menu()
+                self.options()
             # Check an object, item, or orb.
             elif choice[0] == "check" and len(choice) > 1:
                 if choice[1] == "object" and choice[1] in location:
@@ -205,46 +236,30 @@ class Player(object):
             # Move the player.
             elif choice[0] == "go" and len(choice) > 1:
                 if choice[1] == "north" and choice[1] in location:
-                    self.move("north")
+                    self.go("north")
                 elif choice[1] == "east" and choice[1] in location:
-                    self.move("east")
+                    self.go("east")
                 elif choice[1] == "south" and choice[1] in location:
-                    self.move("south")
+                    self.go("south")
                 elif choice[1] == "west" and choice[1] in location:
-                    self.move("west")
+                    self.go("west")
                 else:
                     print("\nThere's no going that way!")
             # Pick up items and orbs.
             elif choice[0] == "get" and len(choice) > 1:
                 if choice[1] == "item" and "item" in location:
-                    if location["item"] == it.PACK:
-                        self.inventory.add(it.PACK)
-                    else:
-                        it.PACK.add_pack(location["item"])
-                    print(f"\nPicked up {location['item']}!")
-                    print(location["item"].info())
-                    del location["item"]
+                    self.get("item")
                 elif choice[1] == "orb" and "orb" in location:
-                    if it.PACK in self.inventory:
-                        it.PACK.add_pack(location["orb"])
-                        print(f"\nPicked up {location['orb']}!")
-                        print(location["orb"].info())
-                        # Proc a special event for WHITE_ORB.
-                        if location["orb"] == it.WHITE_ORB:
-                            print(s.WORB_TEXT)
-                            ROOMS[1]["orb"] = it.BLACK_ORB
-                        del location["orb"]
-                    else:
-                        print("\nYou should have worn the pants with pockets!")
+                    self.get("orb")
                 elif choice[1] == "object" and "object" in location:
                         print("\nYou're going to need a bigger Pack!")
-                        return None
                 else:
                     print("\nIt must have been a mirage...")
             # Exit the game.
             elif choice[0] == "gg":
-                quit_game("Are you sure you wish to quit? Choose [Y] or [N]: ")
+                self.gg("Are you sure you wish to quit? Choose [Y] or [N]: ")
             else:
                 print("\nThat's not a valid command!")
-        else:  # When nothing at all is entered.
+        # When nothing at all is entered.
+        else:
             print("\nNary a whisper could be heard...")
