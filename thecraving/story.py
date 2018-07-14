@@ -64,10 +64,10 @@ The orbs pulse rythmically, in sync, and the box unseals with a feint *hiss*.
 """
 
 EXITS = [
-    "You succumb to your craving and pass out...",
-    ("Chuck Norris appears and roundhouse kicks you in the face."
+    "\nYou succumb to your craving and pass out...",
+    ("\nChuck Norris appears and roundhouse kicks you in the face."
      "\nAs your vision fades, you notice the scent of lilacs and justice..."),
-    ("The kool-aid man bursts through the walls with an 'OH, YEEEEAH!"
+    ("\nThe kool-aid man bursts through the walls with an 'OH, YEEEEAH!"
      "\nHe grins maliciously, pounces, and swallows you whole..."),
-    "A noxious dart hits you in the buttocks - rendering you unconscious..."
+    "\nA noxious dart hits you in the buttocks - rendering you unconscious..."
 ]

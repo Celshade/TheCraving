@@ -11,6 +11,7 @@ Attributes:
 """
 import sys
 import time
+import random
 
 import items as it
 import story as s
@@ -189,23 +190,25 @@ class Player(object):
             phase: The phase in which the function is called.
         """
         while True:
-            exit_choice = input(text).lower()
-            if phase == 1:
-                # Give the player time to scroll back through their journey.
-                if exit_choice == "r":
+            try:
+                exit_choice = input(text).lower()
+                if phase == 1:
+                    if exit_choice == "e":
+                        break
+                    else:
+                        print("\nThat's not a valid choice.")
+                        continue
+                elif exit_choice == "y":
+                    print(s.EXITS[random.randint(0, 3)])
+                    time.sleep(3)
+                    sys.exit()
+                elif exit_choice == "n":
                     break
                 else:
-                    print("\nPlease enter [R] when you're ready to exit: ")
+                    print("\nThat's not a valid choice.")
                     continue
-            elif exit_choice == "y":
-                print("\nThe craving overwhelms you and you pass out...")
-                time.sleep(2)
-                sys.exit()
-            elif exit_choice == "n":
-                break
-            else:
-                print("\nThat's not a valid choice.")
-                continue
+            except EOFError:
+                print("\n\nThat's not a valid choice.")
 
     def action(self) -> None:
         """Establish Player action.
@@ -215,51 +218,55 @@ class Player(object):
         what action the Player will take. Acceptable inputs are listed in the
         'menu()' function and are otherwise known as valid commands.
         """
-        initial_input = input("> ")
-        location = ROOMS[self.room]
+        try:
+            initial_input = input("> ")
+            location = ROOMS[self.room]
 
-        if initial_input != "":
-            choice = initial_input.lower().split()
-            # List valid commands.
-            if choice[0] == "options":
-                self.options()
-            # Check an object, item, or orb.
-            elif choice[0] == "check" and len(choice) > 1:
-                if choice[1] == "object" and choice[1] in location:
-                    self.check(location["object"])
-                elif choice[1] == "item" and choice[1] in location:
-                    self.check(location["item"])
-                elif choice[1] == "orb" and choice[1] in location:
-                    self.check(location["orb"])
+            if initial_input != "":
+                choice = initial_input.lower().split()
+                # List valid commands.
+                if choice[0] == "options":
+                    self.options()
+                # Check an object, item, or orb.
+                elif choice[0] == "check" and len(choice) > 1:
+                    if choice[1] == "object" and choice[1] in location:
+                        self.check(location["object"])
+                    elif choice[1] == "item" and choice[1] in location:
+                        self.check(location["item"])
+                    elif choice[1] == "orb" and choice[1] in location:
+                        self.check(location["orb"])
+                    else:
+                        print("\nIt must have been your imagination")
+                # Move the player.
+                elif choice[0] == "go" and len(choice) > 1:
+                    if choice[1] == "north" and choice[1] in location:
+                        self.go("north")
+                    elif choice[1] == "east" and choice[1] in location:
+                        self.go("east")
+                    elif choice[1] == "south" and choice[1] in location:
+                        self.go("south")
+                    elif choice[1] == "west" and choice[1] in location:
+                        self.go("west")
+                    else:
+                        print("\nThere's no going that way!")
+                # Pick up items and orbs.
+                elif choice[0] == "get" and len(choice) > 1:
+                    if choice[1] == "item" and "item" in location:
+                        self.get("item")
+                    elif choice[1] == "orb" and "orb" in location:
+                        self.get("orb")
+                    elif choice[1] == "object" and "object" in location:
+                            print("\nYou're going to need a bigger Pack!")
+                    else:
+                        print("\nIt must have been a mirage...")
+                # Exit the game.
+                elif choice[0] == "gg":
+                    self.gg("\nDo you wish to quit? Choose [Y] or [N]: ")
                 else:
-                    print("\nIt must have been your imagination")
-            # Move the player.
-            elif choice[0] == "go" and len(choice) > 1:
-                if choice[1] == "north" and choice[1] in location:
-                    self.go("north")
-                elif choice[1] == "east" and choice[1] in location:
-                    self.go("east")
-                elif choice[1] == "south" and choice[1] in location:
-                    self.go("south")
-                elif choice[1] == "west" and choice[1] in location:
-                    self.go("west")
-                else:
-                    print("\nThere's no going that way!")
-            # Pick up items and orbs.
-            elif choice[0] == "get" and len(choice) > 1:
-                if choice[1] == "item" and "item" in location:
-                    self.get("item")
-                elif choice[1] == "orb" and "orb" in location:
-                    self.get("orb")
-                elif choice[1] == "object" and "object" in location:
-                        print("\nYou're going to need a bigger Pack!")
-                else:
-                    print("\nIt must have been a mirage...")
-            # Exit the game.
-            elif choice[0] == "gg":
-                self.gg("Are you sure you wish to quit? Choose [Y] or [N]: ")
+                    print("\nThat's not a valid command!")
+            # When nothing at all is entered.
             else:
-                print("\nThat's not a valid command!")
-        # When nothing at all is entered.
-        else:
-            print("\nNary a whisper could be heard...")
+                print("\nNary a whisper could be heard...")
+        # Handle Control + [Key] commands.
+        except (EOFError, IndexError):
+            print("\nThat's not a valid command!")

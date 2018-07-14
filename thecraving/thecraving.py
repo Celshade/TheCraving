@@ -1,4 +1,4 @@
-"""Primary module of TheCraving: import additional modules and initiate game.
+"""Primary module of TheCraving: initiate game and introduce storyline.
 
 Functions:
     word_wrap(): Text wrapper.
@@ -7,7 +7,6 @@ Functions:
     main(): Primary game-loop.
 """
 import time
-import random
 import signal
 import sys
 
@@ -43,22 +42,17 @@ def intro() -> None:
     print(word_wrap("Search your surroundings for a way to escape!"))
 
 
-def signal_handler(signum: int, frame: object) -> None:
-    """Provide a clean exit for those who don't use the proper commands."""
-    print(s.EXITS[random.randint(0, 3)])
-    time.sleep(4)
-    sys.exit()
-
-
 def main() -> None:
     """Primary game-loop: run game."""
     player = p.Player()
+    game_exit = False
 
     intro()
     player.options()
-    while True:
+    signal.signal(signal.SIGBREAK, signal.SIG_IGN)
+    signal.signal(signal.SIGINT, signal.SIG_IGN)
+    while game_exit is False:
         player.stats()
-        signal.signal(signal.SIGINT, signal_handler)
         player.action()
         if it.TWIZZLERS in it.PACK.pocket:
             print(s.BETA_TEXT)
@@ -72,8 +66,8 @@ def main() -> None:
             print(s.THE_CRAVING)
             time.sleep(2)
             print("Game Over!\nThanks for playing!")
-            player.gg("Enter [R] when you're ready to exit the game: ", 1)
-            break
+            player.gg("Enter [E] to exit the game: ", 1)
+            game_exit = True
     print("\nPeace!\n-Cel-")
     time.sleep(3)
     sys.exit()
