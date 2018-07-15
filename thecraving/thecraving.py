@@ -40,6 +40,7 @@ def intro() -> None:
     print("Startled by the sudden noise, you scramble guardedly to your feet.")
     print(f"\n{s.GRUMBLE}")
     print(s.REALIZATION)
+    print(s.THE_CRAVING)
     print(word_wrap("Search your surroundings for a way to escape!"))
 
 
