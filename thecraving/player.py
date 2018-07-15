@@ -2,8 +2,6 @@
 
 Classes:
     Player(): Establish the Player.
-Functions:
-    quit_game(): Exit the game.
 Attributes:
     ROOMS (dict): Game environment throughout which the Player interacts.
     CHECKABLES (tuple): Checkable objects.
@@ -21,7 +19,7 @@ import story as s
 ROOMS = {
     1: {"name": "White Room",
         "north": it.BLUE_DOOR,
-        "item": it.TWIZZLERS, "orb": it.BLUE_ORB},
+        "item": it.PACK, "orb": it.BLUE_ORB},
     2: {"name": "Blue Room",
         "south": it.WHITE_DOOR, "east": it.GREEN_DOOR, "west": it.PURPLE_DOOR,
         "object": it.BOOKSHELF},
@@ -75,8 +73,8 @@ class Player(object):
         line_2 = "-" * 58
         location = ROOMS[self.room]
 
-        print("\n" + line_2)
-        print("You find yourself in: The " + location["name"])
+        print(f"\n{line_2}")
+        print(f"You find yourself in: *The {location['name']}*")
         if it.PACK in self.inventory:
             print(it.PACK.contents())
         if "object" in location:
@@ -85,7 +83,7 @@ class Player(object):
             print(f"You catch sight of a {location['item']}")
         if "orb" in location:
             print(f"You catch sight of a {location['orb']}")
-        print(line_2 + "\n")
+        print(f"{line_2}\n")
 
     def match(self, door: it.Door) -> bool:
         """Check PACK for Orb >> Door match.
@@ -98,22 +96,32 @@ class Player(object):
         for x in it.PACK.pocket:
             if x.icolor() == door.icolor():
                 return True
+            else:
+                continue
 
     def options(self) -> None:
         """Display main menu."""
         line_1 = "_" * 58
+        line_2 = "-" * 14
         space = " " * 17
 
-        print("\n" + line_1)
-        print(space + "Valid Commands")
-        print(space + "--------------"
-              "\n> 'options'                  (List commands)"
-              "\n> 'check [target]'           ('object', 'item', 'orb')"
-              "\n> 'go [direction]'           (north, south, east, or west)"
-              "\n> 'get item'                 (Pick up nearby non-orb item)"
-              "\n> 'get orb'                  (Pick up nearby orb)"
-              "\n> 'gg'                       (Quit game)")
-        print(line_1 + ("\n" * 2))
+        print(f"\n{line_1}")
+        print(f"{space}Valid Commands")
+        print(f"{space}{line_2}"
+              "\n 'Item' refers to special (non-orb) items."
+              "\n 'Orb' refers to the small glowing spheres known as orbs."
+              "\n 'Object' refers to anything that is not an orb or item."
+              f"\n{space}{line_2}"
+              "\n> 'options'               (List commands)"
+              "\n> 'check [target]'        (Check 'object', 'item', or 'orb')"
+              "\n> 'go [direction]'        (Go north, south, east, or west)"
+              "\n> 'get item'              (Pick up nearby non-orb item)"
+              "\n> 'get orb'               (Pick up nearby orb)"
+              "\n> 'gg'                    (Quit game)")
+        if it.PACK not in self.inventory:
+            print(f"\n{space}{line_2}")
+            print("\n** Try typing 'check item' **")
+        print(f"{line_1}\n\n")
 
     def check(self, obj: [it.Item]) -> None:
         """Check Object for hidden details.
@@ -123,6 +131,10 @@ class Player(object):
         """
         print(f"\nYou take a closer look at the {obj}...")
         print(obj.info())
+        if obj in ORB_LIST and it.PACK in self.inventory:
+            print("* Can be picked up with 'get orb'. *")
+        elif obj == it.PACK or obj == it.TWIZZLERS:
+            print("* Can be picked up with 'get item'. *")
         if obj in CHECKABLES and obj.not_checked():
             if obj == it.SHRINE:
                 print(s.SHRINE_TEXT_BETA)
@@ -146,7 +158,7 @@ class Player(object):
         if door.lock_status(False):
             self.room = door.room_tag()
         elif door.lock_status(True):
-            print("\nYou encounter " + it.door_desc(door.icolor()))
+            print(f"\nYou encounter {it.door_desc(door.icolor())}")
             if it.PACK in self.inventory and self.match(door):
                 door.unlock()
                 self.room = door.room_tag()
@@ -157,7 +169,7 @@ class Player(object):
         """Pick up Items and Orbs.
 
         Args:
-            target: The Item or Orb to be picked up.
+            target: Specify an Item or Orb to be picked up.
         """
         location = ROOMS[self.room]
 

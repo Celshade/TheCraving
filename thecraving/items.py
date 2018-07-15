@@ -68,9 +68,9 @@ class Item(object):
     def info(self) -> str:
         """Return a detailed description of Item."""
         header = f"\n[{self.name}]"
-        wrap = "\n" + "=" * (len(header) - 1)
+        wrap = f"\n{'=' * (len(header) - 1)}"
 
-        return (wrap + header + wrap + f"\n{self.descrip}")
+        return f"{wrap}{header}{wrap}\n{self.descrip}"
 
     def room_tag(self) -> int:
         """Return original location of Item."""
@@ -96,7 +96,7 @@ class Pack(Item):
         self.pocket = []
 
     def add_pack(self, obj: Item) -> None:
-        """Add Item to the Pack.
+        """Add an Item to the Pack.
 
         Args:
             obj: Item to be added.
@@ -114,18 +114,18 @@ class Pack(Item):
             return "Inventory: Empty"
         elif len(self.pocket) > 4:
             return (f"Inventory: {self.pocket[:4]}\n"
-                    + (" " * 11) + f"{self.pocket[4:]}.")
+                    + f"{' ' * 11}{self.pocket[4:]}.")
         else:
             return f"Inventory: {self.pocket}"
 
 
 class Checkable(Item):
-    """Define a container Item which may hold a hidden Item.
+    """Define a container object which may hold a hidden Item.
 
     Attributes:
         special: Special text to be triggered.
         obj: The contained hidden Item.
-        check_count (int): A useful counter.
+        check_count (int): A useful counter (default=0).
     Public Methods:
         hidden()
         hidden_text()
@@ -198,8 +198,8 @@ class Door(Orb):
 
     def rezonate(self) -> str:
         """Rezonate with corresponding Orb."""
-        return (f"You raise the [{self.color} Orb] in front of you.\n"
-                "The door vibrates in sync with the orb and begins to open!")
+        return (f"You raise the [{self.color} Orb] in front of you."
+                "\nThe orb flares brilliantly and the door grinds open!")
 
     def lock_status(self, condition: bool) -> bool:
         """Return the status of a lock.
@@ -221,14 +221,14 @@ class Door(Orb):
 
 
 def door_desc(color: str) -> str:
-    """Return Door(Orb) description text for use in constructor.
+    """Return Door() description text for use in its constructor.
 
     Args:
-        color: the color attribute for Door(Orb).
+        color: the color attribute for Door().
     Returns:
-        The extended description text for Door(Orb) formatted to color attr.
+        The extended description text for Door() formatted to color attr.
     """
-    return f"an imposing stone door with a dim {color.lower()} aura."
+    return f"an imposing stone door with a dim *{color.lower()}* aura."
 
 
 # Orbs
@@ -258,7 +258,7 @@ BOOKSHELF = Checkable("Bookshelf",
                       "One of the books seems out of place...",
                       GREEN_ORB)
 CAMERA_CRATE = Checkable("Crate Full of Camera Parts",
-                         "A crate filled with used camera parts.",
+                         "A crate filled with old camera parts.",
                          4,
                          "An odd glow shines from beneath some fish lenses...",
                          RED_ORB)

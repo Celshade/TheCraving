@@ -7,7 +7,7 @@ Attributes:
     REALIZATION (str): Recognition text.
     THE_CRAVING (str): The craving text.
     GRUMBLE (str): Grumbling noise text.
-    WHITE_ORB_TEXT (str): White Room special text.
+    WORB_TEXT (str): White Room special text.
     SHRINE_TEXT_ALPHA (str): Shrine description text.
     SHRINE_TEXT_BETA (str): Shrine activation text.
     EXITS (list[str]): List of alternate ending text.

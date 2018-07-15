@@ -5,7 +5,9 @@ _A text-based, escape-the-room, adventure game_
 **How to Play:**
 
 After downloading the package, run _**thecraving.py**_ to start the game.
-Don't forget to use the in-game command _> **options**_ if you get stuck!
+The game can be played inside your default terminal or Python's built-in.
+Be sure to resize your window, or scroll up, upon starting the game - if your
+shell is smaller. Use the in-game command _> **options**_ if you get stuck!
 ***
 **Aloha!!**
 
@@ -23,7 +25,7 @@ find it interesting, please share with a friend and look for more to follow!
 Thanks, again, and I hope you enjoi the journey!
 
 _Wiki -> https://github.com/Celshade/TheCraving/wiki_ \
-_Comments & bugs -> http://www.github.com/Celshade/TheCraving/issues_
+_Comments & bugs -> https://www.github.com/Celshade/TheCraving/issues_
 
 _For the sake of being thorough, as most of you do not know me, I am aware
 that "enjoy" is spelled incorrectly. It is a spelling preference, which I've

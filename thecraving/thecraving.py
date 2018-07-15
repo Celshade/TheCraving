@@ -15,17 +15,17 @@ import player as p
 import story as s
 
 
-def word_wrap(target: str, num=1) -> str:
+def word_wrap(target: str, num: int=1) -> str:
     """Wrap text headings.
 
     Args:
         target: The target text to be wrapped.
-        num (int): The wrap multiplyer (default=1).
+        num: The wrap multiplyer (default=1).
     Returns:
         The wrapped target text.
     """
-    wrap = "=" * (len(target) * num)
-    return wrap + "\n" + target + "\n" + wrap
+    wrap = f"{'=' * len(target)}" * num
+    return f"{wrap}\n{target}\n{wrap}"
 
 
 def intro() -> None:
@@ -35,9 +35,9 @@ def intro() -> None:
     print("\n" * 42)
     print(word_wrap(title, 2))
     print(s.ALPHA_TEXT)
-    print(s.GRUMBLE + "\n")
+    print(f"{s.GRUMBLE}\n")
     print("Startled by the sudden noise, you scramble guardedly to your feet.")
-    print("\n" + s.GRUMBLE)
+    print(f"\n{s.GRUMBLE}")
     print(s.REALIZATION)
     print(word_wrap("Search your surroundings for a way to escape!"))
 
@@ -56,7 +56,7 @@ def main() -> None:
         player.action()
         if it.TWIZZLERS in it.PACK.pocket:
             print(s.BETA_TEXT)
-            time.sleep(7)
+            time.sleep(5)
             print(s.OMEGA_TEXT)
             time.sleep(5)
             print(s.GRUMBLE)
@@ -65,7 +65,8 @@ def main() -> None:
             time.sleep(3)
             print(s.THE_CRAVING)
             time.sleep(2)
-            print("Game Over!\nThanks for playing!")
+            print("Game Over!\nThanks for playing!\n")
+            # Give the user time to read back through their journey.
             player.gg("Enter [E] to exit the game: ", 1)
             game_exit = True
     print("\nPeace!\n-Cel-")
