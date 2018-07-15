@@ -13,7 +13,7 @@ with open(path.join(here, 'README.md'), encoding='utf-8') as f:
 
 setup(
     name='TheCraving',
-    version='0.2.0b2',
+    version='1.0.0b',
     description='A simple text-based adventure game',
     long_description=long_description,
     long_description_content_type='text/markdown',
@@ -23,9 +23,12 @@ setup(
     license="MIT License",
     classifiers=[
         'Development Status :: 4 - Beta',
+        'Environment :: Terminal/Shell',
+        'Intended Audience :: End Users/Desktop'
         'Intended Audience :: Developers',
         'Topic :: Game Development',
         'License :: OSI approved :: MIT License',
+        'Operating System :: Microsoft :: Windows',
         'Programming Language :: Python :: 3.6'
         ],
     python_requires='>=3',
