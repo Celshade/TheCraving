@@ -107,19 +107,10 @@ class Player(object):
 
         print(f"\n{line_1}")
         print(f"{space}Valid Commands")
-        print(f"{space}{line_2}"
-              "\n 'Item' refers to special (non-orb) items."
-              "\n 'Orb' refers to the small glowing spheres known as orbs."
-              "\n 'Object' refers to anything that is not an orb or item."
-              f"\n{space}{line_2}"
-              "\n> 'options'               (List commands)"
-              "\n> 'check [target]'        (Check 'object', 'item', or 'orb')"
-              "\n> 'go [direction]'        (Go north, south, east, or west)"
-              "\n> 'get item'              (Pick up nearby non-orb item)"
-              "\n> 'get orb'               (Pick up nearby orb)"
-              "\n> 'gg'                    (Quit game)")
+        print(f"{space}{line_2}")
+        print(s.OPTIONS)
         if it.PACK not in self.inventory:
-            print(f"\n{space}{line_2}")
+            print(f"{space}{line_2}")
             print("\n** Try typing 'check item' **")
         print(f"{line_1}\n\n")
 
@@ -132,9 +123,9 @@ class Player(object):
         print(f"\nYou take a closer look at the {obj}...")
         print(obj.info())
         if obj in ORB_LIST and it.PACK in self.inventory:
-            print("* Can be picked up with 'get orb'. *")
+            print("* Can be picked up with 'get orb' *")
         elif obj == it.PACK or obj == it.TWIZZLERS:
-            print("* Can be picked up with 'get item'. *")
+            print("* Can be picked up with 'get item' *")
         if obj in CHECKABLES and obj.not_checked():
             if obj == it.SHRINE:
                 print(s.SHRINE_TEXT_BETA)
@@ -276,6 +267,7 @@ class Player(object):
                     self.gg("\nDo you wish to quit? Choose [Y] or [N]: ")
                 else:
                     print("\nThat's not a valid command!")
+                    print("Type 'options' to see available commands.")
             # When nothing at all is entered.
             else:
                 print("\nNary a whisper could be heard...")

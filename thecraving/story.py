@@ -71,3 +71,20 @@ EXITS = [
      "\nHe grins maliciously, pounces, and swallows you whole..."),
     "\nA noxious dart hits you in the buttocks - rendering you unconscious..."
 ]
+
+OPTIONS = """
+'Item' refers to special (non-orb) items.
+'Orb' refers to the small glowing spheres known as orbs.
+'Object' refers to anything that is not an orb or item.
+*When in doubt, 'check' it out!
+                 ==============
+  -------                 --------
+  |Input|                 |Action|
+  -------                 --------
+> 'options'               (Return this list of available actions)
+> 'check [target]'        (Check an 'object', 'item', or 'orb' for details)
+> 'go [direction]'        (Go north, south, east, or west)
+> 'get item'              (Pick up a nearby *item)
+> 'get orb'               (Pick up a nearby *orb)
+> 'gg'                    (Quit game)
+"""
