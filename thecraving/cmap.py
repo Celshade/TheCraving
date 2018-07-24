@@ -41,7 +41,7 @@ class MiniMap(object):
     Public Methods:
         start()
         render()
-        stop()
+        run()
     """
     def __init__(self, tilesize: int, width: int, height: int) -> None:
         self.TSIZE = tilesize
