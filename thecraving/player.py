@@ -1,7 +1,7 @@
 """Define the game environment and Player functionality.
 
 Classes:
-    Player(): Establish the Player.
+    Player(object): Establish the Player.
 Attributes:
     ROOMS (dict): Game environment throughout which the Player interacts.
     CHECKABLES (tuple): Checkable objects.
