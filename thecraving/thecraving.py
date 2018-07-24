@@ -3,7 +3,7 @@
 Functions:
     word_wrap(): Text wrapper.
     intro(): Provides story intro.
-    signal_handler(): Signal handler for improper exits.
+    outro(): Provides story outro.
     main(): Primary game-loop.
 """
 import time
@@ -44,6 +44,21 @@ def intro() -> None:
     print(word_wrap("Search your surroundings for a way to escape!"))
 
 
+def outro() -> None:
+    """Introduce end of story."""
+    print(s.BETA_TEXT)
+    time.sleep(5)
+    print(s.OMEGA_TEXT)
+    time.sleep(5)
+    print(s.GRUMBLE)
+    time.sleep(1)
+    print(s.REALIZATION)
+    time.sleep(3)
+    print(s.THE_CRAVING)
+    time.sleep(2)
+    print("Game Over!\nThanks for playing!\n")
+
+
 def main() -> None:
     """Primary game-loop: run game."""
     player = p.Player()
@@ -57,17 +72,7 @@ def main() -> None:
         player.stats()
         player.action()
         if it.TWIZZLERS in it.PACK.pocket:
-            print(s.BETA_TEXT)
-            time.sleep(5)
-            print(s.OMEGA_TEXT)
-            time.sleep(5)
-            print(s.GRUMBLE)
-            time.sleep(1)
-            print(s.REALIZATION)
-            time.sleep(3)
-            print(s.THE_CRAVING)
-            time.sleep(2)
-            print("Game Over!\nThanks for playing!\n")
+            outro()
             # Give the user time to read back through their journey.
             player.gg("Enter [E] to exit the game: ", 1)
             game_exit = True
