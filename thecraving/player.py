@@ -55,16 +55,17 @@ class Player(object):
         room: The current location (default=1).
         inventory:  Base level inventory (default=set()).
     Public methods:
-        stats()
-        match()
-        options()
-        check()
-        go()
-        get()
-        gg()
-        action()
+        stats(): Show current statistics.
+        match(): Match a Door to an Orb.
+        options(): Show available options.
+        check(): Check an object in detail.
+        go(): Move in a direction.
+        get(): Get an object.
+        gg(): Exit game.
+        action(): Determine what Player will do.
     """
-    def __init__(self, room: int=1, inventory: set=set()) -> object:
+
+    def __init__(self, room: int=1, inventory: set=set()) -> None:
         self.room = room
         self.inventory = inventory
 
@@ -115,7 +116,7 @@ class Player(object):
         print(f"{line_1}\n\n")
 
     def check(self, obj: [it.Item]) -> None:
-        """Check Object for hidden details.
+        """Check object for hidden or additional details.
 
         Args:
             obj: Item to be checked.
