@@ -11,6 +11,7 @@ Attributes:
     SHRINE_TEXT_ALPHA (str): Shrine description text.
     SHRINE_TEXT_BETA (str): Shrine activation text.
     EXITS (list[str]): List of alternate ending text.
+    OPTIONS (str): Available input commands.
 """
 ALPHA_TEXT = """
 \n\t====Thus Far====\n
@@ -73,8 +74,8 @@ EXITS = [
 ]
 
 OPTIONS = """
-'Item' refers to special (non-orb) items.
-'Orb' refers to the small glowing spheres known as orbs.
+'Item' refers to unique (non-orb) items that can be picked up.
+'Orb' refers to the colored spheres encountered throughout the game.
 'Object' refers to anything that is not an orb or item.
 *When in doubt, 'check' it out!
                  ==============
