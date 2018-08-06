@@ -1,7 +1,7 @@
 """Define the game environment and Player functionality.
 
 Classes:
-    Player(): Establish the Player.
+    Player(object): Establish the Player.
 Attributes:
     ROOMS (dict): Game environment throughout which the Player interacts.
     CHECKABLES (tuple): Checkable objects.
@@ -55,16 +55,17 @@ class Player(object):
         room: The current location (default=1).
         inventory:  Base level inventory (default=set()).
     Public methods:
-        stats()
-        match()
-        options()
-        check()
-        go()
-        get()
-        gg()
-        action()
+        stats(): Show current statistics.
+        match(): Match a Door to an Orb.
+        options(): Show available options.
+        check(): Check an object in detail.
+        go(): Move in a direction.
+        get(): Get an object.
+        gg(): Exit game.
+        action(): Determine what Player will do.
     """
-    def __init__(self, room: int=1, inventory: set=set()) -> object:
+
+    def __init__(self, room: int=1, inventory: set=set()) -> None:
         self.room = room
         self.inventory = inventory
 
@@ -91,7 +92,7 @@ class Player(object):
         Args:
             door: The Door to be matched.
         Returns:
-            Return True if a match is found, False otherwise.
+            Return True if a match is found, else False.
         """
         for x in it.PACK.pocket:
             if x.icolor() == door.icolor():
@@ -114,8 +115,8 @@ class Player(object):
             print("\n** Try typing 'check item' **")
         print(f"{line_1}\n\n")
 
-    def check(self, obj: [it.Item]) -> None:
-        """Check Object for hidden details.
+    def check(self, obj: it.Item) -> None:
+        """Check object for hidden or additional details.
 
         Args:
             obj: Item to be checked.
@@ -139,7 +140,7 @@ class Player(object):
                 ROOMS[self.room]["item"] = new_obj
 
     def go(self, direction: str) -> None:
-        """Move in desired direction.
+        """Move in the specified direction.
 
         Args:
             direction: Direction the Player wishes to move in.
@@ -216,10 +217,10 @@ class Player(object):
     def action(self) -> None:
         """Establish Player action.
 
-        This is the primary function which handles all in-game decisions.
+        This is the primary function which handles all in-game action.
         The function prompts a series of input 'choices', which dictate
         what action the Player will take. Acceptable inputs are listed in the
-        'menu()' function and are otherwise known as valid commands.
+        'options()' function and are otherwise known as valid commands.
         """
         try:
             initial_input = input("> ")

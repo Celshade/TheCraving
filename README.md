@@ -5,7 +5,7 @@ _A text-based, escape-the-room, adventure game_
 **How to Play:**
 
 After downloading the package, run _**thecraving.py**_ to start the game.
-The game can be played inside your default terminal or Python's built-in.
+The game may also be played in your default terminal, if you prefer.
 Be sure to resize your window, or scroll up, upon starting the game. 
 Use the in-game command _> **options**_ if you get stuck! \
 _A pen and paper is recommended for mapping which rooms you've traversed._

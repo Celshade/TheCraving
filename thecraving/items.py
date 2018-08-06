@@ -40,19 +40,20 @@ import story as s
 class Item(object):
     """Define base Item class.
 
+    Provide a base class for all in-game items; intended to be subclassed for
+    each unique SubClass(Item). Each SubClass will utilize the base
+    attributes and methods defined in this class.
+
     Attributes:
         name: Name of Item.
         descrip: Description of Item.
         tag: Location identifyer.
     Public Methods:
-        info()
-        room_tag()
-
-    Provide a base class for all in-game items; intended to be subclassed for
-    each unique SubClass(Item). Each SubClass will utilize the base
-    attributes and methods defined in this class.
+        info(): Return Item info.
+        room_tag(): Return Item tag.
     """
-    def __init__(self, name: str, descrip: str, tag: int) -> object:
+
+    def __init__(self, name: str, descrip: str, tag: int) -> None:
         self.name = name
         self.descrip = descrip
         self.tag = tag
@@ -80,16 +81,17 @@ class Item(object):
 class Pack(Item):
     """Handle the inventory acquired by the Player.
 
+    Extend Item() behavior while implementing new methods to interact with
+    the unique 'pocket' attribute.
+
     Attributes:
         pocket (list): Container for picked up Items (default=[]).
     Public Methods:
-        add_pack()
-        contents()
-
-    Extend parent behavior while implementing new methods which interact with
-    the unique 'pocket' attribute.
+        add_pack(): Add Item to Pack
+        contents(): Return Pack contents.
     """
-    def __init__(self) -> Item:
+
+    def __init__(self) -> None:
         super().__init__(name="Leather Pack",
                          descrip="Even the pockets have pockets!",
                          tag=1)
@@ -122,19 +124,20 @@ class Pack(Item):
 class Checkable(Item):
     """Define a container object which may hold a hidden Item.
 
+    Extend Item() behavior while implementing new methods to interact
+    with the hidden Item, contained within.
+
     Attributes:
         special: Special text to be triggered.
         obj: The contained hidden Item.
         check_count (int): A useful counter (default=0).
     Public Methods:
-        hidden()
-        hidden_text()
-        not_checked()
-
-    Extend parent behavior while implementing new methods which interact
-    with the hidden Item.
+        hidden(): Return hidden Item.
+        hidden_text(): Return situational text.
+        not_checked(): Confirm a Checkable() has already been checked.
     """
-    def __init__(self, name, descrip, tag, special: str, obj: Item) -> Item:
+
+    def __init__(self, name, descrip, tag, special: str, obj: Item) -> None:
         super().__init__(name, descrip, tag)
         self.special = special
         self.obj = obj
@@ -146,7 +149,7 @@ class Checkable(Item):
         return self.obj
 
     def hidden_text(self) -> str:
-        """Return special text, regarding the hidden Item."""
+        """Return special text, revealing the hidden Item."""
         return self.special
 
     def not_checked(self) -> bool:
@@ -160,15 +163,16 @@ class Checkable(Item):
 class Orb(Item):
     """Define in-game Orbs.
 
+    Extend Item() behavior while implementing a new method to interact with
+    the unique 'color' attribute.
+
     Attributes:
         color: The color of the Item.
     Public methods:
-        icolor()
-
-    Extend parent behavior while implementing a new method to interact with
-    the unique 'color' attribute.
+        icolor(): Return color of Item.
     """
-    def __init__(self, name, descrip, tag, color: str) -> Item:
+
+    def __init__(self, name, descrip, tag, color: str) -> None:
         super().__init__(name, descrip, tag)
         self.color = color
 
@@ -180,19 +184,20 @@ class Orb(Item):
 class Door(Orb):
     """Define in-game Doors.
 
+    Extend Orb() behavior, namely the 'color' attribute, as each Door is
+    directly related to an Orb(). Door() methods will return
+    the status of, and unlock, the door - based on a successful
+    'color' match to an Orb() contained within in the Pack.
+
     Attributes:
         lock: Lock status of Door (default=True)
     Public methods:
-        rezonate()
-        lock_status()
-        unlock()
-
-    Extend parent behavior, namely the 'color' attribute, as each Door is
-    directly related to an Orb. New methods included in this class will return
-    the status of the Door and unlock the door, based on a successful
-    'color' match to an Orb in the Pack.
+        rezonate(): Return situational text.
+        lock_status(): Confirm lock status.
+        unlock(): Unlock Door.
     """
-    def __init__(self, name, descrip, tag, color, lock: bool=True) -> Item:
+
+    def __init__(self, name, descrip, tag, color, lock: bool=True) -> None:
         super().__init__(name, descrip, tag, color)
         self.lock = lock
 
@@ -207,7 +212,7 @@ class Door(Orb):
         Args:
             condition: Condition to be checked for.
         Returns:
-            Return True if condition is accurate, False otherwise.
+            Return True if condition is accurate, else False.
         """
         if self.lock == condition:
             return True
@@ -221,12 +226,12 @@ class Door(Orb):
 
 
 def door_desc(color: str) -> str:
-    """Return Door() description text for use in its constructor.
+    """Return Door description text for use in its constructor.
 
     Args:
-        color: the color attribute for Door().
+        color: Color attribute for the Door.
     Returns:
-        The extended description text for Door() formatted to color attr.
+        The extended description text for Door formatted to color attr.
     """
     return f"an imposing stone door with a dim *{color.lower()}* aura."
 

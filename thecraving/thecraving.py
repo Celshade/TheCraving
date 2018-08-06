@@ -2,8 +2,8 @@
 
 Functions:
     word_wrap(): Text wrapper.
-    intro(): Provides story intro.
-    outro(): Provides story outro.
+    intro(): Provide story intro.
+    outro(): Provide story outro.
     main(): Primary game-loop.
 """
 import time
