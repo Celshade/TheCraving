@@ -1,6 +1,7 @@
 """Package data for TheCraving.
 
 Modules:
+    cmap.py: Contains all [class] MiniMap() data.
     items.py: Contains all [class] Item() data.
     player.py: Contains all [class] Player() and game environment data.
     story.py: Contains constants which hold storyline text.
