@@ -52,9 +52,6 @@ ORB_LIST = (it.BLUE_ORB, it.GREEN_ORB, it.PURPLE_ORB, it.RED_ORB,
 class Player(object):
     """Define the Player and establish gameplay.
 
-    An instance of the MiniMap class will be instantiated
-    in the Player constructor.
-
     Attributes:
         room: The current location (default=1).
         inventory:  Base level inventory (default=set()).
@@ -71,6 +68,9 @@ class Player(object):
     """
 
     def __init__(self, room: int=1, inventory: set=set()) -> None:
+        """An instance of the MiniMap class will be instantiated
+        along with the Player.
+        """
         self.room = room
         self.inventory = inventory
         self.CMAP = cmap.MiniMap(60, 7, 7)

@@ -32,9 +32,6 @@ GRAY = (100, 100, 100)
 class MiniMap(object):
     """Show a map of currently known rooms.
 
-    The start() method will be called, in the constructor, to initialize
-    the necessary modules and speed up map rendering.
-
     Attributes:
         tilesize: Size of map tiles.
         width: Map width in tiles.
@@ -47,6 +44,9 @@ class MiniMap(object):
         run()
     """
     def __init__(self, tilesize: int, width: int, height: int) -> None:
+        """The start() method will be called, upon instantiation, to speed up
+        map rendering.
+        """
         self.TSIZE = tilesize
         self.WIDTH = width
         self.HEIGHT = height
