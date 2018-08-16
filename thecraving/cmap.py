@@ -13,8 +13,6 @@ Attributes:
     BLACK: RGB black.
     GRAY: RGB gray.
 """
-# import sys
-
 import pygame
 
 # Colors.
@@ -62,7 +60,7 @@ class MiniMap(object):
         pygame.__init__("draw")
 
     def render(self) -> None:
-        """Render the map and update."""
+        """Render the map."""
         rect = pygame.draw.rect
         DSPLAY = pygame.display.set_mode((self.MWIDTH + 10, self.MHEIGHT + 10))
 
@@ -81,7 +79,7 @@ class MiniMap(object):
         # TODO edit self.render() to only show current/discovered room(s).
 
     def run(self) -> None:
-        """Primary method: call, render(), and sweep up pygame."""
+        """Call self.render(), update DSPLAY, and close pygame when done."""
         while True:
             self.render()
             for event in pygame.event.get():
