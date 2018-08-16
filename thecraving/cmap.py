@@ -32,6 +32,9 @@ GRAY = (100, 100, 100)
 class MiniMap(object):
     """Show a map of currently known rooms.
 
+    The start() method will be called, in the constructor, to initialize
+    the necessary modules and speed up map rendering.
+
     Attributes:
         tilesize: Size of map tiles.
         width: Map width in tiles.
@@ -49,6 +52,7 @@ class MiniMap(object):
         self.HEIGHT = height
         self.MWIDTH = self.TSIZE * self.WIDTH
         self.MHEIGHT = self.TSIZE * self.HEIGHT
+        self.start()
 
     def start(self) -> None:
         """Initiate pygame modules."""
@@ -74,10 +78,10 @@ class MiniMap(object):
         rect(DSPLAY, YELLOW, (self.TSIZE * 5, self.TSIZE * 2, 60, 60), 1)
         rect(DSPLAY, ORANGE, (self.TSIZE * 3, self.TSIZE * 2, 60, 60), 1)
         rect(DSPLAY, GRAY, (self.TSIZE * 3, 10, 60, 60), 1)
+        # TODO edit self.render() to only show current/discovered room(s).
 
     def run(self) -> None:
-        """Primary method: call start(), render(), and sweep up pygame."""
-        self.start()
+        """Primary method: call, render(), and sweep up pygame."""
         while True:
             self.render()
             for event in pygame.event.get():
@@ -89,40 +93,3 @@ class MiniMap(object):
                     pygame.quit()
                     return False  # THIS LINE IS CRUCIAL
             pygame.display.update()
-
-# # The following is for testing purposes only.
-# def pre_func():
-#     """Utilize CLI interface prior to calling the map."""
-#     while True:
-#         choice = input("Enter [Y] to continue: ").lower()
-#         if choice == "y":
-#             print("YOOOOSH!")
-#             return False
-#         else:
-#             print("NANI!?")
-
-
-# def post_func():
-#     """Utilize CLI interface after calling the map."""
-#     while True:
-#         choice = input("Enter [Y] for continue: ").lower()
-#         if choice == "y":
-#             print("Arrigato!")
-#             break
-#         else:
-#             print("NANI!?")
-
-
-# def main():
-#     """Main loop."""
-#     pre_func()
-#     print("Phase 1 complete.")
-#     test1.run()
-#     print("Phase 2 complete.\nAlmost there!")
-#     post_func()
-#     print("Phase 3 complete!")
-#     sys.exit()
-
-
-# test1 = MiniMap(60, 7, 7)
-# main()

@@ -82,6 +82,7 @@ OPTIONS = """
   -------                 --------
   |Input|                 |Action|
   -------                 --------
+> 'map'                   (Shows a map of any rooms you have discovered)
 > 'options'               (Return this list of available actions)
 > 'check [target]'        (Check an 'object', 'item', or 'orb' for details)
 > 'go [direction]'        (Go north, south, east, or west)

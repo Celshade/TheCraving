@@ -13,6 +13,7 @@ import random
 
 import items as it
 import story as s
+import cmap
 
 
 # The actual game environment a Player will navigate.
@@ -51,9 +52,13 @@ ORB_LIST = (it.BLUE_ORB, it.GREEN_ORB, it.PURPLE_ORB, it.RED_ORB,
 class Player(object):
     """Define the Player and establish gameplay.
 
+    An instance of the MiniMap class will be instantiated
+    in the Player constructor.
+
     Attributes:
         room: The current location (default=1).
         inventory:  Base level inventory (default=set()).
+        CMAP: A map of the ROOMS.
     Public methods:
         stats(): Show current statistics.
         match(): Match a Door to an Orb.
@@ -68,6 +73,7 @@ class Player(object):
     def __init__(self, room: int=1, inventory: set=set()) -> None:
         self.room = room
         self.inventory = inventory
+        self.CMAP = cmap.MiniMap(60, 7, 7)
 
     def stats(self) -> None:
         """Broadcast current inventory and surroundings."""
@@ -229,7 +235,9 @@ class Player(object):
             if initial_input != "":
                 choice = initial_input.lower().split()
                 # List valid commands.
-                if choice[0] == "options":
+                if choice[0] == "map":
+                    self.CMAP.run()
+                elif choice[0] == "options":
                     self.options()
                 # Check an object, item, or orb.
                 elif choice[0] == "check" and len(choice) > 1:
