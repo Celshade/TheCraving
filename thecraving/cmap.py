@@ -28,12 +28,12 @@ GRAY = (100, 100, 100)
 
 
 class MiniMap(object):
-    """Show a map of currently known rooms.
+    """Show a map of explored rooms.
 
     Attributes:
-        tilesize: Size of map tiles.
-        width: Map width in tiles.
-        height: Map height in tiles.
+        TSIZE: Tile size in pixels.
+        WIDTH: Map width in tiles.
+        HEIGHT: Map height in tiles.
         MDWIDTH: Map width in pixels.
         MHEIGHT: Map height in pixels.
     Public Methods:
@@ -53,16 +53,19 @@ class MiniMap(object):
         self.start()
 
     def start(self) -> None:
-        """Initiate pygame modules."""
+        """Initiate necessary pygame modules."""
         # call individual modules for speed boost
         pygame.__init__("display")
         pygame.__init__("event")
         pygame.__init__("draw")
+        pygame.font.init()
 
     def render(self) -> None:
         """Render the map."""
         rect = pygame.draw.rect
-        DSPLAY = pygame.display.set_mode((self.MWIDTH + 10, self.MHEIGHT + 10))
+        DSPLAY = pygame.display.set_mode((self.MWIDTH + 10, self.MHEIGHT + 40))
+        FONT = pygame.font.Font(None, 18)
+        text = FONT.render("Press [Q] to return.", True, WHITE, BLACK)
 
         pygame.display.set_caption("The C R A V I N G")
         # background
@@ -76,7 +79,8 @@ class MiniMap(object):
         rect(DSPLAY, YELLOW, (self.TSIZE * 5, self.TSIZE * 2, 60, 60), 1)
         rect(DSPLAY, ORANGE, (self.TSIZE * 3, self.TSIZE * 2, 60, 60), 1)
         rect(DSPLAY, GRAY, (self.TSIZE * 3, 10, 60, 60), 1)
-        # TODO edit self.render() to only show current/discovered room(s).
+        DSPLAY.blit(text, (self.TSIZE * 3 - 25, self.MHEIGHT + 20))
+        # TODO coordinate with Player.go() to show current/discovered room(s).
 
     def run(self) -> None:
         """Call self.render(), update DSPLAY, and close pygame when done."""
@@ -90,4 +94,10 @@ class MiniMap(object):
                 elif event.type == pygame.QUIT:
                     pygame.quit()
                     return False  # THIS LINE IS CRUCIAL
-            pygame.display.update()
+            pygame.display.flip()
+
+
+# TODO clean up hard-code
+# # For testing purposes
+# test = MiniMap(60, 7, 7)
+# test.run()

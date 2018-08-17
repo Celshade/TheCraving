@@ -152,6 +152,8 @@ class Player(object):
             direction: Direction the Player wishes to move in.
         """
         door = ROOMS[self.room][str(direction)]
+        # TODO Add a counter for how many rooms have been discovered.
+        # This will coordinate with MiniMap.render()
 
         if door.lock_status(False):
             self.room = door.room_tag()
@@ -283,3 +285,5 @@ class Player(object):
         # Handle Control + [Key] commands.
         except (EOFError, IndexError):
             print("\nThat's not a valid command!")
+
+# TODO Add an if-statement which prompts player to check 'object'
