@@ -53,23 +53,22 @@ class MiniMap(object):
         pygame.__init__("display")
         pygame.__init__("event")
         pygame.__init__("draw")
-        pygame.font.init()
 
-    def render(self, num: int=1) -> None:
+    def render(self, num: int) -> None:
         """Render the map.
 
         Args:
-            num: The number of rooms to render (default=1).
+            num: The number of ROOMS to blit.
         """
+        pygame.font.init()
         # Ignore flake8 error
         RECT = pygame.draw.rect
         # Store RECT data as a string for later eval.
         ROOMS = [
             "RECT(DSPLY, WHITE, (self.TSIZE * 3, self.TSIZE * 6, 60, 60), 1)",
-            "RECT(DSPLY, WHITE, (self.TSIZE * 3, self.TSIZE * 6, 60, 60), 1)",
             "RECT(DSPLY, BLUE, (self.TSIZE * 3, self.TSIZE * 4, 60, 60), 1)",
-            "RECT(DSPLY, PURPLE, (self.TSIZE, self.TSIZE * 4, 60, 60), 1)",
             "RECT(DSPLY, GREEN, (self.TSIZE * 5, self.TSIZE * 4, 60, 60), 1)",
+            "RECT(DSPLY, PURPLE, (self.TSIZE, self.TSIZE * 4, 60, 60), 1)",
             "RECT(DSPLY, RED, (self.TSIZE, self.TSIZE * 2, 60, 60), 1)",
             "RECT(DSPLY, YELLOW, (self.TSIZE * 5, self.TSIZE * 2, 60, 60), 1)",
             "RECT(DSPLY, ORANGE, (self.TSIZE * 3, self.TSIZE * 2, 60, 60), 1)",
@@ -87,10 +86,14 @@ class MiniMap(object):
             eval(ROOMS[x])
         DSPLY.blit(text, (self.TSIZE * 3 - 25, self.MHEIGHT + 20))
 
-    def run(self) -> None:
-        """Call self.render(), update DSPLY, and close pygame when done."""
+    def run(self, rooms: int=1) -> None:
+        """Call self.render(), update DSPLY, and close pygame when done.
+
+        Args:
+            rooms: The number of rooms to pass to render() (default=1).
+        """
         while True:
-            self.render()
+            self.render(rooms)
             for event in pygame.event.get():
                 if event.type == pygame.KEYDOWN:
                     if event.key == pygame.K_q:
@@ -103,6 +106,7 @@ class MiniMap(object):
 
 
 # TODO clean up hard-code
+# TODO clean up render()
 # For testing purposes
-test = MiniMap(60, 7, 7)
-test.run()
+# test = MiniMap(60, 7, 7)
+# test.run()

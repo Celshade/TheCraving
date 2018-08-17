@@ -55,6 +55,7 @@ class Player(object):
     Attributes:
         room: The current location (default=1).
         inventory:  Base level inventory (default=set()).
+        discovered: The number of ROOMS discovered (default=1)
         CMAP: A map of the ROOMS.
     Public methods:
         stats(): Show current statistics.
@@ -73,6 +74,7 @@ class Player(object):
         """
         self.room = room
         self.inventory = inventory
+        self.discovered = 0
         self.CMAP = cmap.MiniMap(60, 7, 7)
 
     def stats(self) -> None:
@@ -152,8 +154,6 @@ class Player(object):
             direction: Direction the Player wishes to move in.
         """
         door = ROOMS[self.room][str(direction)]
-        # TODO Add a counter for how many rooms have been discovered.
-        # This will coordinate with MiniMap.render()
 
         if door.lock_status(False):
             self.room = door.room_tag()
@@ -161,6 +161,8 @@ class Player(object):
             print(f"\nYou encounter {it.door_desc(door.icolor())}")
             if it.PACK in self.inventory and self.match(door):
                 door.unlock()
+                if door is not it.WHITE_DOOR:
+                    self.discovered += 1
                 self.room = door.room_tag()
             else:
                 print("The door doesn't budge!")
@@ -238,7 +240,7 @@ class Player(object):
                 choice = initial_input.lower().split()
                 # List valid commands.
                 if choice[0] == "map":
-                    self.CMAP.run()
+                    self.CMAP.run(self.discovered)
                 elif choice[0] == "options":
                     self.options()
                 # Check an object, item, or orb.
@@ -287,3 +289,4 @@ class Player(object):
             print("\nThat's not a valid command!")
 
 # TODO Add an if-statement which prompts player to check 'object'
+# BUG Entering BLACK_ROOM will break pygame
