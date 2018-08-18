@@ -289,4 +289,3 @@ class Player(object):
             print("\nThat's not a valid command!")
 
 # TODO Add an if-statement which prompts player to check 'object'
-# BUG Entering BLACK_ROOM will break pygame

@@ -84,6 +84,7 @@ class MiniMap(object):
         # Render the necessary ROOMS.
         for x in range(0, num + 1):
             eval(ROOMS[x])
+        # TODO Add player position to map and "highlight" current room.
         DSPLY.blit(text, (self.TSIZE * 3 - 25, self.MHEIGHT + 20))
 
     def run(self, rooms: int=1) -> None:
