@@ -15,6 +15,12 @@ Attributes:
 """
 import pygame
 
+# Useful constants.
+TSIZE = 60
+HALF = int(TSIZE / 2)
+RECT = pygame.draw.rect
+CIRCLE = pygame.draw.circle
+
 # Colors.
 WHITE = (255, 255, 255)
 BLUE = (0, 0, 255)
@@ -23,15 +29,27 @@ PURPLE = (165, 0, 255)
 RED = (255, 0, 0)
 YELLOW = (255, 255, 0)
 ORANGE = (255, 165, 0)
-BLACK = (0, 0, 0)
 GRAY = (100, 100, 100)
+BLACK = (0, 0, 0)
+
+# Room coordinates.
+WHITE_X, WHITE_Y = TSIZE * 3, TSIZE * 6
+BLUE_X, BLUE_Y = TSIZE * 3, TSIZE * 4
+GREEN_X, GREEN_Y = TSIZE * 5, TSIZE * 4
+PURPLE_X, PURPLE_Y = TSIZE, TSIZE * 4
+RED_X, RED_Y = TSIZE, TSIZE * 2
+YELLOW_X, YELLOW_Y = TSIZE * 5, TSIZE * 2
+ORANGE_X, ORANGE_Y = TSIZE * 3, TSIZE * 2
+GRAY_X, GRAY_Y = TSIZE * 3, 10
+
+# Set FPS object
+FPS = pygame.time.Clock()
 
 
 class MiniMap(object):
     """Show a map of explored rooms.
 
     Attributes:
-        TSIZE: Tile size in pixels.
         WIDTH: Map width in tiles.
         HEIGHT: Map height in tiles.
         MDWIDTH: Map width in pixels.
@@ -42,13 +60,16 @@ class MiniMap(object):
         run()
     """
 
-    def __init__(self, tilesize: int, width: int, height: int) -> None:
+    def __init__(self, width: int, height: int) -> None:
         """Initialize necessary pygame modules to speed up map rendering."""
-        self.TSIZE = tilesize
         self.WIDTH = width
         self.HEIGHT = height
-        self.MWIDTH = self.TSIZE * self.WIDTH
-        self.MHEIGHT = self.TSIZE * self.HEIGHT
+        self.MWIDTH = TSIZE * self.WIDTH
+        self.MHEIGHT = TSIZE * self.HEIGHT
+        # Player coordinates.
+        # TODO Change coordinates as Player navigates the rooms.
+        self._x = WHITE_X + HALF
+        self._y = WHITE_Y + HALF
 
         pygame.__init__("display")
         pygame.__init__("event")
@@ -61,18 +82,17 @@ class MiniMap(object):
             num: The number of ROOMS to blit.
         """
         pygame.font.init()
-        # Ignore flake8 error
-        RECT = pygame.draw.rect
+
         # Store RECT data as a string for later eval.
         ROOMS = [
-            "RECT(DSPLY, WHITE, (self.TSIZE * 3, self.TSIZE * 6, 60, 60), 1)",
-            "RECT(DSPLY, BLUE, (self.TSIZE * 3, self.TSIZE * 4, 60, 60), 1)",
-            "RECT(DSPLY, GREEN, (self.TSIZE * 5, self.TSIZE * 4, 60, 60), 1)",
-            "RECT(DSPLY, PURPLE, (self.TSIZE, self.TSIZE * 4, 60, 60), 1)",
-            "RECT(DSPLY, RED, (self.TSIZE, self.TSIZE * 2, 60, 60), 1)",
-            "RECT(DSPLY, YELLOW, (self.TSIZE * 5, self.TSIZE * 2, 60, 60), 1)",
-            "RECT(DSPLY, ORANGE, (self.TSIZE * 3, self.TSIZE * 2, 60, 60), 1)",
-            "RECT(DSPLY, GRAY, (self.TSIZE * 3, 10, 60, 60), 1)"
+            "RECT(DSPLY, WHITE, (WHITE_X, WHITE_Y, TSIZE, TSIZE), 1)",
+            "RECT(DSPLY, BLUE, (BLUE_X, BLUE_Y, TSIZE, TSIZE), 1)",
+            "RECT(DSPLY, GREEN, (GREEN_X, GREEN_Y, TSIZE, TSIZE), 1)",
+            "RECT(DSPLY, PURPLE, (PURPLE_X, PURPLE_Y, TSIZE, TSIZE), 1)",
+            "RECT(DSPLY, RED, (RED_X, RED_Y, TSIZE, TSIZE), 1)",
+            "RECT(DSPLY, YELLOW, (YELLOW_X, YELLOW_Y, TSIZE, TSIZE), 1)",
+            "RECT(DSPLY, ORANGE, (ORANGE_X, ORANGE_Y, TSIZE, TSIZE), 1)",
+            "RECT(DSPLY, GRAY, (GRAY_X, GRAY_Y, TSIZE, TSIZE), 1)"
         ]
         DSPLY = pygame.display.set_mode((self.MWIDTH + 10, self.MHEIGHT + 40))
         FONT = pygame.font.Font(None, 18)
@@ -84,17 +104,35 @@ class MiniMap(object):
         # Render the necessary ROOMS.
         for x in range(0, num + 1):
             eval(ROOMS[x])
-        # TODO Add player position to map and "highlight" current room.
-        DSPLY.blit(text, (self.TSIZE * 3 - 25, self.MHEIGHT + 20))
+        # Render text.
+        DSPLY.blit(text, (TSIZE * 3 - 25, self.MHEIGHT + 20))
+        # Player POS indicator.
+        CIRCLE(DSPLY, WHITE, (self._x, self._y), 5)
+        # TODO Add a color shifting glow to the POS indicator.
 
-    def run(self, rooms: int=1) -> None:
+    def run(self, rooms: int=0) -> None:
         """Call self.render(), update DSPLY, and close pygame when done.
 
         Args:
-            rooms: The number of rooms to pass to render() (default=1).
+            rooms: The number of rooms to pass to render() (default=0).
         """
         while True:
             self.render(rooms)
+            pygame.display.flip()
+            # TODO Condense player indicator movement into a function
+            # Bounce the player indicator up.
+            for x in range(20):
+                FPS.tick(65)
+                self._y -= 1
+                self.render(rooms)
+                pygame.display.flip()
+            # Bounce the player indicator down.
+            for x in range(20):
+                FPS.tick(60)
+                self._y += 1
+                self.render(rooms)
+                pygame.display.flip()
+
             for event in pygame.event.get():
                 if event.type == pygame.KEYDOWN:
                     if event.key == pygame.K_q:
@@ -106,8 +144,9 @@ class MiniMap(object):
             pygame.display.flip()
 
 
+# For testing purposes
+# test = MiniMap(7, 7)
+# test.run()
+
 # TODO clean up hard-code
 # TODO clean up render()
-# For testing purposes
-# test = MiniMap(60, 7, 7)
-# test.run()

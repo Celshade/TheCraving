@@ -75,7 +75,7 @@ class Player(object):
         self.room = room
         self.inventory = inventory
         self.discovered = 0
-        self.CMAP = cmap.MiniMap(60, 7, 7)
+        self.CMAP = cmap.MiniMap(7, 7)
 
     def stats(self) -> None:
         """Broadcast current inventory and surroundings."""
