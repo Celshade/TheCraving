@@ -55,8 +55,6 @@ class Player(object):
     Attributes:
         room: The current location (default=1).
         inventory:  Base level inventory (default=set()).
-        discovered: The number of ROOMS discovered (default=1)
-        CMAP: A map of the ROOMS.
     Public methods:
         stats(): Show current statistics.
         match(): Match a Door to an Orb.
@@ -71,11 +69,15 @@ class Player(object):
     def __init__(self, room: int=1, inventory: set=set()) -> None:
         """An instance of the MiniMap class will be instantiated
         along with the Player.
+
+        Attributes:
+            discovered (int): The number of ROOMS discovered(default=0).
+            _CMAP (MiniMap): The MiniMap which displays a map of ROOMS.
         """
         self.room = room
         self.inventory = inventory
         self.discovered = 0
-        self.CMAP = cmap.MiniMap(7, 7)
+        self._CMAP = cmap.MiniMap(7, 7)
 
     def stats(self) -> None:
         """Broadcast current inventory and surroundings."""
@@ -240,7 +242,7 @@ class Player(object):
                 choice = initial_input.lower().split()
                 # List valid commands.
                 if choice[0] == "map":
-                    self.CMAP.run(self.discovered)
+                    self._CMAP.run(self.discovered)
                 elif choice[0] == "options":
                     self.options()
                 # Check an object, item, or orb.

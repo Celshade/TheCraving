@@ -73,7 +73,6 @@ def main() -> None:
         player.action()
         if it.TWIZZLERS in it.PACK.pocket:
             outro()
-            # Give the user time to read back through their journey.
             player.gg("Enter [E] to exit the game: ", 1)
             game_exit = True
     print("\nPeace!\n-Cel-")
