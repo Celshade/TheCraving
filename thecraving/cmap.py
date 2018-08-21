@@ -18,7 +18,9 @@ Attributes:
     BLACK (tuple): RGB black.
     GRAY (tuple): RGB gray.
 
-    RM_COORDS (dict): Room coordinates (-x and -y values).
+    COORDS (dict): Room coordinates (-x and -y values).
+    RM_DATA (dict): Room data to be passed into RECT.
+    FPS (object): A FPS clock to adjust frame control.
 """
 import pygame
 
