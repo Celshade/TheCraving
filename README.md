@@ -1,5 +1,5 @@
 # The Craving
-_A text-based, escape-the-room, adventure game_
+_A short, text-based, adventure game_
 
 ***
 **How to Play:**
@@ -7,22 +7,20 @@ _A text-based, escape-the-room, adventure game_
 After downloading the package, run _**thecraving.py**_ to start the game.
 The game may also be played in your default terminal, if you prefer.
 Be sure to resize your window, or scroll up, upon starting the game. 
-Use the in-game command _> **options**_ if you get stuck! \
-_A pen and paper is recommended for mapping which rooms you've traversed._
+Please make use of the in-game command _> **options**_ if you get stuck!
+
+_**pygame[1.9.3+]** is required to run the game_.
 ***
 **Aloha!!**
 
-This is the first game that I've built, so please pardon the lack of swag.
-I've developed this as a way to test my [python] programming knowledge,
-thus far, and work on my flow. The first, fully, playable version took roughly
-three months to complete; however, I believe it could have been finished
-much sooner - given the time. I still have a few updates planned; so,
-if you've found yourself here, and are curious, please take a look at the
-wiki and stay tuned!
+This is the first game that I've built, so please pardon the lack of story
+swag and simplicity. I've developed this as a way to test my [python]
+programming knowledge and work on my flow. The core of the game took roughly
+three months to complete; and, since then, I have polished and added features whenever time was available.
 
 I truly appreciate all of you who take the time to play through the game. Any
 and all feedback is _extremely_ appreciated. If you like the game, or at least
-find it interesting, please share with a friend and look for more to follow!
+find it interesting, please share it with a friend and look for more to follow!
 Thanks, again, and I hope you enjoi the journey!
 
 _Wiki -> https://github.com/Celshade/TheCraving/wiki_ \

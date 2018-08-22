@@ -1,9 +1,11 @@
 """Package data for TheCraving.
 
 Modules:
-    cmap.py: Contains all [class] MiniMap() data.
-    items.py: Contains all [class] Item() data.
-    player.py: Contains all [class] Player() and game environment data.
-    story.py: Contains constants which hold storyline text.
-    thecraving.py: Contains the primary game-loop and starts the program.
+    pygame: A 3rd party library used to render graphics via SDL.
+
+    cmap: Contains all [class] MiniMap() data.
+    items: Contains all [class] Item() data.
+    player: Contains all [class] Player() and game environment data.
+    story: Contains constants which hold storyline text.
+    thecraving: Contains the primary game-loop and starts the program.
 """

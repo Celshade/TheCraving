@@ -44,9 +44,9 @@ ROOMS = {
         "object": it.SHRINE}
 }
 #  Useful constants for the checking of objects and orbs.
-CHECKABLES = (it.BOOKSHELF, it.CAMERA_CRATE, it.BUILDING_MATERIALS, it.SHRINE)
-ORB_LIST = (it.BLUE_ORB, it.GREEN_ORB, it.PURPLE_ORB, it.RED_ORB,
-            it.YELLOW_ORB, it.ORANGE_ORB, it.WHITE_ORB, it.BLACK_ORB)
+CHECKABLES = {it.BOOKSHELF, it.CAMERA_CRATE, it.BUILDING_MATERIALS, it.SHRINE}
+ORB_LIST = {it.BLUE_ORB, it.GREEN_ORB, it.PURPLE_ORB, it.RED_ORB,
+            it.YELLOW_ORB, it.ORANGE_ORB, it.WHITE_ORB, it.BLACK_ORB}
 
 
 class Player(object):
@@ -125,12 +125,17 @@ class Player(object):
             obj: Item to be checked.
         """
         print(f"\nYou take a closer look at the {obj}...")
-        print(obj.info())
-        if obj in ORB_LIST and it.PACK in self.inventory:
-            print("* Can be picked up with 'get orb' *")
-        elif obj == it.PACK or obj == it.TWIZZLERS:
+        if obj == it.SHRINE:
+            if obj.not_checked is False:
+                print(s.SHRINE_TEXT_THETA)
+        else:
+            print(obj.info())
+
+        if obj == it.PACK or obj == it.TWIZZLERS:
             print("* Can be picked up with 'get item' *")
-        if obj in CHECKABLES and obj.not_checked():
+        elif obj in ORB_LIST and it.PACK in self.inventory:
+            print("* Can be picked up with 'get orb' *")
+        elif obj in CHECKABLES and obj.not_checked():
             if obj == it.SHRINE:
                 print(s.SHRINE_TEXT_BETA)
                 del it.PACK.pocket[:]
@@ -166,7 +171,7 @@ class Player(object):
         """Pick up Items and Orbs.
 
         Args:
-            target: Specify an Item or Orb to be picked up.
+            target: The Item or Orb to be picked up.
         """
         location = ROOMS[self.room]
 

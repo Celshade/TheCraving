@@ -97,15 +97,14 @@ class MiniMap(object):
         pygame.__init__("draw")
 
     def render(self, num: int) -> None:
-        """Render the map.
+        """Prepare all data to be rendered.
 
         Args:
             num: The number of ROOMS to blit.
-            room: The current room of the Player.
         """
         pygame.font.init()
 
-        # Store RECT data as a string for later eval.
+        # Store RECT data as strings for later eval.
         ROOMS = [
             "RECT(DSPLY, WHITE, RM_DATA[1], 1)",
             "RECT(DSPLY, BLUE, RM_DATA[2], 1)",
@@ -134,7 +133,7 @@ class MiniMap(object):
         pygame.display.flip()
 
     def run(self, rooms: int=0, current: int=1) -> None:
-        """Main method of MiniMap(): render all graphics and handle events.
+        """Main method of MiniMap(): call render() and handle events.
 
         Args:
             rooms: The number of discovered rooms to render (default=0).
@@ -164,8 +163,3 @@ class MiniMap(object):
                     pygame.quit()
                     return False  # THIS LINE IS CRUCIAL
             pygame.display.flip()
-
-
-# For testing purposes
-# test = MiniMap(7, 7)
-# test.run()

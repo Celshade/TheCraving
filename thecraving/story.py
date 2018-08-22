@@ -10,6 +10,7 @@ Attributes:
     WORB_TEXT (str): White Room special text.
     SHRINE_TEXT_ALPHA (str): Shrine description text.
     SHRINE_TEXT_BETA (str): Shrine activation text.
+    SHRINE_TEXT_THETA (str): Activated Shrine description text.
     EXITS (list[str]): List of alternate ending text.
     OPTIONS (str): Available input commands.
 """
@@ -55,13 +56,17 @@ WORB_TEXT = "You hear a distant rumble and the [White Orb] flares brightly..."
 
 SHRINE_TEXT_ALPHA = """
 An ornate box sits atop an onyx pedestal. The box is sealed fast.
-Eight perfectly smooth, sphere-shaped, recesses encircle the box.
-You notice each indent emitting a faint glow just like the orbs you carry...
+Eight perfectly smooth, sphere-shaped, recesses encircle the box - each
+emitting a faint glow just like the orbs you carry...
 """
 
 SHRINE_TEXT_BETA = """
-You place each of the colored orbs in their corresponding niche.
+You place each of the colored orbs into place, on the pedestal.
 The orbs pulse rythmically, in sync, and the box unseals with a feint *hiss*.
+"""
+
+SHRINE_TEXT_THETA = """
+An empty ornate box sits atop an onyx pedestal, encircled by 8 glowing orbs.
 """
 
 EXITS = [
