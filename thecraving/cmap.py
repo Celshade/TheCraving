@@ -89,12 +89,14 @@ class MiniMap(object):
         self.HEIGHT = height
         self.MWIDTH = TSIZE * self.WIDTH
         self.MHEIGHT = TSIZE * self.HEIGHT
+        self._pos_x = None  # The current -x location of the Player.
+        self._pos_y = None  # The current -y location of the Player.
 
         pygame.__init__("display")
         pygame.__init__("event")
         pygame.__init__("draw")
 
-    def render(self, num: int, room: int) -> None:
+    def render(self, num: int) -> None:
         """Render the map.
 
         Args:
@@ -117,11 +119,6 @@ class MiniMap(object):
         DSPLY = pygame.display.set_mode((self.MWIDTH + 10, self.MHEIGHT + 40))
         FONT = pygame.font.Font(None, 18)
         text = FONT.render("Press [Q] to return.", True, WHITE, BLACK)
-        # Player coordinates.
-        pos_x = int(COORDS[room]["x"] + HALF)
-        pos_y = COORDS[room]["y"] + HALF
-        # Player indicator.
-        pos_indi = CIRCLE(DSPLY, WHITE, (pos_x, pos_y), 5)
 
         pygame.display.set_caption("The C R A V I N G")
         # Render background.
@@ -131,22 +128,10 @@ class MiniMap(object):
         # Render the necessary ROOMS.
         for x in range(0, num + 1):
             eval(ROOMS[x])
+        # Render the Player indicator.
+        CIRCLE(DSPLY, WHITE, (self._pos_x, self._pos_y), 5)
         # TODO Add a color shifting glow to the POS indicator.
-        # Emphasize Player indicator with a bounce animation.
-        # BUG bounce animation is not rendering properly inside render()
-        # BUG may need to move bounce animation back to run()
-        # for x in range(10):
-        #     FPS.tick(30)
-        #     DSPLY.fill(BLACK, pos_indi)
-        #     pos_y -= 1
-        #     CIRCLE(DSPLY, WHITE, (pos_x, pos_y), 5)
-        #     pygame.display.update()
-        # for x in range(10):
-        #     FPS.tick(30)
-        #     DSPLY.fill(BLACK, pos_indi)
-        #     pos_y += 1
-        #     CIRCLE(DSPLY, WHITE, (pos_x, pos_y), 5)
-        #     pygame.display.update()
+        pygame.display.flip()
 
     def run(self, rooms: int=0, current: int=1) -> None:
         """Main method of MiniMap(): render all graphics and handle events.
@@ -155,9 +140,20 @@ class MiniMap(object):
             rooms: The number of discovered rooms to render (default=0).
             current: The current room (default=1).
         """
+        self._pos_x = COORDS[current]["x"] + HALF
+        self._pos_y = COORDS[current]["y"] + HALF
+
         while True:
-            # TODO Implement player POS attributes from Player.py
-            self.render(rooms, 1)
+            self.render(rooms)
+            # Emphasize Player indicator with a bounce animation.
+            for x in range(10):
+                FPS.tick(30)
+                self._pos_y -= 1
+                self.render(rooms)
+            for x in range(10):
+                FPS.tick(30)
+                self._pos_y += 1
+                self.render(rooms)
 
             for event in pygame.event.get():
                 if event.type == pygame.KEYDOWN:
@@ -171,5 +167,5 @@ class MiniMap(object):
 
 
 # For testing purposes
-test = MiniMap(7, 7)
-test.run()
+# test = MiniMap(7, 7)
+# test.run()
