@@ -1,7 +1,7 @@
 """Define the game environment and Player functionality.
 
 Classes:
-    Player(object): Establish the Player.
+    Player(object): Establish the Player and gameplay.
 Attributes:
     ROOMS (dict): Game environment throughout which the Player interacts.
     CHECKABLES (tuple): Checkable objects.
@@ -63,7 +63,7 @@ class Player(object):
         go(): Move in a direction.
         get(): Get an object.
         gg(): Exit game.
-        action(): Determine what Player will do.
+        action(): Determine what action the Player takes.
     """
 
     def __init__(self, room: int=1, inventory: set=set()) -> None:
@@ -186,7 +186,7 @@ class Player(object):
                 print(location["orb"].info())
                 # Proc a special event for WHITE_ORB.
                 if location["orb"] == it.WHITE_ORB:
-                    print(s.WORB_TEXT)
+                    print(f"\n{s.WORB_TEXT}")
                     ROOMS[1]["orb"] = it.BLACK_ORB
                 del location["orb"]
             else:

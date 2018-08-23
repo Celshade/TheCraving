@@ -1,7 +1,7 @@
 """Create a callable map to display current location and explored rooms.
 
 Classes:
-    MiniMap(object): Establish the map.
+    MiniMap(object): Establish the in-game map and render graphics.
 Attributes:
     TSIZE (int): The size of a tile.
     HALF (int): Half of TSIZE
@@ -40,6 +40,20 @@ YELLOW = (255, 255, 0)
 ORANGE = (255, 165, 0)
 GRAY = (100, 100, 100)
 BLACK = (0, 0, 0)
+
+# Glow hues for Player POS indicator.
+GLOW = [
+    (255, 255, 255),
+    (250, 250, 210),
+    (250, 250, 210),
+    (240, 230, 140),
+    (240, 230, 140),
+    (255, 223, 0),
+    (240, 230, 140),
+    (240, 230, 140),
+    (250, 250, 210),
+    (250, 250, 210)
+]
 
 # Room coordinates.
 COORDS = {
@@ -83,7 +97,7 @@ class MiniMap(object):
         run()
     """
 
-    def __init__(self, width: int, height: int) -> None:
+    def __init__(self, width: int=7, height: int=7) -> None:
         """Initialize necessary pygame modules to speed up map rendering."""
         self.WIDTH = width
         self.HEIGHT = height
@@ -96,11 +110,12 @@ class MiniMap(object):
         pygame.__init__("event")
         pygame.__init__("draw")
 
-    def render(self, num: int) -> None:
+    def render(self, num: int, p_color: tuple=WHITE) -> None:
         """Prepare all data to be rendered.
 
         Args:
             num: The number of ROOMS to blit.
+            p_color: The color of the Player POS indicator.
         """
         pygame.font.init()
 
@@ -127,8 +142,8 @@ class MiniMap(object):
         # Render the necessary ROOMS.
         for x in range(0, num + 1):
             eval(ROOMS[x])
-        # Render the Player indicator.
-        CIRCLE(DSPLY, WHITE, (self._pos_x, self._pos_y), 5)
+        # Render the Player POS indicator.
+        CIRCLE(DSPLY, p_color, (self._pos_x, self._pos_y), 5)
         # TODO Add a color shifting glow to the POS indicator.
         pygame.display.flip()
 
@@ -143,16 +158,23 @@ class MiniMap(object):
         self._pos_y = COORDS[current]["y"] + HALF
 
         while True:
-            self.render(rooms)
-            # Emphasize Player indicator with a bounce animation.
+            # self.render(rooms)
+            hue = 0  # The GLOW index for POS indicator color.
+            # Emphasize POS indicator with a bounce animation.
             for x in range(10):
                 FPS.tick(30)
                 self._pos_y -= 1
-                self.render(rooms)
+                self.render(rooms, GLOW[hue])
+                hue += 1
+                if hue == 10:
+                    hue = 0
             for x in range(10):
                 FPS.tick(30)
                 self._pos_y += 1
-                self.render(rooms)
+                self.render(rooms, GLOW[hue])
+                hue += 1
+                if hue == 10:
+                    hue = 0
 
             for event in pygame.event.get():
                 if event.type == pygame.KEYDOWN:
