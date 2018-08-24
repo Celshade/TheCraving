@@ -1,7 +1,7 @@
 """Create a callable map to display current location and explored rooms.
 
 Classes:
-    MiniMap(object): Establish the in-game map and render graphics.
+    MiniMap(object): Establish the in-game map and graphics control.
 Attributes:
     TSIZE (int): The size of a tile.
     HALF (int): Half of TSIZE
@@ -15,8 +15,11 @@ Attributes:
     RED (tuple): RGB red.
     YELLOW (tuple): RGB yellow.
     ORANGE (tuple): RGB orange.
-    BLACK (tuple): RGB black.
     GRAY (tuple): RGB gray.
+    BLACK (tuple): RGB black.
+    LCYAN (tuple): RBG light cyan.
+    MCYAN (tuple): RBG medium cyan.
+    CYAN (tuple): RGB cyan.
 
     COORDS (dict): Room coordinates (-x and -y values).
     RM_DATA (dict): Room data to be passed into RECT.
@@ -40,20 +43,9 @@ YELLOW = (255, 255, 0)
 ORANGE = (255, 165, 0)
 GRAY = (100, 100, 100)
 BLACK = (0, 0, 0)
-
-# Glow hues for Player POS indicator.
-GLOW = [
-    (255, 255, 255),
-    (250, 250, 210),
-    (250, 250, 210),
-    (240, 230, 140),
-    (240, 230, 140),
-    (255, 223, 0),
-    (240, 230, 140),
-    (240, 230, 140),
-    (250, 250, 210),
-    (250, 250, 210)
-]
+LCYAN = (224, 255, 255)
+MCYAN = (124, 255, 255)
+CYAN = (0, 225, 255)
 
 # Room coordinates.
 COORDS = {
@@ -66,7 +58,6 @@ COORDS = {
     7: {"x": TSIZE * 3, "y": TSIZE * 2},
     8: {"x": TSIZE * 3, "y": 10}
 }
-
 # Room data passed to RECT
 RM_DATA = {
     1: (COORDS[1]["x"], COORDS[1]["y"], TSIZE, TSIZE),
@@ -78,7 +69,6 @@ RM_DATA = {
     7: (COORDS[7]["x"], COORDS[7]["y"], TSIZE, TSIZE),
     8: (COORDS[8]["x"], COORDS[8]["y"], TSIZE, TSIZE),
 }
-
 # Set FPS object
 FPS = pygame.time.Clock()
 
@@ -87,10 +77,10 @@ class MiniMap(object):
     """Show a map of explored rooms.
 
     Attributes:
-        WIDTH: Map width in tiles.
-        HEIGHT: Map height in tiles.
-        MDWIDTH: Map width in pixels.
-        MHEIGHT: Map height in pixels.
+        width: The tile width of the map.
+        height: The tile height of the map.
+        MWIDTH (int): The pixel width of the map.
+        MHEIGHT (int): The pixel height of the map.
     Public Methods:
         start()
         render()
@@ -103,8 +93,8 @@ class MiniMap(object):
         self.HEIGHT = height
         self.MWIDTH = TSIZE * self.WIDTH
         self.MHEIGHT = TSIZE * self.HEIGHT
-        self._pos_x = None  # The current -x location of the Player.
-        self._pos_y = None  # The current -y location of the Player.
+        self._pos_x = None  # int: The current -x location of the Player.
+        self._pos_y = None  # int: The current -y location of the Player.
 
         pygame.__init__("display")
         pygame.__init__("event")
@@ -144,7 +134,6 @@ class MiniMap(object):
             eval(ROOMS[x])
         # Render the Player POS indicator.
         CIRCLE(DSPLY, p_color, (self._pos_x, self._pos_y), 5)
-        # TODO Add a color shifting glow to the POS indicator.
         pygame.display.flip()
 
     def run(self, rooms: int=0, current: int=1) -> None:
@@ -152,36 +141,43 @@ class MiniMap(object):
 
         Args:
             rooms: The number of discovered rooms to render (default=0).
-            current: The current room (default=1).
+            current: The current room of the Player (default=1).
         """
         self._pos_x = COORDS[current]["x"] + HALF
         self._pos_y = COORDS[current]["y"] + HALF
 
         while True:
-            # self.render(rooms)
-            hue = 0  # The GLOW index for POS indicator color.
-            # Emphasize POS indicator with a bounce animation.
+            hue = 0  # int: The GLOW index for POS indicator color.
+            # Upwards bounce of POS indicator.
             for x in range(10):
                 FPS.tick(30)
                 self._pos_y -= 1
-                self.render(rooms, GLOW[hue])
                 hue += 1
-                if hue == 10:
-                    hue = 0
+                if hue <= 4:
+                    self.render(rooms, LCYAN)
+                elif hue > 4 and hue <= 8:
+                    self.render(rooms, MCYAN)
+                elif hue > 8:
+                    self.render(rooms, CYAN)
+
+            # Downwards bounce of POS indicator.
             for x in range(10):
                 FPS.tick(30)
                 self._pos_y += 1
-                self.render(rooms, GLOW[hue])
-                hue += 1
-                if hue == 10:
-                    hue = 0
+                hue -= 1
+                if hue > 8:
+                    self.render(rooms, CYAN)
+                elif hue > 4 and hue <= 8:
+                    self.render(rooms, MCYAN)
+                elif hue < 4:
+                    self.render(rooms, LCYAN)
 
             for event in pygame.event.get():
                 if event.type == pygame.KEYDOWN:
                     if event.key == pygame.K_q:
                         pygame.quit()
-                        return False  # THIS LINE IS CRUCIAL
+                        return False  # Return to the game's CLI.
                 elif event.type == pygame.QUIT:
                     pygame.quit()
-                    return False  # THIS LINE IS CRUCIAL
+                    return False  # Return to the game's CLI.
             pygame.display.flip()

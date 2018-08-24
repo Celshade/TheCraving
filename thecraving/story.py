@@ -79,19 +79,19 @@ EXITS = [
 ]
 
 OPTIONS = """
-'Item' refers to unique (non-orb) items that can be picked up.
-'Orb' refers to the colored spheres encountered throughout the game.
-'Object' refers to anything that is not an orb or item.
-*When in doubt, 'check' it out!
+'Item' refers to unique, non-orb, [Items] that can be picked up.
+'Orb' refers to the [Colored Orbs] encountered throughout the game.
+'Object' refers to anything that is not an [Orb] or [Item].
+* When in doubt, 'check' it out! *
                  ==============
   -------                 --------
   |Input|                 |Action|
   -------                 --------
-> 'map'                   (Shows a map of any rooms you have discovered)
-> 'options'               (Return this list of available actions)
-> 'check [target]'        (Check an 'object', 'item', or 'orb' for details)
-> 'go [direction]'        (Go north, south, east, or west)
-> 'get item'              (Pick up a nearby *item)
-> 'get orb'               (Pick up a nearby *orb)
+> 'map'                   (Shows a map of the rooms that you have discovered)
+> 'options'               (Shows this list of available options)
+> 'check [target]'        (Check 'object', 'item', or 'orb' for more details)
+> 'go [direction]'        (Go 'north', 'south', 'east', or 'west')
+> 'get item'              (Pick up a nearby [Item])
+> 'get orb'               (Pick up a nearby [Orb])
 > 'gg'                    (Quit game)
 """

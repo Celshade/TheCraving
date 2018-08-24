@@ -283,5 +283,3 @@ class Player(object):
         # Handle Control + [Key] commands.
         except (EOFError, IndexError):
             print("\nThat's not a valid command!")
-
-# TODO Add an if-statement which prompts player to check 'object'
