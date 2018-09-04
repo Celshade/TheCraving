@@ -2,21 +2,28 @@
 _A short, text-based, adventure game_
 
 ***
-**How to Play:**
+**Instructions:**
 
-After downloading the package, run _**thecraving.py**_ to start the game.
-The game may also be played in your default terminal, if you prefer.
-Be sure to resize your window, or scroll up, upon starting the game. 
+If you already have the necessary requirements (python and pygame),
+download the package and run _**thecraving.py**_ to start the game.
+The game may also be played in the CLI, if preferred, by navigating to
+the file directly (C:\\...\\thecraving\\thecraving\\thecraving.py). 
+
+*Be sure to resize your window, or scroll up, upon starting the game!*\
 Please make use of the in-game command _> **options**_ if you get stuck!
 
-_**pygame[1.9.3+]** is required to run the game_.
+***
+**Requirements:**
+
+1. _python **[3.6+]**_.
+1. _pygame **[1.9.3+]**_.
 ***
 **Aloha!!**
 
 This is the first game that I've built, so please pardon the lack of story
 swag and simplicity. I've developed this as a way to test my [python]
 programming knowledge and work on my flow. The core of the game took roughly
-three months to complete; and, since then, I have polished and added features whenever time was available.
+three months to complete; and, since then, I have polished and added features whenever time has been available.
 
 I truly appreciate all of you who take the time to play through the game. Any
 and all feedback is _extremely_ appreciated. If you like the game, or at least

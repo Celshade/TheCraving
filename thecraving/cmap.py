@@ -176,8 +176,8 @@ class MiniMap(object):
                 if event.type == pygame.KEYDOWN:
                     if event.key == pygame.K_q:
                         pygame.quit()
-                        return False  # Return to the game's CLI.
+                        return False
                 elif event.type == pygame.QUIT:
                     pygame.quit()
-                    return False  # Return to the game's CLI.
+                    return False
             pygame.display.flip()

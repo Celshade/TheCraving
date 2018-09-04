@@ -13,7 +13,8 @@ with open(path.join(here, 'README.md'), encoding='utf-8') as f:
 
 setup(
     name='TheCraving',
-    version='1.1.0b',
+    version='2.0.0b',
+    packages=find_packages(),
     description='A simple text-based adventure game',
     long_description=long_description,
     long_description_content_type='text/markdown',
@@ -29,11 +30,11 @@ setup(
         'Topic :: Game Development',
         'License :: OSI approved :: MIT License',
         'Operating System :: Microsoft :: Windows',
-        'Programming Language :: Python :: 3.6'
+        'Programming Language :: Python :: 3.6.6'
         ],
     python_requires='>=3',
+    install_requires='pygame>=1.9.3',
     keywords='game textadventure thecraving',
-    packages=find_packages(),
     project_urls={
         'Bug Reports': 'https://github.com/Celshade/TheCraving/issues/9',
         'Comments': 'https://github.com/Celshade/TheCraving/issues/10',
