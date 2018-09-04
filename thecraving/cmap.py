@@ -1,7 +1,7 @@
 """Create a callable map to display current location and explored rooms.
 
 Classes:
-    MiniMap(object): Establish the in-game map and graphics control.
+    MiniMap(object): Establish the in-game map display.
 Attributes:
     TSIZE (int): The size of a tile.
     HALF (int): Half of TSIZE
@@ -76,6 +76,9 @@ FPS = pygame.time.Clock()
 class MiniMap(object):
     """Show a map of explored rooms.
 
+    In order to speed up map rendering, only the necessary pygame modules will
+    be initiated when the MiniMap(object) is instantiated.
+
     Attributes:
         width: The tile width of the map.
         height: The tile height of the map.
@@ -88,7 +91,6 @@ class MiniMap(object):
     """
 
     def __init__(self, width: int=7, height: int=7) -> None:
-        """Initialize necessary pygame modules to speed up map rendering."""
         self.WIDTH = width
         self.HEIGHT = height
         self.MWIDTH = TSIZE * self.WIDTH
@@ -101,7 +103,7 @@ class MiniMap(object):
         pygame.__init__("draw")
 
     def render(self, num: int, p_color: tuple=WHITE) -> None:
-        """Prepare all data to be rendered.
+        """Prepare all visual data and render to screen.
 
         Args:
             num: The number of ROOMS to blit.
@@ -153,6 +155,7 @@ class MiniMap(object):
                 FPS.tick(30)
                 self._pos_y -= 1
                 hue += 1
+
                 if hue <= 4:
                     self.render(rooms, LCYAN)
                 elif hue > 4 and hue <= 8:
@@ -165,6 +168,7 @@ class MiniMap(object):
                 FPS.tick(30)
                 self._pos_y += 1
                 hue -= 1
+
                 if hue > 8:
                     self.render(rooms, CYAN)
                 elif hue > 4 and hue <= 8:
@@ -180,4 +184,3 @@ class MiniMap(object):
                 elif event.type == pygame.QUIT:
                     pygame.quit()
                     return False
-            pygame.display.flip()

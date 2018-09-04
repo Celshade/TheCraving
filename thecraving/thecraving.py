@@ -29,7 +29,7 @@ def word_wrap(target: str, num: int=1) -> str:
 
 
 def intro() -> None:
-    """Introduce storyline."""
+    """Introduce the storyline."""
     title = "\t **ThE CrAvInG**"
 
     # Clear the screen from any previous text.
@@ -45,7 +45,7 @@ def intro() -> None:
 
 
 def outro() -> None:
-    """Introduce end of story."""
+    """End the storyline."""
     print(s.BETA_TEXT)
     time.sleep(5)
     print(s.OMEGA_TEXT)

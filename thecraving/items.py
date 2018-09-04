@@ -3,11 +3,11 @@
 Classes:
     Item(object): Establish base class for Items.
     Pack(Item): Establish Player inventory control.
-    Checkable(Item): Define object which may hold an Item.
+    Checkable(Item): Define objects which may hold another Item.
     Orb(Item): Define orbs.
     Door(Orb): Define doors.
 Functions:
-    door_desc(): Extended description for Door constructor.
+    door_desc(): Extended description for Door() constructor.
 Attributes:
     BLUE_ORB (Orb): Blue Orb.
     GREEN_ORB (Orb): Green Orb.
@@ -110,7 +110,7 @@ class Pack(Item):
 
         Returns:
             Return 'pocket' content. If 'pocket' grows too large, the content
-            string will be wrapped to the next line for readability.
+            string will be wrapped to the next line for better readability.
         """
         if self.pocket == []:
             return "Inventory: Empty"
@@ -122,10 +122,10 @@ class Pack(Item):
 
 
 class Checkable(Item):
-    """Define a container object which may hold a hidden Item.
+    """Define an in-game object which may hold a hidden Item.
 
     Extend Item() behavior while implementing new methods to interact
-    with the hidden Item, contained within.
+    with the hidden Item, contained within the object.
 
     Attributes:
         special: Special text to be triggered.
@@ -202,7 +202,7 @@ class Door(Orb):
         self.lock = lock
 
     def rezonate(self) -> str:
-        """Rezonate with corresponding Orb."""
+        """Rezonate with a corresponding Orb and return action text."""
         return (f"You raise the [{self.color} Orb] in front of you."
                 "\nThe orb flares brilliantly and the door grinds open!")
 
