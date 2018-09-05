@@ -4,7 +4,7 @@ _A short, text-based, adventure game_
 ***
 **Instructions:**
 
-If you already have the necessary requirements (python and pygame),
+Once the necessary requirements are installed (python and pygame), simply
 download the package and run _**thecraving.py**_ to start the game.
 The game may also be played in the CLI, if preferred, by navigating to
 the file directly (C:\\...\\thecraving\\thecraving\\thecraving.py). 
