@@ -4,8 +4,8 @@ Classes:
     Player(object): Establish the Player and gameplay.
 Attributes:
     ROOMS (dict): Game environment throughout which the Player interacts.
-    CHECKABLES (tuple): Checkable objects.
-    ORB_LIST (tuple): Orb objects.
+    CHECKABLES (tuple): A tuple of Checkable objects.
+    ORB_LIST (tuple): A tuple of Orbs.
 """
 import sys
 import time
@@ -43,6 +43,7 @@ ROOMS = {
         "south": it.ORANGE_DOOR,
         "object": it.SHRINE}
 }
+
 #  Useful constants for the checking of objects and orbs.
 CHECKABLES = (it.BOOKSHELF, it.CAMERA_CRATE, it.BUILDING_MATERIALS, it.SHRINE)
 ORB_LIST = (it.BLUE_ORB, it.GREEN_ORB, it.PURPLE_ORB, it.RED_ORB,
@@ -56,12 +57,12 @@ class Player(object):
         room: The current location (default=1).
         inventory:  Base level inventory (default=set()).
     Public methods:
-        stats(): Show current statistics.
+        stats(): Show current location and information.
         match(): Match a Door to an Orb.
-        options(): Show available options.
-        check(): Check an object in detail.
+        options(): Display all available input commands.
+        check(): Inspect an object, Item, or Orb for more detail.
         go(): Move in a direction.
-        get(): Get an object.
+        get(): Get an Item or Orb.
         gg(): Exit game.
         action(): Determine what action the Player takes.
     """
@@ -70,7 +71,7 @@ class Player(object):
         self.room = room
         self.inventory = inventory
         self._discovered = 0  # The number of discovered ROOMS.
-        self._CMAP = cmap.MiniMap(7, 7)  # Initialize the map.
+        self._CMAP = cmap.MiniMap(7, 7)  # Instantiate the map with the Player.
 
     def stats(self) -> None:
         """Broadcast current inventory and surroundings."""
@@ -119,7 +120,7 @@ class Player(object):
         print(f"{line_1}\n\n")
 
     def check(self, obj: it.Item) -> None:
-        """Check object for hidden or additional details.
+        """Check an object for any hidden clues.
 
         Args:
             obj: Item to be checked.
@@ -202,12 +203,14 @@ class Player(object):
         while True:
             try:
                 exit_choice = input(text).lower()
+                # Exit after completing the game.
                 if phase == 1:
                     if exit_choice == "e":
                         break
                     else:
                         print("\nThat's not a valid choice.")
                         continue
+                # Exit before completing the game.
                 elif exit_choice == "y":
                     print(s.EXITS[random.randint(0, 3)])
                     time.sleep(3)
@@ -234,9 +237,10 @@ class Player(object):
 
             if initial_input != "":
                 choice = initial_input.lower().split()
-                # List valid commands.
+                # View the map.
                 if choice[0] == "map":
                     self._CMAP.run(self._discovered, self.room)
+                # List valid commands.
                 elif choice[0] == "options":
                     self.options()
                 # Check an object, item, or orb.

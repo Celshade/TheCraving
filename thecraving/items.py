@@ -245,6 +245,7 @@ YELLOW_ORB = Orb("Yellow Orb", "A glowing yellow orb", 5, "Yellow")
 ORANGE_ORB = Orb("Orange Orb", "A glowing orange orb", 6, "Orange")
 WHITE_ORB = Orb("White Orb", "A glowing white orb", 7, "White")
 BLACK_ORB = Orb("Black Orb", "A glowing black orb", 1, "Black")
+
 # Doors
 BLUE_DOOR = Door("Blue Door", door_desc("blue"), 2, "Blue")
 GREEN_DOOR = Door("Green Door", door_desc("green"), 3, "Green")
@@ -254,6 +255,7 @@ YELLOW_DOOR = Door("Yellow Door", door_desc("yellow"), 6, "Yellow")
 ORANGE_DOOR = Door("Orange Door", door_desc("orange"), 7, "Orange")
 WHITE_DOOR = Door("White Door", door_desc("white"), 1, "White")
 BLACK_DOOR = Door("Black Door", door_desc("black"), 8, "Black")
+
 # Items
 PACK = Pack()
 TWIZZLERS = Item("Pack of Twizzlers", "The tastiest of tasty snacks!", 8)

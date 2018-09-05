@@ -1,4 +1,4 @@
-"""Create a callable map to display current location and explored rooms.
+"""Establish a 'callable' map to display current location and explored rooms.
 
 Classes:
     MiniMap(object): Establish the in-game map display.
@@ -149,7 +149,7 @@ class MiniMap(object):
         self._pos_y = COORDS[current]["y"] + HALF
 
         while True:
-            hue = 0  # int: The GLOW index for POS indicator color.
+            hue = 0  # The GLOW index for POS indicator color.
             # Upwards bounce of POS indicator.
             for x in range(10):
                 FPS.tick(30)
@@ -176,6 +176,7 @@ class MiniMap(object):
                 elif hue < 4:
                     self.render(rooms, LCYAN)
 
+            # Event handler.
             for event in pygame.event.get():
                 if event.type == pygame.KEYDOWN:
                     if event.key == pygame.K_q:
