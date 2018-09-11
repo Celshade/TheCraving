@@ -2,10 +2,11 @@
 
 from os import path
 from codecs import open
+# from cx_Freeze import setup, Executable
 from setuptools import setup
 from setuptools import find_packages
 
-
+# build_exe_options = {"packages": ["thecraving"]}
 here = path.abspath(path.dirname(__file__))
 
 with open(path.join(here, 'README.md'), encoding='utf-8') as f:
@@ -14,6 +15,8 @@ with open(path.join(here, 'README.md'), encoding='utf-8') as f:
 setup(
     name='TheCraving',
     version='2.0.0',
+    # options={"build_exe": build_exe_options},
+    # executables=[Executable("thecraving//thecraving.py")],
     packages=find_packages(),
     description='A simple text-based adventure game',
     long_description=long_description,
@@ -33,7 +36,7 @@ setup(
         'Programming Language :: Python :: 3.6'
         ],
     python_requires='>=3',
-    install_requires='pygame>=1.9.3',
+    install_requires=['pygame'],
     keywords='game textadventure thecraving',
     project_urls={
         'Bug Reports': 'https://github.com/Celshade/TheCraving/issues/9',
