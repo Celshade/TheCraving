@@ -137,6 +137,7 @@ class MiniMap(object):
         # Render the Player POS indicator.
         CIRCLE(DSPLY, p_color, (self._pos_x, self._pos_y), 5)
         pygame.display.flip()
+        FPS.tick(30)
 
     def run(self, rooms: int=0, current: int=1) -> None:
         """Main method of MiniMap(): call render() and handle events.
@@ -152,7 +153,6 @@ class MiniMap(object):
             hue = 0  # The GLOW index for POS indicator color.
             # Upwards bounce of POS indicator.
             for x in range(10):
-                FPS.tick(30)
                 self._pos_y -= 1
                 hue += 1
 
@@ -165,7 +165,6 @@ class MiniMap(object):
 
             # Downwards bounce of POS indicator.
             for x in range(10):
-                FPS.tick(30)
                 self._pos_y += 1
                 hue -= 1
 
