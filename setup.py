@@ -1,11 +1,9 @@
 """Setup file for distribution"""
 
 from os import path
-# from cx_Freeze import setup, Executable
 from setuptools import setup
 from setuptools import find_packages
 
-# build_exe_options = {"packages": ["thecraving"]}
 here = path.abspath(path.dirname(__file__))
 
 # Meta Data
@@ -15,7 +13,7 @@ URL = 'https://github.com/Celshade/TheCraving'
 EMAIL = 'ggcelshade@gmail.com'
 AUTHOR = 'Danny Collins aka Celshade'
 REQUIRES_PYTHON = '>=3.6'
-VERSION = '2.0.1'
+VERSION = '2.0.2'
 REQUIRES = ['pygame']
 
 # README handling
@@ -39,8 +37,6 @@ setup(
     long_description=long_description,
     long_description_content_type='text/markdown',
     license='MIT License',
-    # options={"build_exe": build_exe_options},
-    # executables=[Executable("thecraving//thecraving.py")],
     classifiers=[
         'Development Status :: 5 - Production/Stable',
         'Environment :: Terminal/Shell',

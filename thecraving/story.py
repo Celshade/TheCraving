@@ -7,13 +7,24 @@ Attributes:
     REALIZATION (str): Recognition text.
     THE_CRAVING (str): The craving text.
     GRUMBLE (str): Grumbling noise text.
-    WORB_TEXT (str): White Room special text.
-    SHRINE_TEXT_ALPHA (str): Shrine description text.
+    BOOK_d (str): BOOKSHELF 'descrip'.
+    BOOK_s (str): BOOKSHELF 'special'.
+    CAM_n (str): CAMERA_CRATE 'name'.
+    CAM_d (str): CAMEERA_CRATE 'descrip'.
+    CAM_s (str): CAMERA_CRATE 'special'.
+    BUILD_n (str): BUILDING_MATERIALS 'name'.
+    BUILD_d (str): BUILDING_MATERIALS 'descrip'.
+    BUILD_s (str): BUILDING_MATERIALS 'special'.
+    SHRINE_n (str): SHRINE 'name'.
+    SHRINE_d (str): SHRINE 'descrip'.
+    SHRINE_s (str): SRHINE 'special'.
     SHRINE_TEXT_BETA (str): Shrine activation text.
     SHRINE_TEXT_THETA (str): Activated Shrine description text.
+    WORB_TEXT (str): White Room special text.
     EXITS (list[str]): List of alternate ending text.
     OPTIONS (str): Available input commands.
 """
+# ### STORYLINE ### #
 ALPHA_TEXT = """
 \n\t====Thus Far====\n
 \n\t**A bell rings**\n
@@ -52,13 +63,33 @@ You've developed a serious craving for twizzlers.
 
 GRUMBLE = "\t\t**grRRruMMmble**"
 
-WORB_TEXT = "You hear a distant rumble and the [White Orb] flares brightly..."
+# ### SPECIAL TEXT ### #
 
-SHRINE_TEXT_ALPHA = """
+BOOK_d = "A bookshelf housing old leather tomes."
+
+BOOK_s = "One of the books seems out of place..."
+
+CAM_n = "Crate Full of Camera Parts"
+
+CAM_d = "A crate filled with old camera parts."
+
+CAM_s = "An odd glow shines from beneath some fish lenses..."
+
+BUILD_n = "Pile of Building Materials"
+
+BUILD_d = "Building materials lie strewn about the room."
+
+BUILD_s = "You slip on something amidst the supplies..."
+
+SHRINE_n = "Strange Looking Shrine"
+
+SHRINE_d = """
 An ornate box sits atop an onyx pedestal. The box is sealed fast.
 Eight perfectly smooth, sphere-shaped, recesses encircle the box - each
 emitting a faint glow just like the orbs you carry...
 """
+
+SHRINE_s = "As you open the box and reach inside..."
 
 SHRINE_TEXT_BETA = """
 You place each of the colored orbs into place, on the pedestal.
@@ -69,6 +100,9 @@ SHRINE_TEXT_THETA = """
 An empty ornate box sits atop an onyx pedestal, encircled by 8 glowing orbs.
 """
 
+WORB_TEXT = "You hear a distant rumble and the [White Orb] flares brightly..."
+
+# ### EXITS AND OPTIONS ### #
 EXITS = [
     "\nYou succumb to your craving and pass out...",
     ("\nChuck Norris appears and roundhouse kicks you in the face."

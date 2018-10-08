@@ -1,4 +1,4 @@
-"""Establish a 'callable' map to display current location and explored rooms.
+"""Establish a callable map to display current location and explored rooms.
 
 Classes:
     MiniMap(object): Establish the in-game map display.
@@ -85,9 +85,8 @@ class MiniMap(object):
         MWIDTH (int): The pixel width of the map.
         MHEIGHT (int): The pixel height of the map.
     Public Methods:
-        start()
-        render()
-        run()
+        render(): Render/draw to all surfaces.
+        run(): Handle animation and events.
     """
 
     def __init__(self, width: int=7, height: int=7) -> None:
@@ -140,7 +139,7 @@ class MiniMap(object):
         FPS.tick(30)
 
     def run(self, rooms: int=0, current: int=1) -> None:
-        """Main method of MiniMap(): call render() and handle events.
+        """Main loop; call render(), handle animationa and events.
 
         Args:
             rooms: The number of discovered rooms to render (default=0).

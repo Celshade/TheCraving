@@ -66,6 +66,7 @@ def main() -> None:
 
     intro()
     player.options()
+    # Prevent script breaking signals.
     signal.signal(signal.SIGBREAK, signal.SIG_IGN)
     signal.signal(signal.SIGINT, signal.SIG_IGN)
     while game_exit is False:

@@ -16,7 +16,7 @@ import story as s
 import cmap
 
 
-# The actual game environment a Player will navigate.
+# The actual game environment that a Player will navigate.
 ROOMS = {
     1: {"name": "White Room",
         "north": it.BLUE_DOOR,
@@ -71,7 +71,7 @@ class Player(object):
         self.room = room
         self.inventory = inventory
         self._discovered = 0  # The number of discovered ROOMS.
-        self._CMAP = cmap.MiniMap(7, 7)  # Instantiate the map with the Player.
+        self._CMAP = cmap.MiniMap(7, 7)  # Instantiate the map.
 
     def stats(self) -> None:
         """Broadcast current inventory and surroundings."""
@@ -101,8 +101,6 @@ class Player(object):
         for x in it.PACK.pocket:
             if x.icolor() == door.icolor():
                 return True
-            else:
-                continue
 
     def options(self) -> None:
         """Display main menu."""
@@ -127,18 +125,19 @@ class Player(object):
         """
         print(f"\nYou take a closer look at the {obj}...")
         print(obj.info())
-        if obj == it.PACK or obj == it.TWIZZLERS:
+        if obj is it.PACK or obj is it.TWIZZLERS:
             print("* Can be picked up with 'get item' *")
         elif obj in ORB_LIST and it.PACK in self.inventory:
             print("* Can be picked up with 'get orb' *")
         elif obj in CHECKABLES and obj.not_checked():
-            if obj == it.SHRINE:
+            if obj is it.SHRINE:
                 print(s.SHRINE_TEXT_BETA)
                 it.SHRINE.descrip = s.SHRINE_TEXT_THETA
                 del it.PACK.pocket[:]
             new_obj = obj.hidden()
             print(obj.hidden_text())
             print(f"You discover a {new_obj} hidden inside the {obj}!")
+
             if new_obj in ORB_LIST:
                 ROOMS[self.room]["orb"] = new_obj
             else:
@@ -173,7 +172,7 @@ class Player(object):
         location = ROOMS[self.room]
 
         if target == "item":
-            if location["item"] == it.PACK:
+            if location["item"] is it.PACK:
                 self.inventory.add(it.PACK)
             else:
                 it.PACK.add_pack(location["item"])

@@ -259,23 +259,7 @@ BLACK_DOOR = Door("Black Door", door_desc("black"), 8, "Black")
 # Items
 PACK = Pack()
 TWIZZLERS = Item("Pack of Twizzlers", "The tastiest of tasty snacks!", 8)
-BOOKSHELF = Checkable("Bookshelf",
-                      "A bookshelf housing old leather tomes.",
-                      2,
-                      "One of the books seems out of place...",
-                      GREEN_ORB)
-CAMERA_CRATE = Checkable("Crate Full of Camera Parts",
-                         "A crate filled with old camera parts.",
-                         4,
-                         "An odd glow shines from beneath some fish lenses...",
-                         RED_ORB)
-BUILDING_MATERIALS = Checkable("Pile of Building Materials",
-                               "Building materials lie strewn about the room.",
-                               6,
-                               "You slip on something amidst the supplies...",
-                               ORANGE_ORB)
-SHRINE = Checkable("Strange Looking Shrine",
-                   s.SHRINE_TEXT_ALPHA,
-                   8,
-                   "As you open the box and reach inside...",
-                   TWIZZLERS)
+BOOKSHELF = Checkable("Bookshelf", s.BOOK_d, 2, s.BOOK_s, GREEN_ORB)
+CAMERA_CRATE = Checkable(s.CAM_n, s.CAM_d, 4, s.CAM_s, RED_ORB)
+BUILDING_MATERIALS = Checkable(s.BUILD_n, s.BUILD_d, 6, s.BUILD_s, ORANGE_ORB)
+SHRINE = Checkable(s.SHRINE_n, s.SHRINE_d, 8, s.SHRINE_s, TWIZZLERS)
