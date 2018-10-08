@@ -1,7 +1,6 @@
 """Setup file for distribution"""
 
 from os import path
-from codecs import open
 # from cx_Freeze import setup, Executable
 from setuptools import setup
 from setuptools import find_packages
@@ -9,22 +8,39 @@ from setuptools import find_packages
 # build_exe_options = {"packages": ["thecraving"]}
 here = path.abspath(path.dirname(__file__))
 
-with open(path.join(here, 'README.md'), encoding='utf-8') as f:
-    long_description = f.read()
+# Meta Data
+NAME = 'TheCraving'
+DESCRIPTION = 'A simple, text-based, adventure game'
+URL = 'https://github.com/Celshade/TheCraving'
+EMAIL = 'ggcelshade@gmail.com'
+AUTHOR = 'Danny Collins aka Celshade'
+REQUIRES_PYTHON = '>=3.6'
+VERSION = '2.0.1'
+REQUIRES = ['pygame']
+
+# README handling
+try:
+    with open(path.join(here, 'README.md'), encoding='utf-8') as f:
+        long_description = f'\n{f.read()}'
+except FileNotFoundError:
+    long_description = DESCRIPTION
 
 setup(
-    name='TheCraving',
-    version='2.0.0',
-    # options={"build_exe": build_exe_options},
-    # executables=[Executable("thecraving//thecraving.py")],
+    name=NAME,
+    version=VERSION,
+    description=DESCRIPTION,
+    url=URL,
+    author=AUTHOR,
+    author_email=EMAIL,
+    python_requires=REQUIRES_PYTHON,
+    install_requires=REQUIRES,
+    include_package_data=True,
     packages=find_packages(),
-    description='A simple text-based adventure game',
     long_description=long_description,
     long_description_content_type='text/markdown',
-    url='https://github.com/Celshade/TheCraving',
-    author='Danny Collins aka Celshade',
-    author_email='ggcelshade@gmail.com',
-    license="MIT License",
+    license='MIT License',
+    # options={"build_exe": build_exe_options},
+    # executables=[Executable("thecraving//thecraving.py")],
     classifiers=[
         'Development Status :: 5 - Production/Stable',
         'Environment :: Terminal/Shell',
@@ -35,8 +51,6 @@ setup(
         'Operating System :: Microsoft :: Windows',
         'Programming Language :: Python :: 3.6'
         ],
-    python_requires='>=3',
-    install_requires=['pygame'],
     keywords='game textadventure thecraving',
     project_urls={
         'Bug Reports': 'https://github.com/Celshade/TheCraving/issues/9',
