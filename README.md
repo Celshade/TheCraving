@@ -1,5 +1,5 @@
 # The Craving
-_A short, text-based, adventure game_
+_A short, text-based, adventure game - with a viewable dungeon map_
 
 ***
 **Instructions:**
@@ -11,7 +11,8 @@ the file directly:\
 `C:\...\TheCraving\thecraving\thecraving.py`
 
 *Be sure to resize your window, or scroll up, upon starting the game!*\
-Please make use of the in-game command _> **options**_ if you get stuck!
+Please make use of the in-game command _> **options**_ if you get stuck!\
+Please make use of the in-game command _> **map**_ to view current location!
 
 ***
 **Requirements:**
