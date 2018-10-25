@@ -1,5 +1,9 @@
 # The Craving
-_A short, text-based, adventure game - with a viewable dungeon map_
+[![MIT license](https://img.shields.io/badge/license-MIT-blue.svg)](https://github.com/Celshade/TheCraving/blob/master/LICENSE.txt)
+[![built with Python3](https://img.shields.io/badge/built%20with-Python3-green.svg)](https://www.python.org/)
+[![built with Pygame](https://img.shields.io/badge/built%20with-Pygame-purple.svg)](https://www.pygame.org/)
+
+_A short, text-based, adventure game - with an animated dungeon map_
 
 ***
 **Instructions:**
