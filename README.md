@@ -1,11 +1,17 @@
 # The Craving
 [![MIT license](https://img.shields.io/badge/license-MIT-blue.svg)](https://github.com/Celshade/TheCraving/blob/master/LICENSE.txt)
 [![built with Python3](https://img.shields.io/badge/built%20with-Python3-green.svg)](https://www.python.org/)
-[![built with Pygame](https://img.shields.io/badge/built%20with-Pygame-purple.svg)](https://www.pygame.org/)
+[![built with Pygame](https://img.shields.io/badge/built%20with-Pygame-orange.svg)](https://www.pygame.org/)
 
 _A short, text-based, adventure game - with an animated dungeon map_
-
 ***
+
+**Requirements:**
+
+1. _**Python [3.6+]**_: Can be downloaded [here](https://www.python.org/).
+1. _**Pygame**_: Installable via pip or downloaded [here](https://www.pygame.org/).
+***
+
 **Instructions:**
 
 Once the necessary requirements are installed (python and pygame), simply
@@ -17,13 +23,8 @@ the file directly:\
 *Be sure to resize your window, or scroll up, upon starting the game!*\
 Please make use of the in-game command _> **options**_ if you get stuck!\
 Please make use of the in-game command _> **map**_ to view current location!
-
 ***
-**Requirements:**
 
-1. _python **[3.6+]**_.
-1. _pygame **[1.9.3+]**_.
-***
 **Aloha!!**
 
 This is the first game that I've built, so please pardon the lack of story
