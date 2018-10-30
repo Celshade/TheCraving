@@ -1,4 +1,4 @@
-"""Setup file for distribution"""
+"""Setup."""
 
 from os import path
 from setuptools import setup
@@ -11,9 +11,9 @@ NAME = 'TheCraving'
 DESCRIPTION = 'A simple, text-based, adventure game'
 URL = 'https://github.com/Celshade/TheCraving'
 EMAIL = 'ggcelshade@gmail.com'
-AUTHOR = 'Danny Collins aka Celshade'
+AUTHOR = "Danny 'Celshade' Collins"
 REQUIRES_PYTHON = '>=3.6'
-VERSION = '2.0.7'
+VERSION = '2.0.8'
 REQUIRES = ['pygame']
 
 # README handling
@@ -41,13 +41,13 @@ setup(
         'Development Status :: 5 - Production/Stable',
         'Environment :: Terminal/Shell',
         'Intended Audience :: End Users/Desktop'
-        'Intended Audience :: Developers',
+        'Intended Audience :: Developers, Users'
         'Topic :: Game Development',
         'License :: OSI approved :: MIT License',
         'Operating System :: Microsoft :: Windows',
         'Programming Language :: Python :: 3.6'
         ],
-    keywords='game textadventure thecraving',
+    keywords='game text adventure thecraving',
     project_urls={
         'Bug Reports': 'https://github.com/Celshade/TheCraving/issues/9',
         'Comments': 'https://github.com/Celshade/TheCraving/issues/10',
