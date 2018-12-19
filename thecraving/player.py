@@ -15,7 +15,6 @@ import items as it
 import story as s
 import cmap
 
-
 # The actual game environment that a Player will navigate.
 ROOMS = {
     1: {"name": "White Room",
@@ -44,7 +43,7 @@ ROOMS = {
         "object": it.SHRINE}
 }
 
-#  Useful constants for the checking of objects and orbs.
+#  Useful constants for checking of objects and orbs.
 CHECKABLES = (it.BOOKSHELF, it.CAMERA_CRATE, it.BUILDING_MATERIALS, it.SHRINE)
 ORB_LIST = (it.BLUE_ORB, it.GREEN_ORB, it.PURPLE_ORB, it.RED_ORB,
             it.YELLOW_ORB, it.ORANGE_ORB, it.WHITE_ORB, it.BLACK_ORB)
@@ -55,7 +54,7 @@ class Player(object):
 
     Attributes:
         room: The current location (default=1).
-        inventory:  Base level inventory (default=set()).
+        inventory: The base level of inventory (default=set()).
     Public methods:
         stats(): Show current location and information.
         match(): Match a Door to an Orb.
@@ -91,19 +90,17 @@ class Player(object):
         print(f"{line_2}\n")
 
     def match(self, door: it.Door) -> bool:
-        """Check PACK for Orb >> Door match.
+        """Return True if the 'door' matches an Orb in the Pack, else False.
 
         Args:
             door: The Door to be matched.
-        Returns:
-            Return True if a match is found, else False.
         """
         for x in it.PACK.pocket:
             if x.icolor() == door.icolor():
                 return True
 
     def options(self) -> None:
-        """Display main menu."""
+        """Display the main menu."""
         line_1 = "_" * 58
         line_2 = "-" * 14
         space = " " * 17
@@ -147,7 +144,7 @@ class Player(object):
         """Move in the specified direction.
 
         Args:
-            direction: Direction the Player wishes to move in.
+            direction: The direction to move the Player.
         """
         door = ROOMS[self.room][str(direction)]
 
@@ -197,7 +194,7 @@ class Player(object):
 
         Args:
             text: Text to be displayed upon exiting the game.
-            phase: The phase in which the function is called.
+            phase: The game phase in which the function is called (default=0).
         """
         while True:
             try:
@@ -225,8 +222,8 @@ class Player(object):
     def action(self) -> None:
         """Establish Player action.
 
-        This is the primary function which handles all in-game action.
-        The function prompts a series of input 'choices', which dictate
+        The primary function which handles all in-game action.
+        The function prompts a series of input choices, which dictate
         what action the Player will take. Acceptable inputs are listed in the
         'options()' function and are otherwise known as valid commands.
         """
@@ -236,7 +233,7 @@ class Player(object):
 
             if initial_input != "":
                 choice = initial_input.lower().split()
-                # View the map.
+                # Display the dungeon map.
                 if choice[0] == "map":
                     self._CMAP.run(self._discovered, self.room)
                 # List valid commands.

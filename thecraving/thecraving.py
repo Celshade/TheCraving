@@ -16,13 +16,11 @@ import story as s
 
 
 def word_wrap(target: str, num: int=1) -> str:
-    """Wrap text headings.
+    """Wrap text headings and return the formatted text.
 
     Args:
         target: The target text to be wrapped.
         num: The wrap multiplyer (default=1).
-    Returns:
-        The wrapped target text.
     """
     wrap = f"{'=' * len(target)}" * num
     return f"{wrap}\n{target}\n{wrap}"

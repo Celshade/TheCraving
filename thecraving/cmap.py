@@ -130,16 +130,18 @@ class MiniMap(object):
         DSPLY.fill(BLACK)
         # Render text.
         DSPLY.blit(text, (TSIZE * 3 - 25, self.MHEIGHT + 20))
+
         # Render the necessary ROOMS.
         for x in range(0, num + 1):
             eval(ROOMS[x])
+
         # Render the Player POS indicator.
         CIRCLE(DSPLY, p_color, (self._pos_x, self._pos_y), 5)
         pygame.display.flip()
         FPS.tick(30)
 
     def run(self, rooms: int=0, current: int=1) -> None:
-        """Main loop; call render(), handle animationa and events.
+        """Main loop; call render(), handle animation and events.
 
         Args:
             rooms: The number of discovered rooms to render (default=0).
@@ -150,6 +152,7 @@ class MiniMap(object):
 
         while True:
             hue = 0  # The GLOW index for POS indicator color.
+
             # Upwards bounce of POS indicator.
             for x in range(10):
                 self._pos_y -= 1
@@ -157,11 +160,10 @@ class MiniMap(object):
 
                 if hue <= 4:
                     self.render(rooms, LCYAN)
-                elif hue > 4 and hue <= 8:
+                elif hue > 4 <= 8:
                     self.render(rooms, MCYAN)
                 elif hue > 8:
                     self.render(rooms, CYAN)
-
             # Downwards bounce of POS indicator.
             for x in range(10):
                 self._pos_y += 1
@@ -169,7 +171,7 @@ class MiniMap(object):
 
                 if hue > 8:
                     self.render(rooms, CYAN)
-                elif hue > 4 and hue <= 8:
+                elif hue > 4 <= 8:
                     self.render(rooms, MCYAN)
                 elif hue < 4:
                     self.render(rooms, LCYAN)

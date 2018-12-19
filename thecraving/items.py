@@ -40,14 +40,13 @@ import story as s
 class Item(object):
     """Define base Item class.
 
-    Provide a base class for all in-game items; intended to be subclassed for
-    each unique SubClass(Item). Each SubClass will utilize the base
-    attributes and methods defined in this class.
+    Provide a base class for all in-game items; intended to be subclassed and
+    extended by each unique SubClass(Item).
 
     Attributes:
-        name: Name of Item.
-        descrip: Description of Item.
-        tag: Location identifyer.
+        name: The name of the Item.
+        descrip: The description of the Item.
+        tag: The location identifier.
     Public Methods:
         info(): Return Item info.
         room_tag(): Return Item tag.
@@ -59,15 +58,15 @@ class Item(object):
         self.tag = tag
 
     def __repr__(self) -> str:
-        """Return basic Item name."""
+        """Return the basic Item name."""
         return self.name
 
     def __str__(self) -> str:
-        """Return formatted Item name."""
+        """Return the formatted Item name."""
         return f"[{self.name}]"
 
     def info(self) -> str:
-        """Return a detailed description of Item."""
+        """Return a detailed description of the Item."""
         header = f"\n[{self.name}]"
         wrap = f"\n{'=' * (len(header) - 1)}"
 
@@ -85,10 +84,10 @@ class Pack(Item):
     the unique 'pocket' attribute.
 
     Attributes:
-        pocket (list): Container for picked up Items (default=[]).
+        pocket (list): A container for gathered Items (default=[]).
     Public Methods:
-        add_pack(): Add Item to Pack
-        contents(): Return Pack contents.
+        add_pack(): Add an Item to Pack.
+        contents(): Return the Pack contents.
     """
 
     def __init__(self) -> None:
@@ -106,17 +105,17 @@ class Pack(Item):
         self.pocket.append(obj)
 
     def contents(self) -> str:
-        """Return current iventory.
+        """Return the current iventory.
 
         Returns:
-            Return 'pocket' content. If 'pocket' grows too large, the content
-            string will be wrapped to the next line for better readability.
+            Return pocket content. If the pocket grows too large, the content
+            string will be wrapped to the next line, for better readability.
         """
         if self.pocket == []:
             return "Inventory: Empty"
         elif len(self.pocket) > 4:
             return (f"Inventory: {self.pocket[:4]}\n"
-                    + f"{' ' * 11}{self.pocket[4:]}.")
+                    f"{' ' * 11}{self.pocket[4:]}.")
         else:
             return f"Inventory: {self.pocket}"
 
@@ -129,10 +128,10 @@ class Checkable(Item):
 
     Attributes:
         special: Special text to be triggered.
-        obj: The contained hidden Item.
+        obj: The hidden Item contained within.
         check_count (int): A useful counter (default=0).
     Public Methods:
-        hidden(): Return hidden Item.
+        hidden(): Return the hidden Item.
         hidden_text(): Return situational text.
         not_checked(): Confirm a Checkable() has already been checked.
     """
@@ -190,10 +189,10 @@ class Door(Orb):
     'color' match to an Orb() contained within in the Pack.
 
     Attributes:
-        lock: Lock status of Door (default=True)
+        lock: The lock status of Door (default=True)
     Public methods:
         rezonate(): Return situational text.
-        lock_status(): Confirm lock status.
+        lock_status(): Confirm the lock status.
         unlock(): Unlock Door.
     """
 
@@ -207,12 +206,10 @@ class Door(Orb):
                 "\nThe orb flares brilliantly and the door grinds open!")
 
     def lock_status(self, condition: bool) -> bool:
-        """Return the status of a lock.
+        """Return True if the lock 'condition' is accurate, else False.
 
         Args:
             condition: Condition to be checked for.
-        Returns:
-            Return True if condition is accurate, else False.
         """
         if self.lock == condition:
             return True
@@ -230,8 +227,6 @@ def door_desc(color: str) -> str:
 
     Args:
         color: Color attribute for the Door.
-    Returns:
-        The extended description text for Door formatted to color attr.
     """
     return f"an imposing stone door with a dim *{color.lower()}* aura."
 

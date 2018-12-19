@@ -64,7 +64,6 @@ You've developed a serious craving for twizzlers.
 GRUMBLE = "\t\t**grRRruMMmble**"
 
 # ### SPECIAL TEXT ### #
-
 BOOK_d = "A bookshelf housing old leather tomes."
 
 BOOK_s = "One of the books seems out of place..."
