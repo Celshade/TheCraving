@@ -1,49 +1,44 @@
 # The Craving
-[![MIT license](https://img.shields.io/badge/license-MIT-blue.svg)](https://github.com/Celshade/TheCraving/blob/master/LICENSE.txt)
+[![GNU GPLv3 license](https://img.shields.io/badge/license-GPLv3-blue.svg)](https://github.com/Celshade/TheCraving/blob/master/LICENSE.txt)
 [![built with Python3](https://img.shields.io/badge/built%20with-Python3-green.svg)](https://www.python.org/)
 [![built with Pygame](https://img.shields.io/badge/built%20with-Pygame-orange.svg)](https://www.pygame.org/)
 
 _A short, text-based, adventure game - with an animated dungeon map_
+
+Welcome to TheCraving!
+
+The game will take you through a short series of "escape the room" scenarios,
+which are navigated by entering commands - e.g. `go north`. This is the first
+game that I'd ever built, so please pardon the simplicity and lack of story
+depth. I had developed this as a fun way to test my [python] programming
+skills and work on my flow.
+
+I truly appreciate all of you who take the time to play through the game. Any
+and all feedback is _greatly_ appreciated. If you like the game, or at least
+find it interesting, please share it with a friend and look for more projects
+to follow!
 ***
 
-**Requirements:**
+## Requirements:
 
 1. _**Python [3.6+]**_: Can be downloaded [here](https://www.python.org/).
 1. _**Pygame**_: Installable via pip or downloaded [here](https://www.pygame.org/).
 ***
 
-**Instructions:**
+## Instructions:
 
-Once the necessary requirements are installed (python and pygame), simply
-download the package and run _**thecraving.py**_ to start the game.
-The game may also be played in the CLI, if preferred, by navigating to
-the file directly:\
-`C:\...\TheCraving\thecraving\thecraving.py`
+This game is intended to be run from the CLI. Once the necessary requirements
+are installed (python and pygame), simply download the package and run
+`.src\thecraving.py` from the package directory.
 
 *Be sure to resize your window, or scroll up, upon starting the game!*\
-Please make use of the in-game command _> **options**_ if you get stuck!\
-Please make use of the in-game command _> **map**_ to view current location!
+Please make use of the in-game command `options` to view commands!\
+Please make use of the in-game command `map` to view your current
+location on the dungeon map! **HIGHLY RECOMMENDED**
 ***
 
-**Cheers!!**
-
-This is the first game that I've built, so please pardon the lack of story
-swag and simplicity. I developed this as a way to test my [python]
-programming knowledge and work on my flow. The core of the game took roughly
-three months to complete; and, since then, I have polished and added features
-whenever time was available.
-
-I truly appreciate all of you who take the time to play through the game. Any
-and all feedback is _extremely_ appreciated. If you like the game, or at least
-find it interesting, please share it with a friend and look for more to follow!
-Thanks, again, and I hope you enjoi the journey!
-
+Found a bug or care to drop some feedback? See the link below! \
 _Comments & bugs -> https://www.github.com/Celshade/TheCraving/issues_
-
-_For the sake of being thorough, as most of you do not know me, I am aware
-that "enjoy" is spelled incorrectly. It is a spelling preference, which I've
-long since adopted into my personal projects, out of respect for the company
-known as *enjoi._
 
 Peace
 
