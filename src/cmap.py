@@ -77,11 +77,11 @@ class MiniMap(object):
     """Show a map of explored rooms.
 
     In order to speed up map rendering, only the necessary pygame modules will
-    be initiated when the MiniMap(object) is instantiated.
+    be initiated when the MiniMap() is instantiated.
 
     Attributes:
-        width: The tile width of the map.
-        height: The tile height of the map.
+        width: The tile width of the map (default=7).
+        height: The tile height of the map (default=7).
         MWIDTH (int): The pixel width of the map.
         MHEIGHT (int): The pixel height of the map.
     Public Methods:
@@ -89,7 +89,7 @@ class MiniMap(object):
         run(): Handle animation and events.
     """
 
-    def __init__(self, width: int=7, height: int=7) -> None:
+    def __init__(self, width: int = 7, height: int = 7) -> None:
         self.WIDTH = width
         self.HEIGHT = height
         self.MWIDTH = TSIZE * self.WIDTH
@@ -97,11 +97,12 @@ class MiniMap(object):
         self._pos_x = None  # int: The current -x location of the Player.
         self._pos_y = None  # int: The current -y location of the Player.
 
+        # Init pygame modules
         pygame.__init__("display")
         pygame.__init__("event")
         pygame.__init__("draw")
 
-    def render(self, num: int, p_color: tuple=WHITE) -> None:
+    def render(self, num: int, p_color: tuple = WHITE) -> None:
         """Prepare all visual data and render to screen.
 
         Args:
@@ -126,10 +127,8 @@ class MiniMap(object):
         text = FONT.render("Press [Q] to return.", True, WHITE, BLACK)
 
         pygame.display.set_caption("The C R A V I N G")
-        # Render background.
-        DSPLY.fill(BLACK)
-        # Render text.
-        DSPLY.blit(text, (TSIZE * 3 - 25, self.MHEIGHT + 20))
+        DSPLY.fill(BLACK)  # Render background.
+        DSPLY.blit(text, (TSIZE * 3 - 25, self.MHEIGHT + 20))  # Render text.
 
         # Render the necessary ROOMS.
         for x in range(0, num + 1):
@@ -140,7 +139,7 @@ class MiniMap(object):
         pygame.display.flip()
         FPS.tick(30)
 
-    def run(self, rooms: int=0, current: int=1) -> None:
+    def run(self, rooms: int = 0, current: int = 1) -> None:
         """Main loop; call render(), handle animation and events.
 
         Args:
