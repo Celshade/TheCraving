@@ -49,7 +49,7 @@ class Item(object):
         TAG: The [room] location identifier.
     Public Methods:
         info(): Return Item info.
-        room_tag(): Return Item tag.
+        get_tag(): Return Item tag.
     """
 
     def __init__(self, name: str, descrip: str, tag: int) -> None:
@@ -72,7 +72,7 @@ class Item(object):
 
         return f"{wrap}{header}{wrap}\n{self.DESCRIP}"
 
-    def room_tag(self) -> int:
+    def get_tag(self) -> int:
         """Return the original location of Item (room tag)."""
         return self.TAG
 

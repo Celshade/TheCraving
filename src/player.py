@@ -149,14 +149,14 @@ class Player(object):
         door = ROOMS[self.room][str(direction)]
 
         if door.lock_status(False):
-            self.room = door.room_tag()
+            self.room = door.get_tag()
         elif door.lock_status(True):
             print(f"\nYou encounter {it.door_desc(door.icolor())}")
             if it.PACK in self.inventory and self.match(door):
                 door.unlock()
                 if door is not it.WHITE_DOOR:
                     self._discovered += 1
-                self.room = door.room_tag()
+                self.room = door.get_tag()
             else:
                 print("The door doesn't budge!")
 
