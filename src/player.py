@@ -80,7 +80,7 @@ class Player(object):
         print(f"\n{line_2}")
         print(f"You find yourself in: *The {location['name']}*")
         if it.PACK in self.inventory:
-            print(it.PACK.contents())
+            print(it.PACK.get_contents())
         if "object" in location:
             print(f"You catch sight of a {location['object']}")
         if "item" in location:

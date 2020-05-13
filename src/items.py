@@ -2,7 +2,7 @@
 
 Classes:
     Item(object): Establish base class for Items.
-    Pack(Item): Establish Player inventory control.
+    Pack(Item): Establish Player inventory.
     Checkable(Item): Define objects which may hold another Item.
     Orb(Item): Define orbs.
     Door(Orb): Define doors.
@@ -78,23 +78,21 @@ class Item(object):
 
 
 class Pack(Item):
-    """Handle the inventory acquired by the Player.
+    """Establish a special Item to handle Player inventory.
 
     Extend Item() behavior while implementing new methods to interact with
     the unique 'pocket' attribute.
 
-    Attributes:
-        pocket (list): A container for gathered Items (default=[]).
     Public Methods:
         add_pack(): Add an Item to Pack.
-        contents(): Return the Pack contents.
+        get_contents(): Return the Pack contents.
     """
 
     def __init__(self) -> None:
         super().__init__(name="Leather Pack",
                          descrip="Even the pockets have pockets!",
                          tag=1)
-        self.pocket = []
+        self.pocket = []  # A container for gathered Items.
 
     def add_pack(self, obj: Item) -> None:
         """Add an Item to the Pack.
@@ -104,12 +102,12 @@ class Pack(Item):
         """
         self.pocket.append(obj)
 
-    def contents(self) -> str:
+    def get_contents(self) -> str:
         """Return the current iventory.
 
         Returns:
-            Return pocket content. If the pocket grows too large, the content
-            string will be wrapped to the next line, for better readability.
+            Return Pack content. If the 'pocket' grows too large, the content
+            string will be wrapped to the next line for better readability.
         """
         if self.pocket == []:
             return "Inventory: Empty"
