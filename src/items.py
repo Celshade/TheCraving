@@ -41,40 +41,40 @@ class Item(object):
     """Define base Item class.
 
     Provide a base class for all in-game items; intended to be subclassed and
-    extended by each unique SubClass(Item).
+    extended by each unique type of Item.
 
     Attributes:
-        name: The name of the Item.
-        descrip: The description of the Item.
-        tag: The location identifier.
+        NAME: The name of the Item.
+        DESCRIP: The description of the Item.
+        TAG: The [room] location identifier.
     Public Methods:
         info(): Return Item info.
         room_tag(): Return Item tag.
     """
 
     def __init__(self, name: str, descrip: str, tag: int) -> None:
-        self.name = name
-        self.descrip = descrip
-        self.tag = tag
+        self.NAME = name
+        self.DESCRIP = descrip
+        self.TAG = tag
 
     def __repr__(self) -> str:
-        """Return the basic Item name."""
-        return self.name
+        """Return Item name."""
+        return self.NAME
 
     def __str__(self) -> str:
-        """Return the formatted Item name."""
-        return f"[{self.name}]"
+        """Return a formatted Item name."""
+        return f"[{self.NAME}]"
 
     def info(self) -> str:
-        """Return a detailed description of the Item."""
-        header = f"\n[{self.name}]"
+        """Return a description of the Item."""
+        header = f"\n[{self.NAME}]"
         wrap = f"\n{'=' * (len(header) - 1)}"
 
-        return f"{wrap}{header}{wrap}\n{self.descrip}"
+        return f"{wrap}{header}{wrap}\n{self.DESCRIP}"
 
     def room_tag(self) -> int:
-        """Return original location of Item."""
-        return self.tag
+        """Return the original location of Item (room tag)."""
+        return self.TAG
 
 
 class Pack(Item):
