@@ -66,7 +66,7 @@ class Player(object):
         action(): Determine what action the Player takes.
     """
 
-    def __init__(self, room: int=1, inventory: set=set()) -> None:
+    def __init__(self, room: int = 1, inventory: set = set()) -> None:
         self.room = room
         self.inventory = inventory
         self._discovered = 0  # The number of discovered ROOMS.
@@ -189,7 +189,7 @@ class Player(object):
             else:
                 print("\nYou should have worn pants with pockets!")
 
-    def gg(self, text: str, phase: int=0) -> None:
+    def gg(self, text: str, phase: int = 0) -> None:
         """Handle the game exit.
 
         Args:

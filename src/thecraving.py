@@ -15,7 +15,7 @@ import player as p
 import story as s
 
 
-def word_wrap(target: str, num: int=1) -> str:
+def word_wrap(target: str, num: int = 1) -> str:
     """Wrap text headings and return the formatted text.
 
     Args:
