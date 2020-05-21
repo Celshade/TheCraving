@@ -38,21 +38,28 @@ import story as s
 
 
 class Item(object):
-    """Define base Item class.
+    """Define the base Item class.
 
     Provide a base class for all in-game items; intended to be subclassed and
     extended by each unique type of Item.
 
-    Attributes:
+    Public Attributes:
         NAME: The name of the Item.
-        DESCRIP: The description of the Item.
-        TAG: The [room] location identifier.
+        DESCRIP: The Item description.
+        TAG: The [room] identifier.
     Public Methods:
         info(): Return Item info.
         get_tag(): Return Item tag.
     """
 
     def __init__(self, name: str, descrip: str, tag: int) -> None:
+        """Construct Item.
+
+        Args:
+            name: The name of the Item.
+            descrip: The Item description.
+            tag: The [room] identifier.
+        """
         self.NAME = name
         self.DESCRIP = descrip
         self.TAG = tag
@@ -80,19 +87,26 @@ class Item(object):
 class Pack(Item):
     """Establish a special Item to handle Player inventory.
 
-    Extend Item() behavior while implementing new methods to interact with
-    the unique 'pocket' attribute.
+    Extend Item() while implementing new methods to interact with the unique
+    'pocket' attribute.
 
+    Public Attributes:
+        pocket (list): Container for Items that are picked up.
     Public Methods:
         add_pack(): Add an Item to Pack.
         get_contents(): Return the Pack contents.
     """
 
     def __init__(self) -> None:
+        """Construct Pack.
+        
+        Args:
+            Item():: name, descrip, tag.
+        """
         super().__init__(name="Leather Pack",
                          descrip="Even the pockets have pockets!",
                          tag=1)
-        self.pocket = []  # A container for gathered Items.
+        self.pocket = []
 
     def add_pack(self, obj: Item) -> None:
         """Add an Item to the Pack.
@@ -106,7 +120,7 @@ class Pack(Item):
         """Return the current iventory.
 
         Returns:
-            Return Pack content. If the 'pocket' grows too large, the content
+            Return Pack contents. If Pack grows large enough, the content
             string will be wrapped to the next line for better readability.
         """
         if self.pocket == []:
@@ -121,13 +135,12 @@ class Pack(Item):
 class Checkable(Item):
     """Define an in-game object which may hold a hidden Item.
 
-    Extend Item() behavior while implementing new methods to interact
-    with the hidden Item, contained within the object.
+    Extend Item() while implementing new methods to interact with the hidden
+    Item contained within the object.
 
-    Attributes:
+    Public Attributes:
         special: Special text to be triggered.
         obj: The hidden Item contained within.
-        check_count (int): A useful counter (default=0).
     Public Methods:
         hidden(): Return the hidden Item.
         hidden_text(): Return situational text.
@@ -135,10 +148,17 @@ class Checkable(Item):
     """
 
     def __init__(self, name, descrip, tag, special: str, obj: Item) -> None:
+        """Construct Checkable.
+
+        Args:
+            Item():: name, descrip, tag.
+            special: The triggerable special text.
+            obj: The hidden Item contained within.
+        """
         super().__init__(name, descrip, tag)
         self.special = special
         self.obj = obj
-        self.check_count = 0
+        self._check_count = 0
 
     def hidden(self) -> Item:
         """Return the hidden Item."""
@@ -160,34 +180,39 @@ class Checkable(Item):
 class Orb(Item):
     """Define in-game Orbs.
 
-    Extend Item() behavior while implementing a new method to interact with
-    the unique 'color' attribute.
+    Extend Item() while implementing a new method to interact with the unique
+    'color' attribute.
 
-    Attributes:
-        color: The color of the Item.
+    Public Attributes:
+        color: The color of the Orb.
     Public methods:
-        icolor(): Return color of Item.
+        icolor(): Return Orb color.
     """
 
     def __init__(self, name, descrip, tag, color: str) -> None:
+        """Construct Orb.
+
+        Args:
+            Item():: name, descrip, tag.
+            color: The color of the Orb.
+        """
         super().__init__(name, descrip, tag)
         self.color = color
 
     def icolor(self) -> str:
-        """Return color of Item."""
+        """Return Orb color."""
         return self.color
 
 
 class Door(Orb):
     """Define in-game Doors.
 
-    Extend Orb() behavior, namely the 'color' attribute, as each Door is
-    directly related to an Orb(). Door() methods will return
-    the status of, and unlock, the door - based on a successful
-    'color' match to an Orb() contained within in the Pack.
+    Extend Orb() while implementing new methods to interact with the unique
+    'lock' attribute. Each Door is directly related to an Orb() via color and
+    will only unlock if the corresponding Orb() is currently in inventory.
 
-    Attributes:
-        lock: The lock status of Door (default=True)
+    Public Attributes:
+        lock (bool): The lock status of Door.
     Public methods:
         rezonate(): Return situational text.
         lock_status(): Confirm the lock status.
@@ -195,6 +220,13 @@ class Door(Orb):
     """
 
     def __init__(self, name, descrip, tag, color, lock: bool = True) -> None:
+        """Construct Door.
+
+        Args:
+            Item():: name, descrip, tag.
+            Orb():: color.
+            lock: The lock status of the Door (default=True).
+        """
         super().__init__(name, descrip, tag, color)
         self.lock = lock
 

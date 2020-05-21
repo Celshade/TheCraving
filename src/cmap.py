@@ -79,9 +79,9 @@ class MiniMap(object):
     In order to speed up map rendering, only the necessary pygame modules will
     be initiated when the MiniMap() is instantiated.
 
-    Attributes:
-        width: The tile width of the map (default=7).
-        height: The tile height of the map (default=7).
+    Public Attributes:
+        width (int): The tile width of the map.
+        height (int): The tile height of the map.
         MWIDTH (int): The pixel width of the map.
         MHEIGHT (int): The pixel height of the map.
     Public Methods:
@@ -90,6 +90,12 @@ class MiniMap(object):
     """
 
     def __init__(self, width: int = 7, height: int = 7) -> None:
+        """Construct MiniMap.
+
+        Args:
+            width: The tile width of the map (default=7).
+            height: The tile height of the map (default=7).
+        """
         self.WIDTH = width
         self.HEIGHT = height
         self.MWIDTH = TSIZE * self.WIDTH
@@ -97,7 +103,7 @@ class MiniMap(object):
         self._pos_x = None  # int: The current -x location of the Player.
         self._pos_y = None  # int: The current -y location of the Player.
 
-        # Init pygame modules
+        # Setup the necessary pygame modules
         pygame.__init__("display")
         pygame.__init__("event")
         pygame.__init__("draw")

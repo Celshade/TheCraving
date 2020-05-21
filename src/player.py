@@ -52,10 +52,10 @@ ORB_LIST = (it.BLUE_ORB, it.GREEN_ORB, it.PURPLE_ORB, it.RED_ORB,
 class Player(object):
     """Define the Player and establish gameplay.
 
-    Attributes:
-        room: The current location (default=1).
-        inventory: The base level of inventory (default=set()).
-    Public methods:
+    Public Attributes:
+        room (int): The current location.
+        inventory (set): The base level of inventory.
+    Public Methods:
         stats(): Show current location and information.
         match(): Match a Door to an Orb.
         options(): Display all available input commands.
@@ -66,9 +66,14 @@ class Player(object):
         action(): Determine what action the Player takes.
     """
 
-    def __init__(self, room: int = 1, inventory: set = set()) -> None:
+    def __init__(self, room: int = 1) -> None:
+        """Construct Player.
+        
+        Args:
+            room: The starting room number (default=1).
+        """
         self.room = room
-        self.inventory = inventory
+        self.inventory = set()
         self._discovered = 0  # The number of discovered ROOMS.
         self._CMAP = cmap.MiniMap(7, 7)  # Instantiate the map.
 
