@@ -10,9 +10,9 @@ NAME = 'TheCraving'
 DESCRIPTION = 'A simple, text-based, adventure game'
 URL = 'https://github.com/Celshade/TheCraving'
 EMAIL = 'ggcelshade@gmail.com'
-AUTHOR = "Danny 'Celshade' Collins"
+AUTHOR = "Danny Collins"
 REQUIRES_PYTHON = '>=3.6'
-VERSION = '2.0.9'
+VERSION = '2.1.0'
 REQUIRES = ['pygame']
 
 # README handling
@@ -42,10 +42,10 @@ setup(
         'Intended Audience :: End Users/Desktop'
         'Intended Audience :: Developers, Users'
         'Topic :: Game Development',
-        'License :: OSI approved :: MIT License',
+        'License :: OSI approved :: GNU GPLv3',
         'Operating System :: Microsoft :: Windows',
         'Programming Language :: Python :: 3.6'
-        ],
+    ],
     keywords='game text adventure thecraving',
     project_urls={
         'Bug Reports': 'https://github.com/Celshade/TheCraving/issues/9',
