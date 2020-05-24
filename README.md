@@ -29,13 +29,18 @@ to follow!
 
 This game is intended to be run from the CLI. Once the necessary requirements
 are installed (python and pygame), simply download the package and run
-`.src\thecraving.py` from the package directory.
+`py .src\thecraving.py` from the package directory.
+
+**\*\*NOTE\*\*** \
+_Users may need to run `python .\src\thecraving.py` depending on their setup._
 
 *Be sure to resize your window, or scroll up, upon starting the game!*\
 Please make use of the in-game command `options` to view commands!\
 Please make use of the in-game command `map` to view your current
 location on the dungeon map! **HIGHLY RECOMMENDED**
 ***
+
+For the most recent developments, please see branch [POLISH](https://github.com/Celshade/TheCraving/tree/polish).
 
 Found a bug or care to drop some feedback? See the link below! \
 _Comments & bugs -> https://www.github.com/Celshade/TheCraving/issues_
