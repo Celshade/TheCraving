@@ -99,7 +99,7 @@ class Pack(Item):
 
     def __init__(self) -> None:
         """Construct Pack.
-        
+
         Args:
             Item():: name, descrip, tag.
         """
@@ -133,7 +133,7 @@ class Pack(Item):
 
 
 class Checkable(Item):
-    """Define an in-game object which may hold a hidden Item.
+    """Define an special Item which contains another hidden Item within itself.
 
     Extend Item() while implementing new methods to interact with the hidden
     Item contained within the object.
@@ -144,7 +144,7 @@ class Checkable(Item):
     Public Methods:
         hidden(): Return the hidden Item.
         hidden_text(): Return situational text.
-        not_checked(): Confirm a Checkable() has already been checked.
+        checked(): Confirm if the object has already been checked.
     """
 
     def __init__(self, name, descrip, tag, special: str, obj: Item) -> None:
@@ -152,29 +152,26 @@ class Checkable(Item):
 
         Args:
             Item():: name, descrip, tag.
-            special: The triggerable special text.
+            special: Special text to be triggered.
             obj: The hidden Item contained within.
         """
         super().__init__(name, descrip, tag)
         self.special = special
         self.obj = obj
-        self._check_count = 0
+        self._checked = False
 
     def hidden(self) -> Item:
         """Return the hidden Item."""
-        self.check_count += 1
+        self._checked = True
         return self.obj
 
     def hidden_text(self) -> str:
         """Return special text, revealing the hidden Item."""
         return self.special
 
-    def not_checked(self) -> bool:
-        """Return True if object has not been checked, else False."""
-        if self.check_count > 0:
-            return False
-        else:
-            return True
+    def checked(self) -> bool:
+        """Return True if object has already been checked, else False."""
+        return self._checked
 
 
 class Orb(Item):

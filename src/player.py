@@ -68,7 +68,7 @@ class Player(object):
 
     def __init__(self, room: int = 1) -> None:
         """Construct Player.
-        
+
         Args:
             room: The starting room number (default=1).
         """
@@ -131,7 +131,7 @@ class Player(object):
             print("* Can be picked up with 'get item' *")
         elif obj in ORB_LIST and it.PACK in self.inventory:
             print("* Can be picked up with 'get orb' *")
-        elif obj in CHECKABLES and obj.not_checked():
+        elif obj in CHECKABLES and obj.checked() is False:
             if obj is it.SHRINE:
                 print(s.SHRINE_TEXT_BETA)
                 it.SHRINE.descrip = s.SHRINE_TEXT_THETA
@@ -273,7 +273,7 @@ class Player(object):
                     elif choice[1] == "orb" and "orb" in location:
                         self.get("orb")
                     elif choice[1] == "object" and "object" in location:
-                            print("\nYou're going to need a bigger Pack!")
+                        print("\nYou're going to need a bigger Pack!")
                     else:
                         print("\nIt must have been a mirage...")
                 # Exit the game.
