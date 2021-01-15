@@ -28,18 +28,18 @@ Attributes:
 ALPHA_TEXT = """
 \n\t====Thus Far====\n
 \n\t**A bell rings**\n
-You awaken unto an empty white room..
+You open your eyes to an empty white room..
 ..with no idea where you are or how you arrived.
 You look around, searching for any clue of what's going on..
-..but all you see is a worn pack and a strange orb on the ground.
-You look down and check yourself over..
+..but all you see is a worn pack and a strange orb laying on the ground.
+You look down and inspect yourself..
 ..thankful that you're still, at least, in posession of your pants.
 """
 
 BETA_TEXT = """
-You sigh, as you eagerly unwrap the [Pack of Twizzlers]...
+You sigh in relief, as you eagerly unwrap the [Pack of Twizzlers]...
 As the sweetness hits your tastebuds, you feel a renewed surge of strength.
-The room begins to come into focus, as your eyes adjust to the darkness.
+The room begins to come into focus, and your eyes adjust to the darkness.
 You take notice of an aged wooden door just off to your left.
 You test the door. It gives, easily, and you're blinded by sunlight pouring in.
 You exit the compound and find yourself in a dense forest, when suddenly...
@@ -47,7 +47,7 @@ You exit the compound and find yourself in a dense forest, when suddenly...
 
 OMEGA_TEXT = """
 You awaken, lying on your bed, with sunlight streaming in from the windows.
-You notice that your leather backpack is still slung across your shoulders.
+You notice that your trusty backpack is still slung across your shoulders.
 You must have been so tired that you fell asleep with it on...
 """
 

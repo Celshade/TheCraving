@@ -6,6 +6,7 @@ Functions:
     outro(): Provide story outro.
     main(): Primary game-loop.
 """
+from os import path
 import time
 import signal
 import sys
@@ -79,4 +80,5 @@ def main() -> None:
     sys.exit()
 
 
-main()
+if __name__ == "__main__":
+    main()
