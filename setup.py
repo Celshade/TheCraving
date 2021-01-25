@@ -12,7 +12,7 @@ URL = 'https://github.com/Celshade/TheCraving'
 EMAIL = 'ggcelshade@gmail.com'
 AUTHOR = "Danny Collins"
 REQUIRES_PYTHON = '>=3.6'
-VERSION = '2.1.0'
+VERSION = '2.1.1'
 REQUIRES = ['pygame']
 
 # README handling

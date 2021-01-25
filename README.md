@@ -7,9 +7,11 @@ _A short, text-based, adventure game - with an animated dungeon map_
 
 Welcome to TheCraving!
 
-The game will take you through a short series of "escape the room" scenarios,
+![](thecraving.gif)
+
+The game will take you through a short series of "escape the room" scenarios
 which are navigated by entering commands - e.g. `go north`. This is the first
-game that I'd ever built, so please pardon the simplicity and lack of story
+game that I have ever built, so please pardon the simplicity and lack of story
 depth. I had developed this as a fun way to test my [python] programming
 skills and work on my flow.
 
@@ -29,10 +31,10 @@ to follow!
 
 This game is intended to be run from the CLI. Once the necessary requirements
 are installed (python and pygame), simply download the package and run
-`py .src\thecraving.py` from the package directory.
+`.\src\thecraving.py` from the package directory.
 
 **\*\*NOTE\*\*** \
-_Users may need to run `python .\src\thecraving.py` depending on their setup._
+_Users may need to run `python .\src\thecraving.py` depending on their config._
 
 *Be sure to resize your window, or scroll up, upon starting the game!*\
 Please make use of the in-game command `options` to view commands!\
