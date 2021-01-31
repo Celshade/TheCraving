@@ -7,6 +7,7 @@ Functions:
     main(): Primary game-loop.
 """
 from os import path
+from textwrap import dedent as dd
 import time
 import signal
 import sys
@@ -16,15 +17,18 @@ import player as p
 import story as s
 
 
-def word_wrap(target: str, num: int = 1) -> str:
-    """Wrap text headings and return the formatted text.
+def wrapper(header: str, border: str) -> str:
+    """Return a centered header, wrapped with a border.
 
     Args:
-        target: The target text to be wrapped.
-        num: The wrap multiplyer (default=1).
+        header: The header to wrap.
+        border: The border symbol to wrap the header with.
     """
-    wrap = f"{'=' * len(target)}" * num
-    return f"{wrap}\n{target}\n{wrap}"
+    wrap = border * 79
+    return dd(f"""
+    {wrap}
+    {header.center(79)}
+    {wrap}""")
 
 
 def intro() -> None:
@@ -33,14 +37,14 @@ def intro() -> None:
 
     # Clear the screen from any previous text.
     print("\n" * 42)
-    print(word_wrap(title, 2))
+    print(wrapper(title, '='))
     print(s.ALPHA_TEXT)
     print(f"{s.GRUMBLE}\n")
     print("Startled by the sudden noise, you scramble guardedly to your feet.")
     print(f"\n{s.GRUMBLE}")
     print(s.REALIZATION)
     print(s.THE_CRAVING)
-    print(word_wrap("Search your surroundings for a way to escape!"))
+    print(wrapper("Search your surroundings for a way to escape!", '='))
 
 
 def outro() -> None:
