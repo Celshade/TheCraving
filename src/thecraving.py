@@ -1,7 +1,7 @@
 """Primary module of TheCraving: initiate game and introduce storyline.
 
 Functions:
-    word_wrap(): Text wrapper.
+    wrapper(): Text wrapper.
     intro(): Provide story intro.
     outro(): Provide story outro.
     main(): Primary game-loop.
