@@ -35,8 +35,7 @@ def intro() -> None:
     """Introduce the storyline."""
     title = "\t **ThE CrAvInG**"
 
-    # Clear the screen from any previous text.
-    print("\n" * 42)
+    print("\n" * 42)  # Clear the screen from any previous text.
     print(wrapper(title, '='))
     print(s.ALPHA_TEXT)
     print(f"{s.GRUMBLE}\n")
