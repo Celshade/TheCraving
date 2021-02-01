@@ -159,14 +159,15 @@ class Player(object):
         if door.lock_status(False):
             self.room = door.get_tag()
         elif door.lock_status(True):
-            print(f"\nYou encounter {it.door_desc(door.icolor())}")
+            print()
+            print(f"You encounter {it.door_desc(door.icolor())}".center(79))
             if it.PACK in self.inventory and self.match(door):
                 door.unlock()
                 if door is not it.WHITE_DOOR:
                     self._discovered += 1
                 self.room = door.get_tag()
             else:
-                print("The door doesn't budge!")
+                print("The door doesn't budge!".center(79))
 
     def get(self, target: str) -> None:
         """Pick up Items and Orbs.

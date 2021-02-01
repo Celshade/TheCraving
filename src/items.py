@@ -233,8 +233,9 @@ class Door(Orb):
 
     def rezonate(self) -> str:
         """Rezonate with a corresponding Orb and return action text."""
-        return (f"You raise the [{self.color} Orb] in front of you."
+        text = (f"You raise the [{self.color} Orb] in front of you."
                 "\nThe orb flares brilliantly and the door grinds open!")
+        return s.centered(text)
 
     def lock_status(self, condition: bool) -> bool:
         """Return True if the lock 'condition' is accurate, else False.

@@ -60,7 +60,7 @@ You look down and inspect yourself...
 ...thankful that you're still, at least, in posession of your pants.
 """)
 
-BETA_TEXT = centered("""
+BETA_TEXT = centered("""\
 You sigh in relief, as you eagerly unwrap the [Pack of Twizzlers]...
 As the sweetness hits your tastebuds, you feel a renewed surge of strength.
 The room begins to come into focus, and your eyes adjust to the darkness.
@@ -69,7 +69,7 @@ You test the door. It gives, easily, and you're blinded by sunlight pouring in.
 You exit the compound and find yourself in a dense forest, when suddenly...
 """)
 
-OMEGA_TEXT = centered("""
+OMEGA_TEXT = centered("""\
 You awaken, lying on your bed, with sunlight streaming in from the windows.
 You notice that your trusty backpack is still slung across your shoulders.
 You must have been so tired that you fell asleep with it on...
@@ -90,21 +90,21 @@ BOOK_d = centered("A bookshelf housing old leather tomes.")
 
 BOOK_s = centered("One of the books seems out of place...")
 
-CAM_n = centered("Crate Full of Camera Parts")
+CAM_n = "Crate Full of Camera Parts"
 
 CAM_d = centered("A crate filled with old camera parts.")
 
 CAM_s = centered("An odd glow shines from beneath some fish lenses...")
 
-BUILD_n = centered("Pile of Building Materials")
+BUILD_n = "Pile of Building Materials"
 
 BUILD_d = centered("Building materials lie strewn about the room.")
 
 BUILD_s = centered("You slip on something amidst the supplies...")
 
-SHRINE_n = centered("Strange Looking Shrine")
+SHRINE_n = "Strange Looking Shrine"
 
-SHRINE_d = centered("""
+SHRINE_d = centered("""\
 An ornate box sits atop an onyx pedestal. The box is sealed fast.
 Eight perfectly smooth, sphere-shaped, recesses encircle the box - each
 emitting a faint glow just like the orbs you carry...
@@ -112,12 +112,12 @@ emitting a faint glow just like the orbs you carry...
 
 SHRINE_s = centered("As you open the box and reach inside...")
 
-SHRINE_TEXT_BETA = centered("""
+SHRINE_TEXT_BETA = centered("""\
 You place each of the colored orbs into place, on the pedestal.
 The orbs pulse rythmically, in sync, and the box unseals with a feint *hiss*.
 """)
 
-SHRINE_TEXT_THETA = centered("""
+SHRINE_TEXT_THETA = centered("""\
 An empty ornate box sits atop an onyx pedestal, encircled by 8 glowing orbs.
 """)
 
