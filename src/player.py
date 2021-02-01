@@ -79,20 +79,20 @@ class Player(object):
 
     def stats(self) -> None:
         """Broadcast current inventory and surroundings."""
-        line_2 = "-" * 58
+        line = "-" * 79
         location = ROOMS[self.room]
 
-        print(f"\n{line_2}")
-        print(f"You find yourself in: *The {location['name']}*")
+        print(f"\n{line}")
+        print(s.centered(f"You find yourself in: *The {location['name']}*\n"))
+        if "object" in location:
+            print(s.centered(f"You catch sight of a {location['object']}"))
+        if "item" in location:
+            print(s.centered(f"You catch sight of a {location['item']}"))
+        if "orb" in location:
+            print(s.centered(f"You catch sight of a {location['orb']}"))
         if it.PACK in self.inventory:
             print(it.PACK.get_contents())
-        if "object" in location:
-            print(f"You catch sight of a {location['object']}")
-        if "item" in location:
-            print(f"You catch sight of a {location['item']}")
-        if "orb" in location:
-            print(f"You catch sight of a {location['orb']}")
-        print(f"{line_2}\n")
+        print(line, end='\n')
 
     def match(self, door: it.Door) -> bool:
         """Return True if the 'door' matches an Orb in the Pack, else False.
@@ -118,7 +118,7 @@ class Player(object):
             sub_line = ('-' * len(sub_header)).center(79)
             print(sub_line)
             print(sub_header.center(79))
-        print(sub_line, end='\n\n')
+            print(sub_line, end='\n\n')
 
     def check(self, obj: it.Item) -> None:
         """Check an object for any hidden clues.
