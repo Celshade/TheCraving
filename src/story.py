@@ -126,13 +126,13 @@ WORB_TEXT = centered(
 )
 
 # ### EXITS AND OPTIONS ### #
-EXITS = [
+EXITS = [centered(line) for line in (
     "\nYou succumb to your craving and pass out...",
     ("\nChuck Norris appears and roundhouse kicks you in the face."
      "\nAs your vision fades, you notice the scent of lilacs and justice..."),
     ("\nThe kool-aid man bursts through the walls with an 'OH, YEEEEAH!"
      "\nHe grins maliciously, pounces, and swallows you whole..."),
-    "\nA noxious dart hits you in the buttocks - rendering you unconscious..."
+    "\nA noxious dart hits you in the buttocks - rendering you unconscious...")
 ]
 
 OPTIONS = """

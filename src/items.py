@@ -74,10 +74,14 @@ class Item(object):
 
     def info(self) -> str:
         """Return a description of the Item."""
-        header = f"\n[{self.NAME}]"
-        wrap = f"\n{'=' * (len(header) - 1)}"
+        header = f"[{self.NAME}]"
+        wrap = f"{'=' * len(header)}".center(79)
 
-        return f"{wrap}{header}{wrap}\n{self.DESCRIP}"
+        return '\n'.join((
+               f"{wrap}",
+               f"{header.center(79)}",
+               f"{wrap}",
+               f"{self.DESCRIP.center(79)}"))
 
     def get_tag(self) -> int:
         """Return the original location of Item (room tag)."""

@@ -90,6 +90,7 @@ class Player(object):
             print(s.centered(f"You catch sight of a {location['item']}"))
         if "orb" in location:
             print(s.centered(f"You catch sight of a {location['orb']}"))
+        print()
         if it.PACK in self.inventory:
             print(it.PACK.get_contents())
         print(line, end='\n')
@@ -126,12 +127,12 @@ class Player(object):
         Args:
             obj: Item to be checked.
         """
-        print(f"\nYou take a closer look at the {obj}...")
+        print(s.centered(f"\nYou take a closer look at the {obj}..."))
         print(obj.info())
         if obj is it.PACK or obj is it.TWIZZLERS:
-            print("* Can be picked up with 'get item' *")
+            print(s.centered("* Can be picked up with 'get item' *"))
         elif obj in ORB_LIST and it.PACK in self.inventory:
-            print("* Can be picked up with 'get orb' *")
+            print(s.centered("* Can be picked up with 'get orb' *"))
         elif obj in CHECKABLES and obj.checked() is False:
             if obj is it.SHRINE:
                 print(s.SHRINE_TEXT_BETA)
@@ -139,7 +140,8 @@ class Player(object):
                 del it.PACK.pocket[:]
             new_obj = obj.hidden()
             print(obj.hidden_text())
-            print(f"You discover a {new_obj} hidden inside the {obj}!")
+            _ = f"You discover a {new_obj} hidden inside the {obj}!".center(79)
+            print(_)
 
             if new_obj in ORB_LIST:
                 ROOMS[self.room]["orb"] = new_obj
@@ -202,6 +204,8 @@ class Player(object):
             text: Text to be displayed upon exiting the game.
             phase: The game phase in which the function is called (default=0).
         """
+        invalid = "\nThat's not a valid choice.".center(79)
+
         while True:
             try:
                 exit_choice = input(text).lower()
@@ -210,7 +214,7 @@ class Player(object):
                     if exit_choice == "e":
                         break
                     else:
-                        print("\nThat's not a valid choice.")
+                        print(invalid)
                         continue
                 # Exit before completing the game.
                 elif exit_choice == "y":
@@ -220,10 +224,10 @@ class Player(object):
                 elif exit_choice == "n":
                     break
                 else:
-                    print("\nThat's not a valid choice.")
+                    print(invalid)
                     continue
             except EOFError:
-                print("\n\nThat's not a valid choice.")
+                print(invalid)
 
     def action(self) -> None:
         """Establish Player action.
@@ -233,6 +237,8 @@ class Player(object):
         what action the Player will take. Acceptable inputs are listed in the
         'options()' function and are otherwise known as valid commands.
         """
+        invalid = '\n' + "That's not a valid command!".center(79)
+
         try:
             initial_input = input("> ")
             location = ROOMS[self.room]
@@ -254,7 +260,7 @@ class Player(object):
                     elif choice[1] == "orb" and choice[1] in location:
                         self.check(location["orb"])
                     else:
-                        print("\nIt must have been your imagination")
+                        print("It must have been your imagination".center(79))
                 # Move the player.
                 elif choice[0] == "go" and len(choice) > 1:
                     if choice[1] == "north" and choice[1] in location:
@@ -266,7 +272,7 @@ class Player(object):
                     elif choice[1] == "west" and choice[1] in location:
                         self.go("west")
                     else:
-                        print("\nThere's no going that way!")
+                        print("There's no going that way!".center(79))
                 # Pick up items and orbs.
                 elif choice[0] == "get" and len(choice) > 1:
                     if choice[1] == "item" and "item" in location:
@@ -274,18 +280,19 @@ class Player(object):
                     elif choice[1] == "orb" and "orb" in location:
                         self.get("orb")
                     elif choice[1] == "object" and "object" in location:
-                        print("\nYou're going to need a bigger Pack!")
+                        print("You're going to need a bigger Pack!".center(79))
                     else:
-                        print("\nIt must have been a mirage...")
+                        print("It must have been a mirage...".center(79))
                 # Exit the game.
                 elif choice[0] == "gg":
-                    self.gg("\nDo you wish to quit? Choose [Y] or [N]: ")
+                    self.gg("Do you wish to quit? Choose [Y] or [N]: ")
                 else:
-                    print("\nThat's not a valid command!")
-                    print("Type 'options' to see available commands.")
+                    print(invalid)
+                    print(
+                        "Type 'options' to see available commands.".center(79))
             # When nothing at all is entered.
             else:
-                print("\nNary a whisper could be heard...")
+                print("Nary a whisper could be heard...".center(79))
         # Handle Control + [Key] commands.
         except (EOFError, IndexError):
-            print("\nThat's not a valid command!")
+            print(invalid)
