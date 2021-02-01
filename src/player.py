@@ -114,9 +114,11 @@ class Player(object):
         print(line)
         print(s.OPTIONS)
         if it.PACK not in self.inventory:
-            print(line)
-            print("** Try typing 'check item' **".center(79))
-        print(line, end='\n\n')
+            sub_header = "** Try typing 'check item' **"
+            sub_line = ('-' * len(sub_header)).center(79)
+            print(sub_line)
+            print(sub_header.center(79))
+        print(sub_line, end='\n\n')
 
     def check(self, obj: it.Item) -> None:
         """Check an object for any hidden clues.
@@ -287,8 +289,3 @@ class Player(object):
         # Handle Control + [Key] commands.
         except (EOFError, IndexError):
             print("\nThat's not a valid command!")
-
-
-if __name__ == "__main__":
-    test = Player(1)
-    test.options()
