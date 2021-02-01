@@ -140,7 +140,7 @@ OPTIONS = """
 'Orb' refers to the [Colored Orbs] encountered throughout the game.
 'Object' refers to anything that is not an [Orb] or [Item].
 * When in doubt, 'check' it out! *
-                 ==============
+
   -------                 --------
   |Input|                 |Action|
   -------                 --------

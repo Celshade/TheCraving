@@ -106,18 +106,17 @@ class Player(object):
 
     def options(self) -> None:
         """Display the main menu."""
-        line_1 = "_" * 58
-        line_2 = "-" * 14
-        space = " " * 17
+        header = "Valid Commands"
+        line = ('-' * len(header)).center(79)
 
-        print(f"\n{line_1}")
-        print(f"{space}Valid Commands")
-        print(f"{space}{line_2}")
+        print(line)
+        print("Valid Commands".center(79))
+        print(line)
         print(s.OPTIONS)
         if it.PACK not in self.inventory:
-            print(f"{space}{line_2}")
-            print("\n** Try typing 'check item' **")
-        print(f"{line_1}\n\n")
+            print(line)
+            print("** Try typing 'check item' **".center(79))
+        print(line, end='\n\n')
 
     def check(self, obj: it.Item) -> None:
         """Check an object for any hidden clues.
@@ -288,3 +287,8 @@ class Player(object):
         # Handle Control + [Key] commands.
         except (EOFError, IndexError):
             print("\nThat's not a valid command!")
+
+
+if __name__ == "__main__":
+    test = Player(1)
+    test.options()
