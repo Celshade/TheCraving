@@ -34,12 +34,12 @@ def wrapper(header: str, border: str) -> str:
 def intro() -> None:
     """Introduce the storyline."""
     title = "\t **ThE CrAvInG**"
-
+    startled = "Startled by the sudden noise, you scramble to your feet."
     print("\n" * 42)  # Clear the screen from any previous text.
     print(wrapper(title, '='))
     print(s.ALPHA_TEXT)
     print(f"{s.GRUMBLE}\n")
-    print("Startled by the sudden noise, you scramble guardedly to your feet.")
+    print(startled.center(79))
     print(f"\n{s.GRUMBLE}")
     print(s.REALIZATION)
     print(s.THE_CRAVING)
@@ -64,13 +64,13 @@ def outro() -> None:
 def main() -> None:
     """Primary game-loop: run game."""
     player = p.Player()
-    game_exit = False
-
     intro()
     player.options()
     # Prevent script breaking signals.
     signal.signal(signal.SIGBREAK, signal.SIG_IGN)
     signal.signal(signal.SIGINT, signal.SIG_IGN)
+
+    game_exit = False
     while game_exit is False:
         player.stats()
         player.action()
@@ -79,7 +79,6 @@ def main() -> None:
             player.gg("Enter [E] to exit the game: ", 1)
             game_exit = True
     print("\nPeace!\n-Cel-")
-    time.sleep(3)
     sys.exit()
 
 

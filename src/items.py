@@ -137,7 +137,7 @@ class Pack(Item):
 
 
 class Checkable(Item):
-    """Define an special Item which contains another hidden Item within itself.
+    """Define a special Item which contains another hidden Item within itself.
 
     Extend Item() while implementing new methods to interact with the hidden
     Item contained within the object.

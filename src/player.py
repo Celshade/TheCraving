@@ -81,9 +81,9 @@ class Player(object):
         """Broadcast current inventory and surroundings."""
         line = "-" * 79
         location = ROOMS[self.room]
-
         print(f"\n{line}")
         print(s.centered(f"You find yourself in: *The {location['name']}*\n"))
+
         if "object" in location:
             print(s.centered(f"You catch sight of a {location['object']}"))
         if "item" in location:
@@ -91,6 +91,7 @@ class Player(object):
         if "orb" in location:
             print(s.centered(f"You catch sight of a {location['orb']}"))
         print()
+
         if it.PACK in self.inventory:
             print(it.PACK.get_contents())
         print(line, end='\n')
@@ -109,11 +110,11 @@ class Player(object):
         """Display the main menu."""
         header = "Valid Commands"
         line = ('-' * len(header)).center(79)
-
         print(line)
         print("Valid Commands".center(79))
         print(line)
         print(s.OPTIONS)
+
         if it.PACK not in self.inventory:
             sub_header = "** Try typing 'check item' **"
             sub_line = ('-' * len(sub_header)).center(79)
@@ -128,25 +129,35 @@ class Player(object):
             obj: Item to be checked.
         """
         print(s.centered(f"\nYou take a closer look at the {obj}..."))
-        print(obj.info())
-        if obj is it.PACK or obj is it.TWIZZLERS:
-            print(s.centered("* Can be picked up with 'get item' *"))
-        elif obj in ORB_LIST and it.PACK in self.inventory:
-            print(s.centered("* Can be picked up with 'get orb' *"))
-        elif obj in CHECKABLES and obj.checked() is False:
-            if obj is it.SHRINE:
-                print(s.SHRINE_TEXT_BETA)
-                it.SHRINE.descrip = s.SHRINE_TEXT_THETA
-                del it.PACK.pocket[:]
-            new_obj = obj.hidden()
-            print(obj.hidden_text())
-            _ = f"You discover a {new_obj} hidden inside the {obj}!".center(79)
-            print(_)
 
-            if new_obj in ORB_LIST:
-                ROOMS[self.room]["orb"] = new_obj
+        if obj in CHECKABLES:
+            if obj.checked() is False:
+                print(obj.info())
+
+                if obj is it.SHRINE:
+                    print(s.SHRINE_TEXT_BETA)
+                    del it.PACK.pocket[:]
+
+                new_obj = obj.hidden()
+                discover = f"You discover a {new_obj} hidden inside the {obj}!"
+                print(obj.hidden_text())
+                print(discover.center(79))
+
+                if new_obj in ORB_LIST:
+                    ROOMS[self.room]["orb"] = new_obj
+                else:
+                    ROOMS[self.room]["item"] = new_obj
+            elif obj.checked() and obj is it.SHRINE:  # Handle activated shrine
+                print(s.SHRINE_TEXT_THETA)
             else:
-                ROOMS[self.room]["item"] = new_obj
+                print(obj.info())
+        else:
+            print(obj.info())
+
+            if obj is it.PACK or obj is it.TWIZZLERS:
+                print(s.centered("* Can be picked up with 'get item' *"))
+            elif obj in ORB_LIST and it.PACK in self.inventory:
+                print(s.centered("* Can be picked up with 'get orb' *"))
 
     def go(self, direction: str) -> None:
         """Move in the specified direction.
@@ -161,6 +172,7 @@ class Player(object):
         elif door.lock_status(True):
             print()
             print(f"You encounter {it.door_desc(door.icolor())}".center(79))
+
             if it.PACK in self.inventory and self.match(door):
                 door.unlock()
                 if door is not it.WHITE_DOOR:
@@ -190,6 +202,7 @@ class Player(object):
                 it.PACK.add_pack(location["orb"])
                 print(f"\nPicked up {location['orb']}!")
                 print(location["orb"].info())
+
                 # Proc a special event for WHITE_ORB.
                 if location["orb"] == it.WHITE_ORB:
                     print(f"\n{s.WORB_TEXT}")
@@ -219,8 +232,7 @@ class Player(object):
                         continue
                 # Exit before completing the game.
                 elif exit_choice == "y":
-                    print(s.EXITS[random.randint(0, 3)])
-                    time.sleep(3)
+                    print(s.EXITS[random.randint(0, 3)], end='\n\n')
                     sys.exit()
                 elif exit_choice == "n":
                     break
@@ -234,7 +246,7 @@ class Player(object):
         """Establish Player action.
 
         The primary function which handles all in-game action.
-        The function prompts a series of input choices, which dictate
+        The function prompts a series of input choices which dictate
         what action the Player will take. Acceptable inputs are listed in the
         'options()' function and are otherwise known as valid commands.
         """

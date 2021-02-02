@@ -60,7 +60,7 @@ You look down and inspect yourself...
 ...thankful that you're still, at least, in posession of your pants.
 """)
 
-BETA_TEXT = centered("""\
+BETA_TEXT = '\n' + centered("""\
 You sigh in relief, as you eagerly unwrap the [Pack of Twizzlers]...
 As the sweetness hits your tastebuds, you feel a renewed surge of strength.
 The room begins to come into focus, and your eyes adjust to the darkness.
@@ -113,12 +113,12 @@ emitting a faint glow just like the orbs you carry...
 SHRINE_s = centered("As you open the box and reach inside...")
 
 SHRINE_TEXT_BETA = centered("""\
-You place each of the colored orbs into place, on the pedestal.
-The orbs pulse rythmically, in sync, and the box unseals with a feint *hiss*.
+You place each of the colored orbs into place on the pedestal.
+The orbs pulse rythmically in sync and the box unseals with a feint *hiss*.
 """)
 
 SHRINE_TEXT_THETA = centered("""\
-An empty ornate box sits atop an onyx pedestal, encircled by 8 glowing orbs.
+An ornate box sits atop an onyx pedestal encircled by 8 glowing orbs.
 """)
 
 WORB_TEXT = centered(
