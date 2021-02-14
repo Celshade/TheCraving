@@ -237,16 +237,9 @@ class Door(Orb):
                 "\nThe orb flares brilliantly and the door grinds open!")
         return s.centered(text)
 
-    def lock_status(self, condition: bool) -> bool:
-        """Return True if the lock 'condition' is accurate, else False.
-
-        Args:
-            condition: Condition to be checked for.
-        """
-        if self.lock == condition:
-            return True
-        else:
-            return False
+    def locked(self) -> bool:
+        """Return True if the Door is locked, else False."""
+        return self.lock
 
     def unlock(self) -> None:
         """Unlock Door."""
