@@ -216,7 +216,7 @@ class Door(Orb):
         lock (bool): The lock status of Door.
     Public methods:
         rezonate(): Return situational text.
-        lock_status(): Confirm the lock status.
+        locked(): Confirm the lock status.
         unlock(): Unlock Door.
     """
 
