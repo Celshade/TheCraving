@@ -73,16 +73,16 @@ class Player(object):
     def stats(self) -> None:
         """Broadcast current inventory and surroundings."""
         line = "-" * 79
-        location = ROOMS[self.room]
+        loc = ROOMS[self.room]  # Current location
         print(f"\n{line}")
-        print(s.centered(f"You find yourself in: *The {location['name']}*\n"))
+        print(s.centered(f"You find yourself in: *The {loc['name']}*\n"))
 
-        if "object" in location:
-            print(s.centered(f"You catch sight of a {location['object']}"))
-        if "item" in location:
-            print(s.centered(f"You catch sight of a {location['item']}"))
-        if "orb" in location:
-            print(s.centered(f"You catch sight of a {location['orb']}"))
+        if "object" in loc:
+            print(s.centered(f"You catch sight of a {loc['object']} <Object>"))
+        if "item" in loc:
+            print(s.centered(f"You catch sight of a {loc['item']} <Item>"))
+        if "orb" in loc:
+            print(s.centered(f"You catch sight of a {loc['orb']} <Orb>"))
         print()
 
         if it.PACK in self.inventory:

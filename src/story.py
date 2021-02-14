@@ -135,10 +135,11 @@ EXITS = [centered(line) for line in (
     "\nA noxious dart hits you in the buttocks - rendering you unconscious...")
 ]
 
-OPTIONS = """
+OPTIONS = f"""
 'Item' refers to a non-orb [Item] found within the game.
 'Orb' refers to any colored [Orb] found within the game.
-'Object' refers to a unique [Item] that cannot be picked up.
+'Object' refers to a unique [Object] that can be checked but not picked up.
+
 * When in doubt, 'check' it out! *
 
   -------                 --------
@@ -146,11 +147,11 @@ OPTIONS = """
   -------                 --------
 > 'map'                   Shows map of discovered rooms and current location
 > 'options'               Shows this list of available options
-> 'check orb'             Check an [Orb] for more details
-> 'check item'            Check an [Item] for more details
-> 'check object'          Check an [Object] for more details
+> 'check orb'             Check an <Orb> for more details
+> 'check item'            Check an <Item> for more details
+> 'check object'          Check an <Object> for more details
 > 'go [direction]'        Go 'north', 'south', 'east', or 'west'
-> 'get item'              Pick up a nearby [Item]
-> 'get orb'               Pick up a nearby [Orb]
+> 'get item'              Pick up a nearby <Item>
+> 'get orb'               Pick up a nearby <Orb>
 > 'gg'                    Quit game
 """
