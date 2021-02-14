@@ -95,9 +95,7 @@ class Player(object):
         Args:
             door: The Door to be matched.
         """
-        for x in it.PACK.pocket:
-            if x.icolor() == door.icolor():
-                return True
+        return any([item.icolor() == door.icolor() for item in it.PACK.pocket])
 
     def options(self) -> None:
         """Display the main menu."""
