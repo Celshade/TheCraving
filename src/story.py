@@ -1,7 +1,7 @@
 """Define constants which hold storyline text.
 
 Functions:
-    centered(): Center text
+    centered(): Center text.
 Attributes:
     ALPHA_TEXT (str): Intro text.
     BETA_TEXT (str): Twizzler discovery text.
@@ -65,12 +65,12 @@ You sigh in relief, as you eagerly unwrap the [Pack of Twizzlers]...
 As the sweetness hits your tastebuds, you feel a renewed surge of strength.
 The room begins to come into focus, and your eyes adjust to the darkness.
 You take notice of an aged wooden door just off to your left.
-You test the door. It gives, easily, and you're blinded by sunlight pouring in.
+You test the door - it gives easily, and you're blinded by sunlight pouring in.
 You exit the compound and find yourself in a dense forest, when suddenly...
 """)
 
 OMEGA_TEXT = centered("""\
-You awaken, lying on your bed, with sunlight streaming in from the windows.
+You awaken on your bed - sunlight streams in from the windows.
 You notice that your trusty backpack is still slung across your shoulders.
 You must have been so tired that you fell asleep with it on...
 """)
@@ -136,19 +136,21 @@ EXITS = [centered(line) for line in (
 ]
 
 OPTIONS = """
-'Item' refers to unique, non-orb, [Items] that can be picked up.
-'Orb' refers to the [Colored Orbs] encountered throughout the game.
-'Object' refers to anything that is not an [Orb] or [Item].
+'Item' refers to a non-orb [Item] found within the game.
+'Orb' refers to any colored [Orb] found within the game.
+'Object' refers to a unique [Item] that cannot be picked up.
 * When in doubt, 'check' it out! *
 
   -------                 --------
   |Input|                 |Action|
   -------                 --------
-> 'map'                   (Shows map of discovered rooms and current location.)
-> 'options'               (Shows this list of available options)
-> 'check [target]'        (Check 'object', 'item', or 'orb' for more details)
-> 'go [direction]'        (Go 'north', 'south', 'east', or 'west')
-> 'get item'              (Pick up a nearby [Item])
-> 'get orb'               (Pick up a nearby [Orb])
-> 'gg'                    (Quit game)
+> 'map'                   Shows map of discovered rooms and current location
+> 'options'               Shows this list of available options
+> 'check orb'             Check an [Orb] for more details
+> 'check item'            Check an [Item] for more details
+> 'check object'          Check an [Object] for more details
+> 'go [direction]'        Go 'north', 'south', 'east', or 'west'
+> 'get item'              Pick up a nearby [Item]
+> 'get orb'               Pick up a nearby [Orb]
+> 'gg'                    Quit game
 """
