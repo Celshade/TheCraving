@@ -4,8 +4,6 @@ Classes:
     Player(object): Establish the Player and gameplay.
 Attributes:
     ROOMS (dict): Game environment throughout which the Player interacts.
-    CHECKABLES (tuple): A tuple of Checkable objects.
-    ORB_LIST (tuple): A tuple of Orbs.
 """
 import sys
 import time
@@ -42,11 +40,6 @@ ROOMS = {
         "south": it.ORANGE_DOOR,
         "object": it.SHRINE}
 }
-
-#  Useful constants for checking of objects and orbs.
-CHECKABLES = (it.BOOKSHELF, it.CAMERA_CRATE, it.BUILDING_MATERIALS, it.SHRINE)
-ORB_LIST = (it.BLUE_ORB, it.GREEN_ORB, it.PURPLE_ORB, it.RED_ORB,
-            it.YELLOW_ORB, it.ORANGE_ORB, it.WHITE_ORB, it.BLACK_ORB)
 
 
 class Player(object):
@@ -130,8 +123,8 @@ class Player(object):
         """
         print(s.centered(f"\nYou take a closer look at the {obj}..."))
 
-        if obj in CHECKABLES:
-            if obj.checked() is False:
+        if type(obj) == it.Checkable:
+            if not obj.checked():
                 print(obj.info())
 
                 if obj is it.SHRINE:
@@ -143,7 +136,7 @@ class Player(object):
                 print(obj.hidden_text())
                 print(discover.center(79))
 
-                if new_obj in ORB_LIST:
+                if type(new_obj) == it.Orb:
                     ROOMS[self.room]["orb"] = new_obj
                 else:
                     ROOMS[self.room]["item"] = new_obj
@@ -156,7 +149,7 @@ class Player(object):
 
             if obj is it.PACK or obj is it.TWIZZLERS:
                 print(s.centered("* Can be picked up with 'get item' *"))
-            elif obj in ORB_LIST and it.PACK in self.inventory:
+            elif type(obj) == it.Orb and it.PACK in self.inventory:
                 print(s.centered("* Can be picked up with 'get orb' *"))
 
     def go(self, direction: str) -> None:
