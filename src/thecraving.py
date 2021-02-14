@@ -6,7 +6,6 @@ Functions:
     outro(): Provide story outro.
     main(): Primary game-loop.
 """
-from os import path
 from textwrap import dedent as dd
 import time
 import signal
