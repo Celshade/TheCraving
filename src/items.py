@@ -216,7 +216,7 @@ class Door(Orb):
         lock (bool): The lock status of Door.
     Public methods:
         rezonate(): Return situational text.
-        locked(): Confirm the lock status.
+        lock_status(): Confirm the lock status.
         unlock(): Unlock Door.
     """
 
@@ -237,9 +237,13 @@ class Door(Orb):
                 "\nThe orb flares brilliantly and the door grinds open!")
         return s.centered(text)
 
-    def locked(self) -> bool:
-        """Return True if the Door is locked, else False."""
-        return self.lock
+    def lock_status(self, condition: bool) -> bool:
+        """Return True if the lock 'condition' is accurate, else False.
+
+        Args:
+            condition: Condition to be checked for.
+        """
+        return self.lock is condition
 
     def unlock(self) -> None:
         """Unlock Door."""

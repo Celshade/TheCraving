@@ -158,9 +158,9 @@ class Player(object):
         """
         door = ROOMS[self.room][str(direction)]
 
-        if not door.locked:
+        if door.lock_status(False):
             self.room = door.get_tag()
-        elif door.locked:
+        elif door.lock_status(True):
             print()
             print(f"You encounter {it.door_desc(door.icolor())}".center(79))
 
