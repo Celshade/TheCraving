@@ -160,7 +160,7 @@ class Player(object):
 
         if door.lock_status(False):
             self.room = door.get_tag()
-        elif door.lock_status(True):
+        else:
             print()
             print(f"You encounter {it.door_desc(door.icolor())}".center(79))
 
