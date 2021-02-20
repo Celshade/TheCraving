@@ -76,7 +76,8 @@ class Player(object):
         end_line = '-' * 79
         loc = ROOMS[self.room]  # Current location
         print(f"\n{start_line}")
-        print(s.centered(f"You find yourself in: *The {loc['name']}*\n"))
+        print(s.centered(f"You find yourself in: *The {loc['name']}*"))
+        print()
 
         if "object" in loc:
             print(s.centered(f"You catch sight of a {loc['object']} <Object>"))
@@ -119,7 +120,8 @@ class Player(object):
         Args:
             obj: Item to be checked.
         """
-        print(s.centered(f"\nYou take a closer look at the {obj}...\n"))
+        print()
+        print(s.centered(f"You take a closer look at the {obj}...\n"))
 
         if type(obj) == it.Checkable:
             if not obj.checked():
