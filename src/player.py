@@ -59,7 +59,7 @@ class Player(object):
         action(): Determine what action the Player takes.
     """
 
-    def __init__(self, room: int = 1) -> None:
+    def __init__(self, room: int=1) -> None:
         """Construct Player.
 
         Args:
@@ -72,9 +72,10 @@ class Player(object):
 
     def stats(self) -> None:
         """Broadcast current inventory and surroundings."""
-        line = "-" * 79
+        start_line = '=' * 79
+        end_line = '-' * 79
         loc = ROOMS[self.room]  # Current location
-        print(f"\n{line}")
+        print(f"\n{start_line}")
         print(s.centered(f"You find yourself in: *The {loc['name']}*\n"))
 
         if "object" in loc:
@@ -87,7 +88,6 @@ class Player(object):
 
         if it.PACK in self.inventory:
             print(it.PACK.get_contents())
-        print(line, end='\n')
 
     def match(self, door: it.Door) -> bool:
         """Return True if the 'door' matches an Orb in the Pack, else False.
@@ -119,7 +119,7 @@ class Player(object):
         Args:
             obj: Item to be checked.
         """
-        print(s.centered(f"\nYou take a closer look at the {obj}..."))
+        print(s.centered(f"\nYou take a closer look at the {obj}...\n"))
 
         if type(obj) == it.Checkable:
             if not obj.checked():
@@ -202,7 +202,7 @@ class Player(object):
             else:
                 print("\nYou should have worn pants with pockets!")
 
-    def gg(self, text: str, phase: int = 0) -> None:
+    def gg(self, text: str, phase: int=0) -> None:
         """Handle the game exit.
 
         Args:
@@ -244,7 +244,7 @@ class Player(object):
         invalid = '\n' + "That's not a valid command!".center(79)
 
         try:
-            initial_input = input("> ")
+            initial_input = input("\n> ")
             location = ROOMS[self.room]
 
             if initial_input != "":
