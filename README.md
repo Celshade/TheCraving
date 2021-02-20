@@ -44,7 +44,7 @@ Please make use of the in-game command `map` to view your current
 location on the dungeon map! **HIGHLY RECOMMENDED**
 ***
 
-For the most recent developments, please see branch [POLISH](https://github.com/Celshade/TheCraving/tree/polish).
+For the most recent developments, please see branch [DEV](https://github.com/Celshade/TheCraving/tree/dev).
 
 Found a bug or care to drop some feedback? See the link below! \
 _Comments & bugs -> https://www.github.com/Celshade/TheCraving/issues_
