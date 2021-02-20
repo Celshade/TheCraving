@@ -145,8 +145,8 @@ OPTIONS = f"""
   -------                 --------
   |Input|                 |Action|
   -------                 --------
-> 'map'                   Shows map of discovered rooms and current location
-> 'options'               Shows this list of available options
+> 'map'                   Show map of discovered rooms and current location
+> 'options'               Show this list of available options
 > 'check orb'             Check an <Orb> for more details
 > 'check item'            Check an <Item> for more details
 > 'check object'          Check an <Object> for more details
