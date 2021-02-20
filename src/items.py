@@ -220,7 +220,7 @@ class Door(Orb):
         unlock(): Unlock Door.
     """
 
-    def __init__(self, name, descrip, tag, color, lock: bool = True) -> None:
+    def __init__(self, name, descrip, tag, color, lock: bool=True) -> None:
         """Construct Door.
 
         Args:
