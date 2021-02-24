@@ -89,7 +89,7 @@ class MiniMap(object):
         run(): Handle animation and events.
     """
 
-    def __init__(self, width: int=7, height: int=7) -> None:
+    def __init__(self, width: int = 7, height: int = 7) -> None:
         """Construct MiniMap.
 
         Args:
@@ -108,7 +108,7 @@ class MiniMap(object):
         pygame.__init__("event")
         pygame.__init__("draw")
 
-    def render(self, num: int, p_color: tuple=WHITE) -> None:
+    def render(self, num: int, p_color: tuple = WHITE) -> None:
         """Prepare all visual data and render to screen.
 
         Args:
@@ -145,7 +145,7 @@ class MiniMap(object):
         pygame.display.flip()
         FPS.tick(30)
 
-    def run(self, rooms: int=0, current: int=1) -> None:
+    def run(self, rooms: int = 0, current: int = 1) -> None:
         """Main loop; call render(), handle animation and events.
 
         Args:

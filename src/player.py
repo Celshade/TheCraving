@@ -59,7 +59,7 @@ class Player(object):
         action(): Determine what action the Player takes.
     """
 
-    def __init__(self, room: int=1) -> None:
+    def __init__(self, room: int = 1) -> None:
         """Construct Player.
 
         Args:
@@ -204,7 +204,7 @@ class Player(object):
             else:
                 print("\nYou should have worn pants with pockets!")
 
-    def gg(self, text: str, phase: int=0) -> None:
+    def gg(self, text: str, phase: int = 0) -> None:
         """Handle the game exit.
 
         Args:
