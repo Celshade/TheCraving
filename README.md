@@ -13,7 +13,7 @@ The game will take you through a short series of "escape the room" scenarios
 which are navigated by entering commands - e.g. `go north`. This is the first
 game that I have ever built, so please pardon the simplicity and lack of story
 depth. I had developed this as a fun way to test my [python] programming
-skills.
+skills at the time.
 
 I truly appreciate all of you who take the time to play through the game. Any
 and all feedback is _greatly_ appreciated. If you like the game, or at least
@@ -23,7 +23,7 @@ to follow!
 
 ## Requirements:
 
-1. _**Python [3.9]**_: Can be downloaded [here](https://www.python.org/).
+1. _**Python [3.6+]**_: Can be downloaded [here](https://www.python.org/).
 1. _**Pygame**_: Installable via pip or downloaded [here](https://www.pygame.org/).
 
 Older versions of python may work; however, this has not been tested.
