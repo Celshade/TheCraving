@@ -26,7 +26,7 @@ to follow!
 1. _**Python [3.9+]**_: Can be downloaded [here](https://www.python.org/).
 1. _**Pygame**_: Installable via pip or downloaded [here](https://www.pygame.org/).
 
-Originally built on 3.6 and updated later using 3.9 - older versions of python may work; however, this has not been tested.
+_Originally built on 3.6 and updated later using 3.9 - older versions of python may work; however, this has not been tested._
 ***
 
 ## Instructions:
