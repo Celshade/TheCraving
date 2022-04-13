@@ -23,10 +23,10 @@ to follow!
 
 ## Requirements:
 
-1. _**Python [3.6+]**_: Can be downloaded [here](https://www.python.org/).
+1. _**Python [3.9+]**_: Can be downloaded [here](https://www.python.org/).
 1. _**Pygame**_: Installable via pip or downloaded [here](https://www.pygame.org/).
 
-Older versions of python may work; however, this has not been tested.
+Originally built on 3.6 and updated later using 3.9 - older versions of python may work; however, this has not been tested.
 ***
 
 ## Instructions:
